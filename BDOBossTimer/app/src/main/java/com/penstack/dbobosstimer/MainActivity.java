@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         SaturdayList.add(new Boss("Kzarka"," 01:00:00 "));
         SaturdayList.add(new Boss("Kzarka"," 03:00:00 "));
         SaturdayList.add(new Boss("KARANDA","  04:00:00 "));
-        SaturdayList.add(new Boss("Kzarka","  01:00:00 "));
+        SaturdayList.add(new Boss("Kzarka","  20:00:00 "));
 
 
 
@@ -105,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
     public  String Time(String s){
         Date k;
         SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");//tou lew pws na ta emfanizei
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));//tou lew to timezone tou string pou tou dinw
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+1"));//tou lew to timezone tou string pou tou dinw
 
         ParsePosition pos=new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
         k=sdf.parse(s,pos);//parsarei to string sto Date k
 
 
-        sdf.setTimeZone(TimeZone.getDefault());//allazoume apo gmt+2 se auto tou xrhsth
+        sdf.setTimeZone(TimeZone.getDefault());//allazoume apo gmt+1(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
 
         String time=sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
         return  time;
