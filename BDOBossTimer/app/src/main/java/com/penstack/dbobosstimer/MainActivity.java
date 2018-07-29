@@ -1,5 +1,6 @@
 package com.penstack.dbobosstimer;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -16,11 +17,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static java.lang.Long.valueOf;
+
 public class MainActivity extends AppCompatActivity {
 
+public long countdown,day;
+    public Date k;
      public Timestamp BossTimestamp;
+    public int i;
     public int hour;
-    public TextView BossTime;
+    public TimeZone offset;
+    public TextView text1;
     public final ArrayList<Boss> BossDayList = new ArrayList<>();
     private ListView listView;
     private BossAdapter BossAdapter;
@@ -31,33 +38,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView=(ListView) findViewById(R.id.listView0);
+        listView = (ListView) findViewById(R.id.listView0);
 
-        final ArrayList<Boss> MondayList=new ArrayList<>();
-        final ArrayList<Boss> TuesdayList=new ArrayList<>();
-        final ArrayList<Boss> WednesdayList=new ArrayList<>();
-        final ArrayList<Boss> ThursdayList=new ArrayList<>();
-        final ArrayList<Boss> FridayList=new ArrayList<>();
-        final ArrayList<Boss> SaturdayList=new ArrayList<>();
-        final ArrayList<Boss> SundayList=new ArrayList<>();
+        final ArrayList<Boss> MondayList = new ArrayList<>();
+        final ArrayList<Boss> TuesdayList = new ArrayList<>();
+        final ArrayList<Boss> WednesdayList = new ArrayList<>();
+        final ArrayList<Boss> ThursdayList = new ArrayList<>();
+        final ArrayList<Boss> FridayList = new ArrayList<>();
+        final ArrayList<Boss> SaturdayList = new ArrayList<>();
+        final ArrayList<Boss> SundayList = new ArrayList<>();
 
-        MondayList.add(new Boss("Kzarka"," 01:00 "));
-        TuesdayList.add(new Boss("Kzarka"," 02:00:00 "));
-        ThursdayList.add(new Boss("Kzarka"," 01:00:00 "));
-        WednesdayList.add(new Boss("Kzarka"," 01:00:00 "));
-        FridayList.add(new Boss("KARANDA"," 01:00:00 "));
-        SaturdayList.add(new Boss("Kzar","  16:00:00 "));
-        SaturdayList.add(new Boss("Kzarka"," 01:00:00 "));
-        SaturdayList.add(new Boss("Kzarka"," 03:00:00 "));
-        SaturdayList.add(new Boss("KARANDA","  04:00:00 "));
-        SaturdayList.add(new Boss("Kzarka","  20:00:00 "));
+        MondayList.add(new Boss("Kzarka", " 18-07-31 01:00 GMT+02:00"));
+        TuesdayList.add(new Boss("Kzarka", " 18-07-31 02:00:00 GMT+02:00"));
+        ThursdayList.add(new Boss("Kzarka", "18-07-31 01:00:00 GMT+02:00"));
+        WednesdayList.add(new Boss("Kzarka", "18-07-31 01:00:00 GMT+02:00"));
+        FridayList.add(new Boss("KARANDA", " 18-07-31 01:00:00 GMT+02:00"));
+        SaturdayList.add(new Boss("Kzar", " 18-07-31 16:00:00 GMT+02:00"));
+        SaturdayList.add(new Boss("Kzarka", "18-07-31 01:00:00 GMT+02:00"));
+        SaturdayList.add(new Boss("Kzarka", "18-07-31 03:00:00 GMT+02:00"));
+        SaturdayList.add(new Boss("KARANDA", "18-07-31  04:00:00 GMT+02:00 "));
+        SaturdayList.add(new Boss("Kzarka", "18-07-31  20:00:00 GMT+02:00"));
+        SundayList.add(new Boss("Karanda", "18-07-31 16:00:00 GMT+02:00"));
+        SundayList.add(new Boss("Karanda", "18-07-31 16:00:00 GMT+02:00"));
+        SundayList.add(new Boss("Karanda", "18-07-31 16:00:00 GMT+02:00"));
 
-
-
-                bCalendar=Calendar.getInstance();
-                hour=bCalendar.get(Calendar.HOUR_OF_DAY);
+        bCalendar = Calendar.getInstance();
+        hour = bCalendar.get(Calendar.HOUR_OF_DAY);
         dayLongName = bCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);
-
+        offset = bCalendar.getTimeZone();
         switch (dayLongName) {
             case "Monday":
                 BossDayList.addAll(MondayList);
@@ -90,30 +98,48 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-        for(int i=0;i<BossDayList.size();i++) {
+        for (i = 0; i < BossDayList.size(); i++) {
 
-            String n=Time(BossDayList.get(i).getBossTime());//pairnw kathe object ths listas kai to metatrepw apo gmt+2 sto default tou xrhsth,edw xrhsimopoioume mono gia EU
-            BossDayList.get(i).setBossTime(n);
-         }
+            countdown = Time(BossDayList.get(i).getBossTime());//pairnw kathe object ths listas kai to metatrepw apo gmt+2 sto default tou xrhsth,edw xrhsimopoioume mono gia EU
+            day = bCalendar.getTimeInMillis();
+            BossDayList.get(i).setBossTime("Time" + ((countdown - day)));
 
-        BossAdapter = new BossAdapter(this,BossDayList);
+        }
+        text1 = (TextView) findViewById(R.id.editText);
+
+            new CountDownTimer((countdown - day), 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    text1.setText("Remaining" + (millisUntilFinished / 1000));// BossDayList.get(0).setBossTime( "Remaining"+(millisUntilFinished/1000));
+
+                }
+                public void onFinish() {
+                    text1.setText("done!");
+
+                }
+            }.start();
+
+
+        BossAdapter = new BossAdapter(this, BossDayList);
         listView.setAdapter(BossAdapter);
 
-
-
     }
-    public  String Time(String s){
-        Date k;
-        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");//tou lew pws na ta emfanizei
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT+1"));//tou lew to timezone tou string pou tou dinw
 
+    public  long Time(String s){
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yy-MM-dd HH:mm:ss z");//tou lew pws na ta emfanizei
+            //sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));//tou lew to timezone tou string pou tou dinw
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+"+bCalendar.get(Calendar.DST_OFFSET)+""));
         ParsePosition pos=new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
-        k=sdf.parse(s,pos);//parsarei to string sto Date k
+         k=sdf.parse(s,pos);//parsarei to string sto Date k
+
+        long n=k.getTime();
 
 
-        sdf.setTimeZone(TimeZone.getDefault());//allazoume apo gmt+1(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
+
+        //sdf.setTimeZone(TimeZone.getDefault());//offset.getTimeZone("GMT+"+bCalendar.get(Calendar.DST_OFFSET)+""));//allazoume apo gmt+1(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
 
         String time=sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
-        return  time;
+        return n; //time;
     }
 }
