@@ -45,6 +45,7 @@ public long countdown,day;
 
 
 
+
         BossDayList.add(new Kutum("Monday","00:15","UTC+2")) ;
         BossDayList.add(new Karanda("Monday","02:00","UTC+2")) ;
         BossDayList.add(new Kzarka("Monday","05:00","UTC+2"));
@@ -78,6 +79,38 @@ public long countdown,day;
         BossDayList.add(new Kutum("Thursday","16:00","UTC+2")) ;
         BossDayList.add(new Offin("Thursday","19:00","UTC+2")) ;
         BossDayList.add(new Karanda("Thursday","22:15","UTC+2")) ;
+
+
+        //Friday
+        BossDayList.add(new Kzarka("Friday","00:15","UTC+2"));
+        BossDayList.add(new Nouver("Friday","02:00","UTC+2"));
+        BossDayList.add(new Karanda("Friday","05:00","UTC+2"));
+        BossDayList.add(new Kutum("Friday","09:00","UTC+2"));
+        BossDayList.add(new Karanda("Friday","12:00","UTC+2"));
+        BossDayList.add(new Nouver("Friday","16:00","UTC+2"));
+        BossDayList.add(new Kzarka("Friday","19:00","UTC+2"));
+        BossDayList.add(new Kzarka("Friday","22:15","UTC+2"));
+        BossDayList.add(new Kutum("Friday","22:15","UTC+2"));
+        //Saturday
+        BossDayList.add(new Karanda("Saturday","00:15","UTC+2"));
+        BossDayList.add(new Offin("Saturday","02:00","UTC+2"));
+        BossDayList.add(new Nouver("Saturday","05:00","UTC+2"));
+        BossDayList.add(new Kutum("Saturday","09:00","UTC+2"));
+        BossDayList.add(new Nouver("Saturday","12:00","UTC+2"));
+        BossDayList.add(new Quint("Saturday","16:00","UTC+2"));
+        BossDayList.add(new Kzarka("Saturday","19:00","UTC+2"));
+        BossDayList.add(new Karanda("Saturday","19:00","UTC+2"));
+        //Sunday
+        BossDayList.add(new Nouver("Sunday","00:15","UTC+2"));
+        BossDayList.add(new Kutum("Sunday","00:15","UTC+2"));
+        BossDayList.add(new Kzarka("Sunday","02:00","UTC+2"));
+        BossDayList.add(new Kutum("Sunday","05:00","UTC+2"));
+        BossDayList.add(new Nouver("Sunday","09:00","UTC+2"));
+        BossDayList.add(new Kzarka("Sunday","12:00","UTC+2"));
+        BossDayList.add(new Vell("Sunday","16:00","UTC+2"));
+        BossDayList.add(new Karanda("Sunday","19:00","UTC+2"));
+        BossDayList.add(new Kzarka("Sunday","22:15","UTC+2"));
+        BossDayList.add(new Nouver("Sunday","22:15","UTC+2"));
 
 
         bCalendar = Calendar.getInstance();
@@ -130,5 +163,7 @@ public long countdown,day;
 
         String time=sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
         return n; //time;*/
+
+
     }
 }
