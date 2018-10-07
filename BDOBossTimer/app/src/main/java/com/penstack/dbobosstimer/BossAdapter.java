@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+    import android.widget.ImageView;
+    import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,11 @@ public class BossAdapter extends ArrayAdapter<Boss>
             TextView BossName = (TextView) listItem.findViewById(R.id.BossName);
             BossName.setText(currentBoss.getBossName());
 
-            TextView BossTime = (TextView) listItem.findViewById(R.id.timeZone);
+            TextView BossTime = (TextView) listItem.findViewById(R.id.timeLeft);
             BossTime.setText(currentBoss.getBossTime());
+
+            ImageView BossImage = (ImageView) listItem.findViewById(R.id.bossImage);
+
 
             return listItem;
         }
