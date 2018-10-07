@@ -58,9 +58,9 @@ public long countdown,day;
         SaturdayList.add(new Boss("Kzarka", "18-07-31 03:00:00 GMT+02:00"));
         SaturdayList.add(new Boss("KARANDA", "18-07-31  04:00:00 GMT+02:00 "));
         SaturdayList.add(new Boss("Kzarka", "18-07-31  20:00:00 GMT+02:00"));
-        SundayList.add(new Boss("Karanda", "18-07-31 16:00:00 GMT+02:00"));
-        SundayList.add(new Boss("Karanda", "18-07-31 16:00:00 GMT+02:00"));
-        SundayList.add(new Boss("Karanda", "18-07-31 16:00:00 GMT+02:00"));
+        SundayList.add(new Boss("Karanda", "18-12-31 16:00:00 GMT+02:00"));
+        SundayList.add(new Boss("Karanda", "18-12-31 16:00:00 GMT+02:00"));
+        SundayList.add(new Boss("Karanda", "18-12-31 16:00:00 GMT+02:00"));
 
         bCalendar = Calendar.getInstance();
         hour = bCalendar.get(Calendar.HOUR_OF_DAY);
@@ -110,7 +110,8 @@ public long countdown,day;
             new CountDownTimer((countdown - day), 1000) {
 
                 public void onTick(long millisUntilFinished) {
-                    text1.setText("Remaining" + (millisUntilFinished / 1000));// BossDayList.get(0).setBossTime( "Remaining"+(millisUntilFinished/1000));
+                    //text1.setText("Remaining" + (millisUntilFinished / 1000));
+                    BossDayList.get(0).setBossTime( "Remaining"+(millisUntilFinished/1000));
 
                 }
                 public void onFinish() {

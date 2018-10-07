@@ -1,27 +1,43 @@
 package com.penstack.dbobosstimer;
 
+import android.media.Image;
+
 import java.sql.Time;
 import java.lang.String;
 import java.sql.Timestamp;
 
 public class Boss   {
 
-    String BossName;
-    String BossTime;
-            public Boss(String BossName,String BossTime){
-                this.BossName=BossName;
-                this.BossTime=BossTime;
+    String Name;
+     //Image;
+    String Day;
+    String Hour;
+    String Tmz;
+            public Boss(String Name,String Day,String Hour,String Tmz){
+                this.Name=Name;
+                //this.Image=Image;
+                this.Day=Day;
+                this.Hour=Hour;
+                this.Tmz=Tmz;
+
             }
-            public String getBossName(){ return BossName; }
+            public String getBossName(){ return Name; }
 
-            public String getBossTime(){return  BossTime;}
+            public String getBossDay(){return  Day;}
 
-            public void setBossName(String BossDay){this.BossName=BossName;}
+            public void setBossName(String Name){this.Name=Name;}
 
-            public void setBossTime(String BossTime){ this.BossTime=BossTime;}
+            public void setBossDay(String Day){ this.Day=Day;}
+
+             public String getBossHour(){return  Hour;}
+
+             public void setBossHour(String Hour){this.Hour=Hour;}
+            public String getBossTmz(){return  Tmz;}
+
+            public void setBossTmz(String Tmz){this.Tmz=Tmz;}
 
     @Override
       public  String toString(){
-            return "BossDay"+this.BossName+",BossTime"+this.BossTime+"";
+            return "BossName"+this.Name+",BossDay"+this.Day+",BossHour"+this.Hour+""+this.Tmz;
             }
 }
