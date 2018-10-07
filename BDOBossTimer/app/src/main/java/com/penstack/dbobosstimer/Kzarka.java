@@ -6,10 +6,10 @@ public class Kzarka extends  Boss {
     static  final String Name="Kzarka";;
     public Kzarka(String Day,String Hour,String Tmz){
 
-        super(Day, Hour,Tmz);
+        super(Day, Hour,Tmz,Name);
 
 
     }
 
-    static public String getBossName(){ return Name; }
+     public String getBossName(){ return Name; }
 }
