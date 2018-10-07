@@ -49,7 +49,7 @@ public long countdown,day;
         final ArrayList<Boss> FridayList = new ArrayList<>();
         final ArrayList<Boss> SaturdayList = new ArrayList<>();
         ArrayList<Boss> SundayList = new ArrayList<>();
-         Karanda testBoss = new Karanda("1","1","1");
+         Boss testBoss = new Karanda(".","1","1");
         Log.d("test", testBoss.getBossName());
         SundayList.add(testBoss) ;
         SundayList.add(new Kzarka("2","1","1"));
