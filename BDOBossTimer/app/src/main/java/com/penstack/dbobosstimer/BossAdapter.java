@@ -42,7 +42,7 @@ public class BossAdapter extends ArrayAdapter<Boss>
             BossName.setText(currentBoss.getBossName());
 
             TextView BossTime = (TextView) listItem.findViewById(R.id.timeLeft);
-            BossTime.setText(currentBoss.getBossTime());
+
 
             ImageView BossImage = (ImageView) listItem.findViewById(R.id.bossImage);
 
