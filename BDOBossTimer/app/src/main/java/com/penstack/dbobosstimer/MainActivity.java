@@ -45,7 +45,7 @@ public long countdown,day;
 
 
 
-
+        //Monday
         BossDayList.add(new Kutum("Monday","00:15","UTC+2")) ;
         BossDayList.add(new Karanda("Monday","02:00","UTC+2")) ;
         BossDayList.add(new Kzarka("Monday","05:00","UTC+2"));
@@ -54,6 +54,7 @@ public long countdown,day;
         BossDayList.add(new Kutum( "Monday","16:00","UTC+2")) ;
         BossDayList.add(new Nouver("Monday","19:00","UTC+2")) ;
         BossDayList.add(new Kzarka("Monday","22:15","UTC+2")) ;
+        //Tuesday
         BossDayList.add(new Karanda("Tuesday","00:15","UTC+2")) ;
         BossDayList.add(new Kutum("Tuesday","02:00","UTC+2")) ;
         BossDayList.add(new Kzarka("Tuesday","05:00","UTC+2")) ;
@@ -63,6 +64,7 @@ public long countdown,day;
         BossDayList.add(new Karanda("Tuesday","19:00","UTC+2")) ;
         BossDayList.add(new Kzarka("Tuesday","22:15","UTC+2")) ;
         BossDayList.add(new Nouver("Tuesday","22:15","UTC+2")) ;
+        //Wednesday
         BossDayList.add(new Kutum("Wednesday","00:15","UTC+2")) ;
         BossDayList.add(new Karanda("Wednesday","02:00","UTC+2")) ;
         BossDayList.add(new Kzarka("Wednesday","05:00","UTC+2")) ;
@@ -71,6 +73,7 @@ public long countdown,day;
         BossDayList.add(new Kutum("Wednesday","19:00","UTC+2")) ;
         BossDayList.add(new Karanda("Wednesday","22:15","UTC+2")) ;
         BossDayList.add(new Kzarka("Wednesday","22:15","UTC+2")) ;
+        //Thursday
         BossDayList.add(new Nouver("Thursday","00:15    ","UTC+2")) ;
         BossDayList.add(new Kutum("Thursday","02:00","UTC+2")) ;
         BossDayList.add(new Nouver("Thursday","05:00","UTC+2")) ;
@@ -79,7 +82,6 @@ public long countdown,day;
         BossDayList.add(new Kutum("Thursday","16:00","UTC+2")) ;
         BossDayList.add(new Offin("Thursday","19:00","UTC+2")) ;
         BossDayList.add(new Karanda("Thursday","22:15","UTC+2")) ;
-
 
         //Friday
         BossDayList.add(new Kzarka("Friday","00:15","UTC+2"));
