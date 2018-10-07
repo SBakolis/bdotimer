@@ -52,6 +52,7 @@ public long countdown,day;
          Karanda testBoss = new Karanda("1","1","1");
         Log.d("test", testBoss.getBossName());
         SundayList.add(testBoss) ;
+        SundayList.add(new Kzarka("2","1","1"));
 
 
         bCalendar = Calendar.getInstance();
