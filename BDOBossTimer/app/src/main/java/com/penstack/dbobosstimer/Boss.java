@@ -4,22 +4,22 @@ import java.sql.Time;
 import java.lang.String;
 import java.sql.Timestamp;
 
-import static com.penstack.dbobosstimer.Karanda.Name;
+//import static com.penstack.dbobosstimer.Karanda.Name;
 
 public class Boss   {
 
 
-    //String Name;
+    String Name;
     String Day;
     String Hour;
     String Tmz;
-    public Boss(String Day,String Hour,String Tmz){
+    public Boss(String Day,String Hour,String Tmz,String Name){
 
         //this.Image=Image;
         this.Day=Day;
         this.Hour=Hour;
         this.Tmz=Tmz;
-        //this.Name=Name;
+        this.Name=Name;
     }
 
 
@@ -35,8 +35,8 @@ public class Boss   {
     public String getBossTmz(){return  Tmz;}
 
     public void setBossTmz(String Tmz){this.Tmz=Tmz;}
-    static public String getBossName(){ return Name; }
-    //public void setName(String Name){this.Name=Name;}
+     public String getBossName(){ return Name; }
+    public void setName(String Name){this.Name=Name;}
     @Override
     public  String toString(){
         return "BossDay"+this.Day+",BossHour"+this.Hour+""+this.Tmz;
