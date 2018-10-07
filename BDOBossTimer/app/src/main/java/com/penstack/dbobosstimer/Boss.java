@@ -6,22 +6,36 @@ import java.sql.Timestamp;
 
 public class Boss   {
 
-    String BossName;
-    String BossTime;
-            public Boss(String BossName,String BossTime){
-                this.BossName=BossName;
-                this.BossTime=BossTime;
-            }
-            public String getBossName(){ return BossName; }
+    String Name;
+    //Image;
+    String Day;
+    String Hour;
+    String Tmz;
+    public Boss(String Name,String Day,String Hour,String Tmz){
+        this.Name=Name;
+        //this.Image=Image;
+        this.Day=Day;
+        this.Hour=Hour;
+        this.Tmz=Tmz;
 
-            public String getBossTime(){return  BossTime;}
+    }
+    public String getBossName(){ return Name; }
 
-            public void setBossName(String BossDay){this.BossName=BossName;}
+    public String getBossDay(){return  Day;}
 
-            public void setBossTime(String BossTime){ this.BossTime=BossTime;}
+    public void setBossName(String Name){this.Name=Name;}
+
+    public void setBossDay(String Day){ this.Day=Day;}
+
+    public String getBossHour(){return  Hour;}
+
+    public void setBossHour(String Hour){this.Hour=Hour;}
+    public String getBossTmz(){return  Tmz;}
+
+    public void setBossTmz(String Tmz){this.Tmz=Tmz;}
 
     @Override
-      public  String toString(){
-            return "BossDay"+this.BossName+",BossTime"+this.BossTime+"";
-            }
+    public  String toString(){
+        return "BossName"+this.Name+",BossDay"+this.Day+",BossHour"+this.Hour+""+this.Tmz;
+    }
 }
