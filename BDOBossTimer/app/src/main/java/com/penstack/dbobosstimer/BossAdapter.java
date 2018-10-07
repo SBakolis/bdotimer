@@ -40,8 +40,8 @@ public class BossAdapter extends ArrayAdapter<Boss>
             TextView BossName = (TextView) listItem.findViewById(R.id.BossName);
             BossName.setText(currentBoss.getBossName());
 
-            TextView BossTime = (TextView) listItem.findViewById(R.id.timeZone);
-            BossTime.setText(currentBoss.getBossTime());
+            TextView TimeLeft = (TextView) listItem.findViewById(R.id.timeZone);
+
 
             return listItem;
         }

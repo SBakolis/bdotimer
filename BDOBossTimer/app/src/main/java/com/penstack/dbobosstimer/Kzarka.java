@@ -9,6 +9,6 @@ public class Kzarka extends Boss {
     public Kzarka(String Name,Image Image,String Day,String Hour,String Tmz){
 
         super( Name,Day, Hour,Tmz);
-        Image
+
     }
 }

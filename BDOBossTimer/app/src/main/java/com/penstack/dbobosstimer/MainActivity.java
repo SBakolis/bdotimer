@@ -48,19 +48,7 @@ public long countdown,day;
         final ArrayList<Boss> SaturdayList = new ArrayList<>();
         final ArrayList<Boss> SundayList = new ArrayList<>();
 
-        MondayList.add(new Boss("Kzarka", " 18-07-31 01:00 GMT+02:00"));
-        TuesdayList.add(new Boss("Kzarka", " 18-07-31 02:00:00 GMT+02:00"));
-        ThursdayList.add(new Boss("Kzarka", "18-07-31 01:00:00 GMT+02:00"));
-        WednesdayList.add(new Boss("Kzarka", "18-07-31 01:00:00 GMT+02:00"));
-        FridayList.add(new Boss("KARANDA", " 18-07-31 01:00:00 GMT+02:00"));
-        SaturdayList.add(new Boss("Kzar", " 18-07-31 16:00:00 GMT+02:00"));
-        SaturdayList.add(new Boss("Kzarka", "18-07-31 01:00:00 GMT+02:00"));
-        SaturdayList.add(new Boss("Kzarka", "18-07-31 03:00:00 GMT+02:00"));
-        SaturdayList.add(new Boss("KARANDA", "18-07-31  04:00:00 GMT+02:00 "));
-        SaturdayList.add(new Boss("Kzarka", "18-07-31  20:00:00 GMT+02:00"));
-        SundayList.add(new Boss("Karanda", "18-12-31 16:00:00 GMT+02:00"));
-        SundayList.add(new Boss("Karanda", "18-12-31 16:00:00 GMT+02:00"));
-        SundayList.add(new Boss("Karanda", "18-12-31 16:00:00 GMT+02:00"));
+
 
         bCalendar = Calendar.getInstance();
         hour = bCalendar.get(Calendar.HOUR_OF_DAY);
@@ -98,7 +86,7 @@ public long countdown,day;
             default:
                 break;
         }
-        for (i = 0; i < BossDayList.size(); i++) {
+        /*for (i = 0; i < BossDayList.size(); i++) {
 
             countdown = Time(BossDayList.get(i).getBossTime());//pairnw kathe object ths listas kai to metatrepw apo gmt+2 sto default tou xrhsth,edw xrhsimopoioume mono gia EU
             day = bCalendar.getTimeInMillis();
@@ -141,6 +129,6 @@ public long countdown,day;
         //sdf.setTimeZone(TimeZone.getDefault());//offset.getTimeZone("GMT+"+bCalendar.get(Calendar.DST_OFFSET)+""));//allazoume apo gmt+1(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
 
         String time=sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
-        return n; //time;
+        return n; //time; */
     }
 }
