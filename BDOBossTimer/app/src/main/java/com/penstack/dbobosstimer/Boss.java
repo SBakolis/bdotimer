@@ -6,24 +6,24 @@ import java.sql.Timestamp;
 
 public class Boss   {
 
-    String Name;
-    //Image;
+
+    //String Name;
     String Day;
     String Hour;
     String Tmz;
-    public Boss(String Name,String Day,String Hour,String Tmz){
-        this.Name=Name;
+    public Boss(String Day,String Hour,String Tmz){
+
         //this.Image=Image;
         this.Day=Day;
         this.Hour=Hour;
         this.Tmz=Tmz;
-
+        //this.Name=Name;
     }
-    public String getBossName(){ return Name; }
+
 
     public String getBossDay(){return  Day;}
 
-    public void setBossName(String Name){this.Name=Name;}
+
 
     public void setBossDay(String Day){ this.Day=Day;}
 
@@ -33,9 +33,10 @@ public class Boss   {
     public String getBossTmz(){return  Tmz;}
 
     public void setBossTmz(String Tmz){this.Tmz=Tmz;}
-
+    //public String getBossName(){ return Name; }
+    //public void setName(String Name){this.Name=Name;}
     @Override
     public  String toString(){
-        return "BossName"+this.Name+",BossDay"+this.Day+",BossHour"+this.Hour+""+this.Tmz;
+        return "BossDay"+this.Day+",BossHour"+this.Hour+""+this.Tmz;
     }
 }
