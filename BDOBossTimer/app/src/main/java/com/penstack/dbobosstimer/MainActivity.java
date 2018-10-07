@@ -42,55 +42,18 @@ public long countdown,day;
         listView = (ListView) findViewById(R.id.listView0);
         TextView text1=(TextView) findViewById(R.id.BossName);
 
-        final ArrayList<Boss> MondayList = new ArrayList<>();
-        final ArrayList<Boss> TuesdayList = new ArrayList<>();
-        final ArrayList<Boss> WednesdayList = new ArrayList<>();
-        final ArrayList<Boss> ThursdayList = new ArrayList<>();
-        final ArrayList<Boss> FridayList = new ArrayList<>();
-        final ArrayList<Boss> SaturdayList = new ArrayList<>();
-        ArrayList<Boss> SundayList = new ArrayList<>();
+
          Boss testBoss = new Karanda(".","1","1");
         Log.d("test", testBoss.getBossName());
-        SundayList.add(testBoss) ;
-        SundayList.add(new Kzarka("2","1","1"));
+        BossDayList.add(testBoss) ;
+        BossDayList.add(new Kzarka("2","1","1"));
 
 
         bCalendar = Calendar.getInstance();
         hour = bCalendar.get(Calendar.HOUR_OF_DAY);
         dayLongName = bCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);
         offset = bCalendar.getTimeZone();
-        switch (dayLongName) {
-            case "Monday":
-                BossDayList.addAll(MondayList);
-                break;
-
-            case "Tuesday":
-                BossDayList.addAll(TuesdayList);
-                break;
-
-            case "Wednesday":
-                BossDayList.addAll(WednesdayList);
-                break;
-
-            case "Thursday":
-                BossDayList.addAll(ThursdayList);
-                break;
-
-            case "Friday":
-                BossDayList.addAll(FridayList);
-                break;
-
-            case "Saturday":
-                BossDayList.addAll(SaturdayList);
-
-            case "Sunday":
-                BossDayList.addAll(SundayList);
-
-                break;
-
-            default:
-                break;
-        }
+        
         BossAdapter = new BossAdapter(this, BossDayList);
         listView.setAdapter(BossAdapter);
         /*for (i = 0; i < BossDayList.size(); i++) {
