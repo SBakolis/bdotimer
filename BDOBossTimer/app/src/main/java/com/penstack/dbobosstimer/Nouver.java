@@ -4,9 +4,9 @@ public class Nouver extends  Boss {
 
     String Image;
     static  final String Name="Nouver";
-    public Nouver(String Day,String Hour,String Tmz){
+    public Nouver(int Day,int Hour,int Minute,String Tmz,long TimeLeft){
 
-        super(Day, Hour,Tmz,Name);
+        super(Day, Hour,Minute,Tmz,Name,TimeLeft);
 
 
     }

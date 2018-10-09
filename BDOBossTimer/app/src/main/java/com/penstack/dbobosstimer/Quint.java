@@ -5,9 +5,9 @@ public class Quint extends Boss {
 
     static  final String Name="Quint/Muraka";
 
-    public Quint(String Day,String Hour,String Tmz){
+    public Quint(int Day,int Hour,int Minute,String Tmz,long TimeLeft){
 
-        super(Day, Hour,Tmz,Name);
+        super(Day, Hour,Minute,Tmz,Name,TimeLeft);
 
 
     }
