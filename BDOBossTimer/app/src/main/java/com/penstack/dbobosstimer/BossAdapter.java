@@ -2,7 +2,8 @@ package com.penstack.dbobosstimer;
 
 
     import android.content.Context;
-import android.support.annotation.LayoutRes;
+    import android.os.CountDownTimer;
+    import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,8 +13,11 @@ import android.widget.ArrayAdapter;
     import android.widget.ImageView;
     import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+    import java.text.ParsePosition;
+    import java.text.SimpleDateFormat;
+    import java.util.ArrayList;
+    import java.util.Date;
+    import java.util.List;
     import java.util.TimeZone;
 
 public class BossAdapter extends ArrayAdapter<Boss>
@@ -41,13 +45,31 @@ public class BossAdapter extends ArrayAdapter<Boss>
             TextView BossName = (TextView) listItem.findViewById(R.id.BossName);
             BossName.setText(currentBoss.getBossName());
 
-            TextView BossTime = (TextView) listItem.findViewById(R.id.timeLeft);
+            final TextView BossTime = (TextView) listItem.findViewById(R.id.timeLeft);
 
+            new CountDownTimer(currentBoss.TimeLeft, 1000) {//edw kanw to countdown timer,otan teleiwnei vgainei done
+
+                public void onTick(long millisUntilFinished) {
+
+                    BossTime.setText(""+FinalTime(millisUntilFinished));
+
+                }
+
+                public void onFinish() {
+                        BossTime.setText("done");
+
+                }
+            }.start();
 
             ImageView BossImage = (ImageView) listItem.findViewById(R.id.bossImage);
 
 
             return listItem;
+        }
+
+        public String FinalTime(long m){
+
+          return(new SimpleDateFormat("HH:mm:ss").format(new Date(m)));//to kanw ths morfhs wres:lepta:secs
         }
     }
 

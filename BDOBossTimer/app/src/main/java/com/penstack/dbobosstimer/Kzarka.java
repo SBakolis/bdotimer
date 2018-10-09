@@ -4,9 +4,9 @@ public class Kzarka extends  Boss {
 
     String Image;
     static  final String Name="Kzarka";;
-    public Kzarka(String Day,String Hour,String Tmz){
+    public Kzarka(int Day,int Hour,int Minute,String Tmz,long TimeLeft){
 
-        super(Day, Hour,Tmz,Name);
+        super(Day, Hour,Minute,Tmz,Name,TimeLeft);
 
 
     }
