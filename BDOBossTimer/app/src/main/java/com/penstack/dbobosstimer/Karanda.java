@@ -5,10 +5,10 @@ public class Karanda extends Boss {
 
 
         String Image;
-        static  final String Name="Kara";;
-        public Karanda(String Day,String Hour,String Tmz){
+        static  final String Name="Karanda";;
+        public Karanda(int Day,int Hour,int Minute,String Tmz,long TimeLeft){
 
-            super(Day, Hour,Tmz,Name);
+            super(Day, Hour,Minute,Tmz,Name,TimeLeft);
 
 
         }

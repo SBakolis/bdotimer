@@ -10,33 +10,51 @@ public class Boss   {
 
 
     String Name;
-    String Day;
-    String Hour;
-    String Tmz;
-    public Boss(String Day,String Hour,String Tmz,String Name){
+    int Day;
+    int Hour;
+    int Minute;
+    String Tmz;// de kserw an xreiazetai en telei
+     long TimeLeft;
+    public Boss(int Day,int Hour,int Minute,String Tmz,String Name,long TimeLeft){
 
         //this.Image=Image;
         this.Day=Day;
         this.Hour=Hour;
         this.Tmz=Tmz;
+        this.Minute=Minute;
         this.Name=Name;
+        this.TimeLeft=TimeLeft;
     }
 
 
-    public String getBossDay(){return  Day;}
+    public int getBossDay(){return  Day;}
 
 
 
-    public void setBossDay(String Day){ this.Day=Day;}
+    public void setBossDay(int Day){ this.Day=Day;}
 
-    public String getBossHour(){return  Hour;}
+    public int getBossHour(){return  Hour;}
 
-    public void setBossHour(String Hour){this.Hour=Hour;}
+    public void setBossHour(int Hour){this.Hour=Hour;}
+
+    public int getBossMin(){return  Minute;}
+
+    public void setBossMin(int Minute){this.Minute=Minute;}
+
     public String getBossTmz(){return  Tmz;}
 
     public void setBossTmz(String Tmz){this.Tmz=Tmz;}
      public String getBossName(){ return Name; }
     public void setName(String Name){this.Name=Name;}
+
+    public long getTimeLeft() {
+        return TimeLeft;
+    }
+
+    public void setTimeLeft(long timeLeft) {
+        this.TimeLeft = timeLeft;
+    }
+
     @Override
     public  String toString(){
         return "BossDay"+this.Day+",BossHour"+this.Hour+""+this.Tmz;
