@@ -5,7 +5,7 @@ public class Karanda extends Boss {
 
 
         String Image;
-        static  final String Name="Karanda";;
+        private static  final String Name="Karanda";;
         public Karanda(int Day,int Hour,int Minute,String Tmz,long TimeLeft){
 
             super(Day, Hour,Minute,Tmz,Name,TimeLeft);
