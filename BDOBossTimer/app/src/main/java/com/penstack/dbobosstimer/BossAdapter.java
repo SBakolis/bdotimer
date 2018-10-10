@@ -46,10 +46,10 @@ public class BossAdapter extends RecyclerView.Adapter<BossHolder> {
 
     public void onBindViewHolder(BossHolder holder, int position) {
 
-        // 5. Use position to access the correct Bakery object
+        // 5. Use position to access the correct Boss object
         Boss currentBoss = this.BossDayList.get(position);
 
-        // 6. Bind the bakery object to the holder
+        // 6. Bind the boss object to the holder
         holder.bindBoss(currentBoss);
 
 
