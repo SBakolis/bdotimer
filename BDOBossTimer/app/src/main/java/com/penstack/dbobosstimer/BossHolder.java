@@ -17,6 +17,7 @@ public class BossHolder extends RecyclerView.ViewHolder {
     //private final ImageView BossImage;
     private final TextView BossName;
     private  final TextView BossTime;
+    private final ImageView BossImage;
     private  Boss boss;
     private Context context;
     private CountDownTimer timer;
@@ -26,6 +27,7 @@ public class BossHolder extends RecyclerView.ViewHolder {
             this.context=context;
             this.BossName=(TextView) view.findViewById(R.id.BossName);
             this.BossTime=(TextView) view.findViewById(R.id.timeLeft);
+            this.BossImage = (ImageView) view.findViewById(R.id.bossImage);
         }
         public void bindBoss(Boss boss){
             this.boss=boss;
@@ -47,6 +49,8 @@ public class BossHolder extends RecyclerView.ViewHolder {
 
                 }
             }.start();
+
+            this.BossImage.setImageResource(boss.getBossImage());
 
         }
     public String FinalTime(long m) { //methodos gia na metatrepsw ta milliseconds se days:hours:mins:secs
