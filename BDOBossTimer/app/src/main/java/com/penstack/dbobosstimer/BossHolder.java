@@ -45,7 +45,7 @@ public class BossHolder extends RecyclerView.ViewHolder {
                 }
 
                 public void onFinish() {
-                    BossTime.setText("Spawned");
+                    BossTime.setText("done");
 
                 }
             }.start();
