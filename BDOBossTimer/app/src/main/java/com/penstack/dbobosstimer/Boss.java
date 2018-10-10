@@ -8,28 +8,27 @@ import java.sql.Timestamp;
 
 public class Boss   {
 
-
+    private int bossImage;
     private String Name;
     private int Day;
     private int Hour;
     private int Minute;
     String Tmz;// de kserw an xreiazetai en telei
-     long TimeLeft;
-    public Boss(int Day,int Hour,int Minute,String Tmz,String Name,long TimeLeft){
+    long TimeLeft;
 
-        //this.Image=Image;
-        this.Day=Day;
-        this.Hour=Hour;
-        this.Tmz=Tmz;
-        this.Minute=Minute;
-        this.Name=Name;
-        this.TimeLeft=TimeLeft;
+    public Boss(int Day,int Hour,int Minute,String Tmz,String Name,long TimeLeft, int bossImage){
+
+        this.bossImage = bossImage;
+        this.Day = Day;
+        this.Hour = Hour;
+        this.Tmz = Tmz;
+        this.Minute = Minute;
+        this.Name = Name;
+        this.TimeLeft = TimeLeft;
     }
 
 
     public int getBossDay(){return  Day;}
-
-
 
     public void setBossDay(int Day){ this.Day=Day;}
 
@@ -44,7 +43,9 @@ public class Boss   {
     public String getBossTmz(){return  Tmz;}
 
     public void setBossTmz(String Tmz){this.Tmz=Tmz;}
-     public String getBossName(){ return Name; }
+
+    public String getBossName(){ return Name; }
+
     public void setName(String Name){this.Name=Name;}
 
     public long getTimeLeft() {
@@ -54,6 +55,8 @@ public class Boss   {
     public void setTimeLeft(long timeLeft) {
         this.TimeLeft = timeLeft;
     }
+
+    public int getBossImage(){return bossImage;}
 
     @Override
     public  String toString(){
