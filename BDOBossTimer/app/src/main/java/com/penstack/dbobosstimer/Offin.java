@@ -3,7 +3,7 @@ package com.penstack.dbobosstimer;
 public class Offin extends Boss {
     String Image;
 
-    static  final String Name="Offin";
+    private static  final String Name="Offin";
 
     public Offin(int Day,int Hour,int Minute,String Tmz,long TimeLeft){
 

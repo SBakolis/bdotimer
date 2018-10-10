@@ -9,10 +9,10 @@ import java.sql.Timestamp;
 public class Boss   {
 
 
-    String Name;
-    int Day;
-    int Hour;
-    int Minute;
+    private String Name;
+    private int Day;
+    private int Hour;
+    private int Minute;
     String Tmz;// de kserw an xreiazetai en telei
      long TimeLeft;
     public Boss(int Day,int Hour,int Minute,String Tmz,String Name,long TimeLeft){

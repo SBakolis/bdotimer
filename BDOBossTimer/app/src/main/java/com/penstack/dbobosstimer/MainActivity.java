@@ -3,6 +3,8 @@ package com.penstack.dbobosstimer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,8 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import static java.lang.Long.valueOf;
-import static java.util.Calendar.DAY_OF_MONTH;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public long countdown,day;
     public TextView text1;
     public final ArrayList<Boss> BossDayList = new ArrayList<>();
     public final ArrayList<Boss> BossDayMList = new ArrayList<>();
-    private ListView listView;
+    private RecyclerView listView;
     private BossAdapter BossAdapter;
     private Calendar bCalendar;
     public int Wday;
@@ -47,7 +48,7 @@ public long countdown,day;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView) findViewById(R.id.listView0);
+        
 
 
 
@@ -136,8 +137,8 @@ public long countdown,day;
 
              String v=Hours(Integer.toString(hour));//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
              int RealHour=Integer.parseInt(v);
-           // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis
-            if((Wday==BossDayMList.get(i).Day && (RealHour<BossDayMList.get(i).Hour) || RealHour==BossDayMList.get(i).Hour&& minute<BossDayMList.get(i).Minute)){
+           // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
+            if((Wday==BossDayMList.get(i).getBossDay() && (RealHour<BossDayMList.get(i).getBossHour()) || RealHour==BossDayMList.get(i).getBossHour()&& minute<BossDayMList.get(i).getBossMin())){
 
                 s=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+MDay+" "+BossDayMList.get(i).getBossHour()+":"+BossDayMList.get(i).getBossMin()+":00";
                 countdown = Time(s,offset);
@@ -148,7 +149,7 @@ public long countdown,day;
                 Boss nextBoss=BossDayMList.get(i);
                 BossDayList.add(nextBoss);
             }
-            else if(Wday==(BossDayMList.get(i).Day-1)){
+            else if(Wday==(BossDayMList.get(i).getBossDay()-1)){
                 s=bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+(MDay+1)+" "+BossDayMList.get(i).getBossHour()+":"+BossDayMList.get(i).getBossMin()+":00";
                 countdown=Time(s,offset);
                 day = bCalendar.getTimeInMillis();
@@ -160,7 +161,7 @@ public long countdown,day;
             }
 
         }
-            for(int j=0;j<BossDayList.size();j++){
+            for(int j=0;j<BossDayList.size();j++){//sortarei me auksousa seira
                 for(int l=j+1;l<BossDayList.size();l++) {
                     if (BossDayList.get(l).getTimeLeft() <= BossDayList.get(j).getTimeLeft()) {
 
@@ -172,13 +173,16 @@ public long countdown,day;
 
                 }
             }
-
-        BossAdapter = new BossAdapter(this, BossDayList);
-
+            //ftiaxnw ton bossadapter kai pernaw to recycle view sth lista,ton layoutmanager ton evala giati alliws den emfanizontan
+        BossAdapter = new BossAdapter(this,BossDayList);
+        listView = (RecyclerView)findViewById(R.id.listView0);
+        listView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+        listView.setLayoutManager(layoutManager);
         listView.setAdapter(BossAdapter);
 
     }
-    public String  Hours(String v){
+    public String  Hours(String v){ //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
         SimpleDateFormat hour = new SimpleDateFormat("H");
         hour.setTimeZone(TimeZone.getTimeZone("GMT+"+offset.getOffset(new Date().getTime())/360000));
         ParsePosition pos = new ParsePosition(0);
