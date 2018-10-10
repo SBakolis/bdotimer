@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static java.util.TimeZone.getTimeZone;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public long countdown,day;
     public int i;
     public int hour;
     public int MDay;
-    public TimeZone offset;
+    public int offset;
     public TextView text1;
     public final ArrayList<Boss> BossDayList = new ArrayList<>();
     public final ArrayList<Boss> BossDayMList = new ArrayList<>();
@@ -129,13 +130,15 @@ public long countdown,day;
         minute=bCalendar.get(Calendar.MINUTE);
         MDay = bCalendar.get(Calendar.DAY_OF_MONTH);
         Wday = bCalendar.get(Calendar.DAY_OF_WEEK);
-        offset = bCalendar.getTimeZone();
+        offset =(bCalendar.get(Calendar.DST_OFFSET)+bCalendar.get(Calendar.ZONE_OFFSET))/3600000;
         int month=bCalendar.get(Calendar.MONTH);
+        TimeZone tz=TimeZone.getDefault();
+        TimeZone tz2=TimeZone.getTimeZone("GMT+2");
         for( i=0;i<BossDayMList.size();i++){
 
 
 
-             String v=Hours(Integer.toString(hour));//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
+             String v=Hours(Integer.toString(hour),offset);//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
              int RealHour=Integer.parseInt(v);
            // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
             if((Wday==BossDayMList.get(i).getBossDay() && (RealHour<BossDayMList.get(i).getBossHour()) || RealHour==BossDayMList.get(i).getBossHour()&& minute<BossDayMList.get(i).getBossMin())){
@@ -182,19 +185,21 @@ public long countdown,day;
         listView.setAdapter(BossAdapter);
 
     }
-    public String  Hours(String v){ //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
+    public String  Hours(String v,int offset){ //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
         SimpleDateFormat hour = new SimpleDateFormat("H");
-        hour.setTimeZone(TimeZone.getTimeZone("GMT+"+offset.getOffset(new Date().getTime())/360000));
+        //String test=timeZone.getID();
+        hour.setTimeZone(getTimeZone("GMT+"+offset));//"GMT+"+offset.getOffset(new Date().getTime())));
         ParsePosition pos = new ParsePosition(0);
         k = hour.parse(v, pos);
-        hour.setTimeZone(TimeZone.getTimeZone("GMT+2"));
+        hour.setTimeZone(getTimeZone("GMT+2"));
         String time=hour.format(k);
+
         return time;
     }
-    public  long Time(String s,TimeZone offset){
+    public  long Time(String s,int offset){
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:mm:ss");//tou lew pws na ta emfanizei
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));//tou lew to timezone tou string pou tou dinw
+            sdf.setTimeZone(getTimeZone("GMT+2"));//tou lew to timezone tou string pou tou dinw
             //sdf.setTimeZone(TimeZone.getTimeZone("GMT+" + bCalendar.get(Calendar.DST_OFFSET) + ""));
             ParsePosition pos = new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
             k = sdf.parse(s, pos);//parsarei to string sto Date k
@@ -202,7 +207,7 @@ public long countdown,day;
             long n = k.getTime();
 
 
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT+"+offset.getOffset(new Date().getTime())/360000));//allazoume apo gmt+UTC+2(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
+                sdf.setTimeZone(getTimeZone("GMT+"+offset));//.getOffset(new Date().getTime())));//allazoume apo gmt+UTC+2(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
 
             String time = sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
             return n;
