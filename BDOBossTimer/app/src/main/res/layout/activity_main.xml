@@ -13,7 +13,7 @@
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent">
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/listView0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +28,7 @@
         tools:layout_editor_absoluteY="90dp" >
 
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
