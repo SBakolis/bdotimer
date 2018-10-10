@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top|center"
+    >
+
+    <TextView
+        android:id="@+id/serverText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Server:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:paddingTop="25dp"
+         />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+    <RadioButton android:id="@+id/rbNA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EU"
+        android:onClick="onRadioButtonClicked"
+        android:paddingRight="60dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"/>
+
+    <RadioButton android:id="@+id/rbEU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NA"
+        android:onClick="onRadioButtonClicked"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/notificationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:paddingTop="15dp"
+        />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginRight="15dp"
+    android:paddingTop="10dp">
+
+    <CheckBox
+        android:id="@+id/checkKaranda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Karanda"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"/>
+
+    <CheckBox
+        android:id="@+id/checkKutum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kutumm"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkKzarka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kzarka"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkNouver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nouver"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkOffin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Offin"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkQuint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quint / Muraka"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkVell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vell"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+       />
+</LinearLayout>
+
+
+</LinearLayout>
+</android.support.constraint.ConstraintLayout>
