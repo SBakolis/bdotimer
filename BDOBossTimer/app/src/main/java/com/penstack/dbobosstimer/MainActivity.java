@@ -1,11 +1,15 @@
 package com.penstack.dbobosstimer;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,16 +47,26 @@ public long countdown,day;
     public String s;
     public int nextDay;
     public long n,diff;
+    public ImageView settButton;
+    Intent intentSettings ;
+    Intent intentFirstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        intentSettings = new Intent(MainActivity.this, Settings.class);
+        intentFirstTime = new Intent(MainActivity.this, firstTimeUseActivity.class);
 
+        settButton = (ImageView)findViewById(R.id.settButton);
+        settButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                startActivity(intentSettings);
+            }
+        });
 
-
-
+        checkFirstRun();
 
 
         //Monday
@@ -213,5 +227,39 @@ public long countdown,day;
             return n;
         }
 
+    private void checkFirstRun() {
+
+        final String PREFS_NAME = "BDO_TIMER_PREFS";
+        final String PREF_VERSION_CODE_KEY = "1";
+        final int DOESNT_EXIST = -1;
+
+        // Get current version code
+        int currentVersionCode = BuildConfig.VERSION_CODE;
+
+        // Get saved version code
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
+
+        // Check for first run or upgrade
+        if (currentVersionCode == savedVersionCode) {
+
+            // This is just a normal run
+            return;
+
+        } else if (savedVersionCode == DOESNT_EXIST) {
+
+            //first time
+            startActivity(intentFirstTime);
+            prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+
+        } else if (currentVersionCode > savedVersionCode) {
+
+            // update
+            return;
+        }
+
+        // Update the shared preferences with the current version code
+        prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+    }
 
 }
