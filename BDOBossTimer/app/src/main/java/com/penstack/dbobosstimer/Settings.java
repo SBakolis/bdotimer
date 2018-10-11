@@ -2,20 +2,38 @@ package com.penstack.dbobosstimer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
+
 import android.widget.RadioButton;
 import android.view.View;
-import android.widget.RadioGroup;
 
 public class Settings extends AppCompatActivity {
-    RadioGroup radioGroup;
 
+
+
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
         radioGroup = (RadioGroup) findViewById(R.id.ServerGroup);
 
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rbEU:
+                if (checked)
+                    // Pirates are the best
+                    break;
+            case R.id.rbNA:
+                if (checked)
+                    // Ninjas rule
+                    break;
+        }
     }
 }
 

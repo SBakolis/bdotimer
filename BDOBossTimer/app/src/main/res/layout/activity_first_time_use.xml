@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".firstTimeUseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top|center"
+        >
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome "
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:paddingTop="120dp"
+            />
+
+    <TextView
+        android:id="@+id/serverText1st"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Server:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:paddingTop="15dp"
+        />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton android:id="@+id/rbNA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+
+            android:paddingRight="60dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <RadioButton
+            android:id="@+id/rbEU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:text="EU"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RadioGroup>
+
+        <Button
+            android:id="@+id/firstStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="spot taken." />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
