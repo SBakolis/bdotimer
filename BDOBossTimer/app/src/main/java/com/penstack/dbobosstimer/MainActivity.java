@@ -38,13 +38,13 @@ public long countdown,day;
     public int offset;
     public TextView text1;
     public final ArrayList<Boss> BossDayList = new ArrayList<>();
-    public final ArrayList<Boss> BossDayMList = new ArrayList<>();
+    public final ArrayList<Boss> BossDayEUList = new ArrayList<>();
     private RecyclerView listView;
     private BossAdapter BossAdapter;
     private Calendar bCalendar;
     public int Wday;
     public int minute;
-    public String s;
+    public String s,server;
     public int nextDay;
     public long n,diff;
     public ImageView settButton;
@@ -70,73 +70,73 @@ public long countdown,day;
 
 
         //Monday
-        BossDayMList.add(new Kutum(2,00,15,"UTC+2",0)) ;
-        BossDayMList.add(new Karanda(2,02,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(2,05,00,"UTC+2",0));
-         BossDayMList.add(new Kzarka(2,9, 00, "UTC+2",0));
-        BossDayMList.add(new Nouver(2,12,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum( 2,16,00,"UTC+2",0)) ;
-        BossDayMList.add(new Nouver(2,19,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(2,22,15,"UTC+2",0)) ;
+        BossDayEUList.add(new Kutum(2,00,15,"EU",0)) ;
+        BossDayEUList.add(new Karanda(2,02,00,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(2,05,00,"EU",0));
+         BossDayEUList.add(new Kzarka(2,9, 00, "EU",0));
+        BossDayEUList.add(new Nouver(2,12,00,"EU",0)) ;
+        BossDayEUList.add(new Kutum( 2,16,00,"EU",0)) ;
+        BossDayEUList.add(new Nouver(2,19,00,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(2,22,15,"EU",0)) ;
         //Tuesday
-        BossDayMList.add(new Karanda(3,00,15,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum(3,02,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(3,05,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum(3,9,00,"UTC+2",0)) ;
-        BossDayMList.add(new  Offin(3,12,00,"UTC+2",0)) ;
-        BossDayMList.add(new Nouver(3,16,00,"UTC+2",0)) ;
-        BossDayMList.add(new Karanda(3,19,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(3,22,15,"UTC+2",0)) ;
-        BossDayMList.add(new Nouver(3,22,15,"UTC+2",0)) ;
+        BossDayEUList.add(new Karanda(3,00,15,"EU",0)) ;
+        BossDayEUList.add(new Kutum(3,02,00,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(3,05,00,"EU",0)) ;
+        BossDayEUList.add(new Kutum(3,9,00,"EU",0)) ;
+        BossDayEUList.add(new  Offin(3,12,00,"EU",0)) ;
+        BossDayEUList.add(new Nouver(3,16,00,"EU",0)) ;
+        BossDayEUList.add(new Karanda(3,19,00,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(3,22,15,"EU",0)) ;
+        BossDayEUList.add(new Nouver(3,22,15,"EU",0)) ;
         //Wednesday
-        BossDayMList.add(new Kutum(4,00,15,"UTC+2",0)) ;
-        BossDayMList.add(new Karanda(4,02,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(4,05,00,"UTC+2",0)) ;
-        BossDayMList.add(new Karanda(4,9,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(4,16,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum(4,19,00,"UTC+2",0)) ;
-        BossDayMList.add(new Karanda(4,22,15,"UTC+2",0)) ;
-        BossDayMList.add(new Kzarka(4,22,15,"UTC+2",0)) ;
+        BossDayEUList.add(new Kutum(4,00,15,"EU",0)) ;
+        BossDayEUList.add(new Karanda(4,02,00,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(4,05,00,"EU",0)) ;
+        BossDayEUList.add(new Karanda(4,9,00,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(4,16,00,"EU",0)) ;
+        BossDayEUList.add(new Kutum(4,19,00,"EU",0)) ;
+        BossDayEUList.add(new Karanda(4,22,15,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(4,22,15,"EU",0)) ;
         //Thursday
-        BossDayMList.add(new Nouver(5,00,15,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum(5,02,00,"UTC+2",0)) ;
-        BossDayMList.add(new Nouver(5,05,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum(5,9,00,"UTC+2",0)) ;
-        BossDayMList.add(new Nouver(5,12,00,"UTC+2",0)) ;
-        BossDayMList.add(new Kutum(5,16,00,"UTC+2",0)) ;
-        BossDayMList.add(new Offin(5,19,00,"UTC+2",0)) ;
-        BossDayMList.add(new Karanda(5,22,15,"UTC+2",0)) ;
+        BossDayEUList.add(new Nouver(5,00,15,"EU",0)) ;
+        BossDayEUList.add(new Kutum(5,02,00,"EU",0)) ;
+        BossDayEUList.add(new Nouver(5,05,00,"EU",0)) ;
+        BossDayEUList.add(new Kutum(5,9,00,"EU",0)) ;
+        BossDayEUList.add(new Nouver(5,12,00,"EU",0)) ;
+        BossDayEUList.add(new Kutum(5,16,00,"EU",0)) ;
+        BossDayEUList.add(new Offin(5,19,00,"EU",0)) ;
+        BossDayEUList.add(new Karanda(5,22,15,"EU",0)) ;
 
         //Friday
-        BossDayMList.add(new Kzarka(6,00,15,"UTC+2",0));
-        BossDayMList.add(new Nouver(6,02,00,"UTC+2",0));
-        BossDayMList.add(new Karanda(6,05,00,"UTC+2",0));
-        BossDayMList.add(new Kutum(6,9,00,"UTC+2",0));
-        BossDayMList.add(new Karanda(6,12,00,"UTC+2",0));
-        BossDayMList.add(new Nouver(6,16,00,"UTC+2",0));
-        BossDayMList.add(new Kzarka(6,19,00,"UTC+2",0));
-        BossDayMList.add(new Kzarka(6,22,15,"UTC+2",0));
-        BossDayMList.add(new Kutum(6,22,15,"UTC+2",0));
+        BossDayEUList.add(new Kzarka(6,00,15,"EU",0));
+        BossDayEUList.add(new Nouver(6,02,00,"EU",0));
+        BossDayEUList.add(new Karanda(6,05,00,"EU",0));
+        BossDayEUList.add(new Kutum(6,9,00,"EU",0));
+        BossDayEUList.add(new Karanda(6,12,00,"EU",0));
+        BossDayEUList.add(new Nouver(6,16,00,"EU",0));
+        BossDayEUList.add(new Kzarka(6,19,00,"EU",0));
+        BossDayEUList.add(new Kzarka(6,22,15,"EU",0));
+        BossDayEUList.add(new Kutum(6,22,15,"EU",0));
         //Saturday
-        BossDayMList.add(new Karanda(7,00,15,"UTC+2",0));
-        BossDayMList.add(new Offin(7,02,00,"UTC+2",0));
-        BossDayMList.add(new Nouver(7,05,00,"UTC+2",0));
-        BossDayMList.add(new Kutum(7,9,00,"UTC+2",0));
-        BossDayMList.add(new Nouver(7,12,00,"UTC+2",0));
-        BossDayMList.add(new Quint(7,16,00,"UTC+2",0));
-        BossDayMList.add(new Kzarka(7,19,00,"UTC+2",0));
-        BossDayMList.add(new Karanda(7,19,00,"UTC+2",0));
+        BossDayEUList.add(new Karanda(7,00,15,"EU",0));
+        BossDayEUList.add(new Offin(7,02,00,"EU",0));
+        BossDayEUList.add(new Nouver(7,05,00,"EU",0));
+        BossDayEUList.add(new Kutum(7,9,00,"EU",0));
+        BossDayEUList.add(new Nouver(7,12,00,"EU",0));
+        BossDayEUList.add(new Quint(7,16,00,"EU",0));
+        BossDayEUList.add(new Kzarka(7,19,00,"EU",0));
+        BossDayEUList.add(new Karanda(7,19,00,"EU",0));
         //Sunday
-        BossDayMList.add(new Nouver(1,00,15,"UTC+2",0));
-        BossDayMList.add(new Kutum(1,00,15,"UTC+2",0));
-        BossDayMList.add(new Kzarka(1,02,00,"UTC+2",0));
-        BossDayMList.add(new Kutum(1,05,00,"UTC+2",0));
-        BossDayMList.add(new Nouver(1,9,00,"UTC+2",0));
-        BossDayMList.add(new Kzarka(1,12,00,"UTC+2",0));
-        BossDayMList.add(new Vell(1,16,00,"UTC+2",0));
-        BossDayMList.add(new Karanda(1,19,00,"UTC+2",0));
-        BossDayMList.add(new Kzarka(1,22,15,"UTC+2",0));
-        BossDayMList.add(new Nouver(1,22,15,"UTC+2",0));
+        BossDayEUList.add(new Nouver(1,00,15,"EU",0));
+        BossDayEUList.add(new Kutum(1,00,15,"EU",0));
+        BossDayEUList.add(new Kzarka(1,02,00,"EU",0));
+        BossDayEUList.add(new Kutum(1,05,00,"EU",0));
+        BossDayEUList.add(new Nouver(1,9,00,"EU",0));
+        BossDayEUList.add(new Kzarka(1,12,00,"EU",0));
+        BossDayEUList.add(new Vell(1,16,00,"EU",0));
+        BossDayEUList.add(new Karanda(1,19,00,"EU",0));
+        BossDayEUList.add(new Kzarka(1,22,15,"EU",0));
+        BossDayEUList.add(new Nouver(1,22,15,"EU",0));
 
 
         bCalendar = Calendar.getInstance();
@@ -148,31 +148,38 @@ public long countdown,day;
         int month=bCalendar.get(Calendar.MONTH);
         TimeZone tz=TimeZone.getDefault();
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
-        for( i=0;i<BossDayMList.size();i++){
+
+
+        if(server=="EU"){
+            ServerSelection(BossDayEUList,2);
+            }
+    }
+
+        public void ServerSelection(ArrayList<Boss> Slist,int Soffset){for( i=0;i<Slist.size();i++){
 
 
 
-             String v=Hours(Integer.toString(hour),offset);//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
+             String v=Hours(Integer.toString(hour),offset,Soffset);//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
              int RealHour=Integer.parseInt(v);
            // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
-            if((Wday==BossDayMList.get(i).getBossDay() && (RealHour<BossDayMList.get(i).getBossHour()) || RealHour==BossDayMList.get(i).getBossHour()&& minute<BossDayMList.get(i).getBossMin())){
+            if((Wday==Slist.get(i).getBossDay() && (RealHour<Slist.get(i).getBossHour()) || RealHour==Slist.get(i).getBossHour()&& minute<Slist.get(i).getBossMin())){
 
-                s=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+MDay+" "+BossDayMList.get(i).getBossHour()+":"+BossDayMList.get(i).getBossMin()+":00";
-                countdown = Time(s,offset);
+                s=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+MDay+" "+Slist.get(i).getBossHour()+":"+Slist.get(i).getBossMin()+":00";
+                countdown = Time(s,offset,Soffset);
 
                 day = bCalendar.getTimeInMillis();
                 diff=(countdown-day);
-                BossDayMList.get(i).setTimeLeft(diff);
-                Boss nextBoss=BossDayMList.get(i);
+                Slist.get(i).setTimeLeft(diff);
+                Boss nextBoss=Slist.get(i);
                 BossDayList.add(nextBoss);
             }
-            else if(Wday==(BossDayMList.get(i).getBossDay()-1)){
-                s=bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+(MDay+1)+" "+BossDayMList.get(i).getBossHour()+":"+BossDayMList.get(i).getBossMin()+":00";
-                countdown=Time(s,offset);
+            else if(Wday==(Slist.get(i).getBossDay()-1)){
+                s=bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+(MDay+1)+" "+Slist.get(i).getBossHour()+":"+Slist.get(i).getBossMin()+":00";
+                countdown=Time(s,offset,Soffset);
                 day = bCalendar.getTimeInMillis();
                 diff=(countdown-day);
-                BossDayMList.get(i).setTimeLeft(diff);
-                Boss nextBoss=BossDayMList.get(i);
+                Slist.get(i).setTimeLeft(diff);
+                Boss nextBoss=Slist.get(i);
                 BossDayList.add(nextBoss);
 
             }
@@ -199,21 +206,21 @@ public long countdown,day;
         listView.setAdapter(BossAdapter);
 
     }
-    public String  Hours(String v,int offset){ //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
+    public String  Hours(String v,int Uoffset,int serverOff){ //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
         SimpleDateFormat hour = new SimpleDateFormat("H");
         //String test=timeZone.getID();
-        hour.setTimeZone(getTimeZone("GMT+"+offset));//"GMT+"+offset.getOffset(new Date().getTime())));
+        hour.setTimeZone(getTimeZone("GMT+"+Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
         ParsePosition pos = new ParsePosition(0);
         k = hour.parse(v, pos);
-        hour.setTimeZone(getTimeZone("GMT+2"));
+        hour.setTimeZone(getTimeZone("GMT+"+serverOff));
         String time=hour.format(k);
 
         return time;
     }
-    public  long Time(String s,int offset){
+    public  long Time(String s,int Uoffset,int serverOff){
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:mm:ss");//tou lew pws na ta emfanizei
-            sdf.setTimeZone(getTimeZone("GMT+2"));//tou lew to timezone tou string pou tou dinw
+            sdf.setTimeZone(getTimeZone("GMT+"+serverOff));//tou lew to timezone tou string pou tou dinw
             //sdf.setTimeZone(TimeZone.getTimeZone("GMT+" + bCalendar.get(Calendar.DST_OFFSET) + ""));
             ParsePosition pos = new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
             k = sdf.parse(s, pos);//parsarei to string sto Date k
@@ -221,7 +228,7 @@ public long countdown,day;
             long n = k.getTime();
 
 
-                sdf.setTimeZone(getTimeZone("GMT+"+offset));//.getOffset(new Date().getTime())));//allazoume apo gmt+UTC+2(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
+                sdf.setTimeZone(getTimeZone("GMT+"+Uoffset));//.getOffset(new Date().getTime())));//allazoume apo gmt+UTC+2(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
 
             String time = sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
             return n;

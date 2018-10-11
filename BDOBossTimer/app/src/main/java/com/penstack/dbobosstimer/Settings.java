@@ -2,16 +2,20 @@ package com.penstack.dbobosstimer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
 import android.widget.RadioButton;
 import android.view.View;
 
 public class Settings extends AppCompatActivity {
+
+
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
+        radioGroup = (RadioGroup) findViewById(R.id.ServerGroup);
 
     }
 
@@ -32,3 +36,6 @@ public class Settings extends AppCompatActivity {
         }
     }
 }
+
+
+
