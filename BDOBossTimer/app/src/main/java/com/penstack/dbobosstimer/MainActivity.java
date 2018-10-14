@@ -39,6 +39,7 @@ public long countdown,day;
     public TextView text1;
     public final ArrayList<Boss> BossDayList = new ArrayList<>();
     public final ArrayList<Boss> BossDayEUList = new ArrayList<>();
+    public final ArrayList<Boss> BossDayNAList = new ArrayList<>();
     private RecyclerView listView;
     private BossAdapter BossAdapter;
     private Calendar bCalendar;
@@ -50,6 +51,10 @@ public long countdown,day;
     public ImageView settButton;
     Intent intentSettings ;
     Intent intentFirstTime;
+    final String PREFS_NAME = "BDO_TIMER_PREFS";
+    final String PREF_SERVER_CONSTANT = "0";
+    final int DOESNT_EXIST = -1;
+    SharedPreferences prefs ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,7 @@ public long countdown,day;
 
         checkFirstRun();
 
-
+        //----------------------------------EU BOSSES-----------------------------------------
         //Monday
         BossDayEUList.add(new Kutum(2,00,15,"EU",0)) ;
         BossDayEUList.add(new Karanda(2,02,00,"EU",0)) ;
@@ -106,7 +111,6 @@ public long countdown,day;
         BossDayEUList.add(new Kutum(5,16,00,"EU",0)) ;
         BossDayEUList.add(new Offin(5,19,00,"EU",0)) ;
         BossDayEUList.add(new Karanda(5,22,15,"EU",0)) ;
-
         //Friday
         BossDayEUList.add(new Kzarka(6,00,15,"EU",0));
         BossDayEUList.add(new Nouver(6,02,00,"EU",0));
@@ -138,6 +142,76 @@ public long countdown,day;
         BossDayEUList.add(new Kzarka(1,22,15,"EU",0));
         BossDayEUList.add(new Nouver(1,22,15,"EU",0));
 
+        //----------------------------------NA BOSSES-----------------------------------------
+        //Monday
+        BossDayNAList.add(new Karanda(2,00,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(2,03,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(2,07,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(2,10,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(2,14,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(2,17,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(2,20,15,"NA",0)) ;
+        BossDayNAList.add(new Karanda(2,22,15,"NA",0)) ;
+        //Tuesday
+        BossDayNAList.add(new Kutum(3,00,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(3,03,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(3,07,00,"NA",0)) ;
+        BossDayNAList.add(new Offin(3,10,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(3,14,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(3,17,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(3,20,15,"NA",0)) ;
+        BossDayNAList.add(new Nouver(3,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kutum(3,22,15,"NA",0)) ;
+        //Wednesday
+        BossDayNAList.add(new Karanda(4,00,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(4,07,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(4,10,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(4,14,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(4,17,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(4,20,15,"NA",0)) ;
+        BossDayNAList.add(new Karanda(4,20,15,"NA",0)) ;
+        BossDayNAList.add(new Nouver(4,22,15,"NA",0)) ;
+        //Thursday
+        BossDayNAList.add(new Kutum(5,00,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(5,03,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(5,07,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(5,10,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(5,14,00,"NA",0)) ;
+        BossDayNAList.add(new Offin(5,17,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(5,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(5,22,15,"NA",0)) ;
+        //Friday
+        BossDayNAList.add(new Nouver(6,00,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(6,03,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(6,07,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(6,10,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(6,14,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(6,17,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(6,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(6,20,15,"NA",0)) ;
+        BossDayNAList.add(new Karanda(6,22,15,"NA",0)) ;
+        //Saturday
+        BossDayNAList.add(new Offin(7,00,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(7,03,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(7,07,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(7,10,00,"NA",0)) ;
+        BossDayNAList.add(new Quint(7,14,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(7,17,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(7,17,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(7,22,15,"NA",0)) ;
+        BossDayNAList.add(new Kutum(7,22,15,"NA",0)) ;
+        //Sunday
+        BossDayNAList.add(new Kzarka(1,00,00,"NA",0)) ;
+        BossDayNAList.add(new Kutum(1,03,00,"NA",0)) ;
+        BossDayNAList.add(new Nouver(1,07,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(1,10,00,"NA",0)) ;
+        BossDayNAList.add(new Vell(1,14,00,"NA",0)) ;
+        BossDayNAList.add(new Karanda(1,17,00,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(1,20,15,"NA",0)) ;
+        BossDayNAList.add(new Nouver(1,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kutum(1,22,15,"NA",0)) ;
+
+
 
         bCalendar = Calendar.getInstance();
         hour = bCalendar.get(Calendar.HOUR_OF_DAY);
@@ -150,9 +224,9 @@ public long countdown,day;
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
 
 
-        if(server=="EU"){
-            ServerSelection(BossDayEUList,2);
-            }
+        //if(server=="EU"){
+        //    ServerSelection(BossDayEUList,2);
+        //    }
     }
 
         public void ServerSelection(ArrayList<Boss> Slist,int Soffset){for( i=0;i<Slist.size();i++){
@@ -258,6 +332,7 @@ public long countdown,day;
             //first time
             startActivity(intentFirstTime);
             prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+            return;
 
         } else if (currentVersionCode > savedVersionCode) {
 
@@ -267,6 +342,21 @@ public long countdown,day;
 
         // Update the shared preferences with the current version code
         prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+    }
+
+    @Override
+    public void onResume()
+    {
+
+        super.onResume();
+        BossDayList.clear();
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+        if(currentServerSelection == 1) {
+            ServerSelection(BossDayEUList, 2);
+        }else if(currentServerSelection == 2){
+            ServerSelection(BossDayNAList, 2);
+        }
     }
 
 }
