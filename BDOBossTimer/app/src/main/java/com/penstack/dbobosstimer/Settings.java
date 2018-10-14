@@ -1,5 +1,6 @@
 package com.penstack.dbobosstimer;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -8,13 +9,20 @@ import android.view.View;
 
 public class Settings extends AppCompatActivity {
 
-
+    final String PREFS_NAME = "BDO_TIMER_PREFS";
+    //final String EUSERVER = "EU";
+    //final String NASERVER = "NA";
+    final int EUSERVER_CONSTANT = 1;
+    final int NASERVER_CONSTANT = 2;
+    final String PREF_SERVER_CONSTANT = "0";
+    SharedPreferences prefs;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
+         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         
 
     }
@@ -27,11 +35,11 @@ public class Settings extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.rbEU:
                 if (checked)
-                    // Pirates are the best
+                    prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
                     break;
             case R.id.rbNA:
                 if (checked)
-                    // Ninjas rule
+                    prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     break;
         }
     }

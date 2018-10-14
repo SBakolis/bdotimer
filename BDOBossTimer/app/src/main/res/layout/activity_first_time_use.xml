@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NA"
-
+            android:onClick="onRadioButtonClicked"
             android:paddingRight="60dp"
             android:textStyle="bold"
             android:textSize="20dp"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-
+            android:onClick="onRadioButtonClicked"
             android:text="EU"
             android:textSize="20dp"
             android:textStyle="bold" />
