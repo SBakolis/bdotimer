@@ -286,7 +286,7 @@ public long countdown,day;
         hour.setTimeZone(getTimeZone("GMT+"+Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
         ParsePosition pos = new ParsePosition(0);
         k = hour.parse(v, pos);
-        hour.setTimeZone(getTimeZone("GMT+"+serverOff));
+        hour.setTimeZone(getTimeZone("GMT"+serverOff));
         String time=hour.format(k);
 
         return time;
@@ -294,7 +294,7 @@ public long countdown,day;
     public  long Time(String s,int Uoffset,int serverOff){
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:mm:ss");//tou lew pws na ta emfanizei
-            sdf.setTimeZone(getTimeZone("GMT+"+serverOff));//tou lew to timezone tou string pou tou dinw
+            sdf.setTimeZone(getTimeZone("GMT"+serverOff));//tou lew to timezone tou string pou tou dinw
             //sdf.setTimeZone(TimeZone.getTimeZone("GMT+" + bCalendar.get(Calendar.DST_OFFSET) + ""));
             ParsePosition pos = new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
             k = sdf.parse(s, pos);//parsarei to string sto Date k
@@ -353,9 +353,9 @@ public long countdown,day;
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
         if(currentServerSelection == 1) {
-            ServerSelection(BossDayEUList, 2);
+            ServerSelection(BossDayEUList, +2);
         }else if(currentServerSelection == 2){
-            ServerSelection(BossDayNAList, 2);
+            ServerSelection(BossDayNAList, -7);
         }
     }
 
