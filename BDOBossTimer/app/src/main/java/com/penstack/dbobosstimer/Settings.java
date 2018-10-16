@@ -22,7 +22,7 @@ public class Settings extends AppCompatActivity {
     final String PREF_SERVER_CONSTANT = "0";
     final ArrayList<String> NOTIFY_BOSS=new ArrayList<>();
     final Set<String> BossNotify=new HashSet<String>();
-    final String PREF_NOTIFY="";
+    final String PREF_NOTIFY="NotificationList";
     SharedPreferences prefs;
 
    @Override
@@ -31,8 +31,25 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
 
          prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        
+       RadioButton rbEU=(RadioButton)findViewById(R.id.rbEU);
+       RadioButton rbNa=(RadioButton) findViewById(R.id.rbNA);
+       CheckBox CheckKaranda=(CheckBox) findViewById(R.id.checkKaranda);
+       CheckBox CheckKutum=(CheckBox) findViewById(R.id.checkKutum);
+       CheckBox CheckKzarka=(CheckBox) findViewById(R.id.checkKzarka);
+       CheckBox CheckNouver=(CheckBox) findViewById(R.id.checkNouver);
+       CheckBox CheckQuint=(CheckBox) findViewById(R.id.checkQuint);
+       CheckBox CheckVell=(CheckBox) findViewById(R.id.checkVell);
+       CheckBox CheckOffin=(CheckBox) findViewById(R.id.checkOffin);
 
+       rbEU.setChecked(prefs.getBoolean("EU",false));
+       rbNa.setChecked(prefs.getBoolean("NA",false));
+       CheckKaranda.setChecked(prefs.getBoolean("Karanda",false));
+       CheckKzarka.setChecked(prefs.getBoolean("Kzarka",false));
+       CheckKutum.setChecked(prefs.getBoolean("Kutum",false));
+       CheckNouver.setChecked(prefs.getBoolean("Nouver",false));
+       CheckOffin.setChecked(prefs.getBoolean("Offin",false));
+       CheckVell.setChecked(prefs.getBoolean("Vell",false));
+       CheckQuint.setChecked(prefs.getBoolean("Quint",false));
     }
 
     public void onRadioButtonClicked(View view) {
@@ -42,13 +59,25 @@ public class Settings extends AppCompatActivity {
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.rbEU:
-                if (checked)
+                if (checked) {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
-                    break;
+                    prefs.edit().putBoolean("EU", checked).apply();// na apothikeuei kai to oti einai checkarismeno
+                }
+                else
+
+                    prefs.edit().putBoolean("EU", checked).apply();// na to ksetickarei
+
+                break;
             case R.id.rbNA:
-                if (checked)
+                if (checked){
+
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
-                    break;
+                    prefs.edit().putBoolean("NA", checked).apply();
+                }
+                else
+                    prefs.edit().putBoolean("NA",checked).apply();
+
+                break;
         }
     }
 
@@ -61,50 +90,83 @@ public class Settings extends AppCompatActivity {
             case R.id.checkKaranda:
                 if (checked) {
                     NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
+                    prefs.edit().putBoolean("Karanda",checked).apply();
                 } else
-                    NOTIFY_BOSS.add("");
+                    //NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Karanda",checked).apply();
                 break;
             case R.id.checkKutum:
                 if (checked) {
 
                     NOTIFY_BOSS.add("Kutum");// prefs.edit().putStringSet("Kutum",BossNotify).apply();
-                } else
-                    NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Kutum",checked).apply();
+
+                }
+                else {
+
+                    //NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Kutum", checked).apply();
+                }
                 break;
             case R.id.checkKzarka:
                 if (checked) {
 
-                    NOTIFY_BOSS.add("Kzarka");//prefs.edit().putStringSet("Kzarka",BossNotify).apply();
-                } else
-                    NOTIFY_BOSS.add("");
+                    NOTIFY_BOSS.add("Kzarka");
+                    prefs.edit().putBoolean("Kzarka",checked).apply();
+                }
+                else {
+
+                    //NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Kzarka", checked).apply();
+                }
                 break;
             case R.id.checkNouver:
                 if (checked) {
 
-                    NOTIFY_BOSS.add("Nouver");//prefs.edit().putStringSet("Nouver",BossNotify).apply();
-                } else
-                    NOTIFY_BOSS.add("");
+                    NOTIFY_BOSS.add("Nouver");
+                    prefs.edit().putBoolean("Nouver",checked).apply();
+
+                }
+                else {
+                   // NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Nouver", checked).apply();
+                }
                 break;
             case R.id.checkQuint:
                 if (checked) {
 
                     NOTIFY_BOSS.add("Quint");//prefs.edit().putStringSet("Quint",BossNotify).apply();
-                } else
-                    NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Quint",checked).apply();
+                }
+                else {
+
+                    //NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Quint", checked).apply();
+                }
                 break;
             case R.id.checkVell:
                 if (checked) {
 
                     NOTIFY_BOSS.add("Vell");// prefs.edit().putString(NOTIFY_BOSS.get(5),"Vell").apply();
-                } else
-                    NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Vell",checked).apply();
+                }
+                else {
+
+                    //NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Vell", checked).apply();
+                }
                 break;
             case R.id.checkOffin:
                 if (checked) {
 
                     NOTIFY_BOSS.add("Offin");// prefs.edit().putString(NOTIFY_BOSS.get(6),"Offin").apply();
-                } else
-                    NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Offin",checked).apply();
+                }
+                else {
+
+                   // NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Offin",checked).apply();
+                }
                 break;
         }
          BossNotify.addAll(NOTIFY_BOSS);

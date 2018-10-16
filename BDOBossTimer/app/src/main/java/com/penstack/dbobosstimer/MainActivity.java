@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.sql.Timestamp;
@@ -62,7 +63,7 @@ public long countdown,day;
     final int DOESNT_EXIST = -1;
     final ArrayList<String> NOTIFY_BOSS=new ArrayList<>();
      Set<String> BossNotify=new HashSet<String>();
-    final String PREF_NOTIFY="";
+    final String PREF_NOTIFY="NotificationList";
     SharedPreferences prefs ;
     public String CHANNEL_ID;
     @Override
