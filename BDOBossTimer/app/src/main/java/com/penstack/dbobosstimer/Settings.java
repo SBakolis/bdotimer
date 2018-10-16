@@ -62,6 +62,7 @@ public class Settings extends AppCompatActivity {
                 if (checked) {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("EU", checked).apply();// na apothikeuei kai to oti einai checkarismeno
+                    prefs.edit().putBoolean("NA",false).apply();
                 }
                 else
 
@@ -73,6 +74,7 @@ public class Settings extends AppCompatActivity {
 
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("NA", checked).apply();
+                    prefs.edit().putBoolean("EU", false).apply();
                 }
                 else
                     prefs.edit().putBoolean("NA",checked).apply();
@@ -83,89 +85,89 @@ public class Settings extends AppCompatActivity {
 
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        boolean checked2 = ((CheckBox) view).isChecked();
 
 
         switch(view.getId()) {
             case R.id.checkKaranda:
-                if (checked) {
+                if (checked2) {
                     NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
-                    prefs.edit().putBoolean("Karanda",checked).apply();
+                    prefs.edit().putBoolean("Karanda",checked2).apply();
                 } else
                     //NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Karanda",checked).apply();
+                    prefs.edit().putBoolean("Karanda",checked2).apply();
                 break;
             case R.id.checkKutum:
-                if (checked) {
+                if (checked2) {
 
                     NOTIFY_BOSS.add("Kutum");// prefs.edit().putStringSet("Kutum",BossNotify).apply();
-                    prefs.edit().putBoolean("Kutum",checked).apply();
+                    prefs.edit().putBoolean("Kutum",checked2).apply();
 
                 }
                 else {
 
                     //NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Kutum", checked).apply();
+                    prefs.edit().putBoolean("Kutum", checked2).apply();
                 }
                 break;
             case R.id.checkKzarka:
-                if (checked) {
+                if (checked2) {
 
                     NOTIFY_BOSS.add("Kzarka");
-                    prefs.edit().putBoolean("Kzarka",checked).apply();
+                    prefs.edit().putBoolean("Kzarka",checked2).apply();
                 }
                 else {
 
                     //NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Kzarka", checked).apply();
+                    prefs.edit().putBoolean("Kzarka", checked2).apply();
                 }
                 break;
             case R.id.checkNouver:
-                if (checked) {
+                if (checked2) {
 
                     NOTIFY_BOSS.add("Nouver");
-                    prefs.edit().putBoolean("Nouver",checked).apply();
+                    prefs.edit().putBoolean("Nouver",checked2).apply();
 
                 }
                 else {
                    // NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Nouver", checked).apply();
+                    prefs.edit().putBoolean("Nouver", checked2).apply();
                 }
                 break;
             case R.id.checkQuint:
-                if (checked) {
+                if (checked2) {
 
                     NOTIFY_BOSS.add("Quint");//prefs.edit().putStringSet("Quint",BossNotify).apply();
-                    prefs.edit().putBoolean("Quint",checked).apply();
+                    prefs.edit().putBoolean("Quint",checked2).apply();
                 }
                 else {
 
                     //NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Quint", checked).apply();
+                    prefs.edit().putBoolean("Quint", checked2).apply();
                 }
                 break;
             case R.id.checkVell:
-                if (checked) {
+                if (checked2) {
 
                     NOTIFY_BOSS.add("Vell");// prefs.edit().putString(NOTIFY_BOSS.get(5),"Vell").apply();
-                    prefs.edit().putBoolean("Vell",checked).apply();
+                    prefs.edit().putBoolean("Vell",checked2).apply();
                 }
                 else {
 
                     //NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Vell", checked).apply();
+                    prefs.edit().putBoolean("Vell", checked2).apply();
                 }
                 break;
             case R.id.checkOffin:
-                if (checked) {
+                if (checked2) {
 
                     NOTIFY_BOSS.add("Offin");// prefs.edit().putString(NOTIFY_BOSS.get(6),"Offin").apply();
-                    prefs.edit().putBoolean("Offin",checked).apply();
+                    prefs.edit().putBoolean("Offin",checked2).apply();
                 }
                 else {
 
                    // NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Offin",checked).apply();
+                    prefs.edit().putBoolean("Offin",checked2).apply();
                 }
                 break;
         }

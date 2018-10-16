@@ -241,7 +241,7 @@ public long countdown,day;
         TimeZone tz=TimeZone.getDefault();
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
 
-
+        Preferences();
         //if(server=="EU"){
         //    ServerSelection(BossDayEUList,2);
         //    }
@@ -378,7 +378,8 @@ public long countdown,day;
     {
 
         super.onResume();
-        BossDayList.clear();
+        Preferences();
+        /*BossDayList.clear();
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
         if(currentServerSelection == 1) {
@@ -389,7 +390,7 @@ public long countdown,day;
 
 
 
-           BossNotify=prefs.getStringSet(PREF_NOTIFY,null);
+           BossNotify=prefs.getStringSet(PREF_NOTIFY,null);*/
 
     }
 
@@ -409,5 +410,20 @@ public long countdown,day;
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+    private void Preferences(){
+
+        BossDayList.clear();
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+        if(currentServerSelection == 1) {
+            ServerSelection(BossDayEUList, "+2");
+        }else if(currentServerSelection == 2){
+            ServerSelection(BossDayNAList, "-7");
+        }
+
+
+
+        BossNotify=prefs.getStringSet(PREF_NOTIFY,null);
     }
 }
