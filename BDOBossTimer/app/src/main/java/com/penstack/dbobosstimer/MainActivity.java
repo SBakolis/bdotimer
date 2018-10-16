@@ -1,8 +1,12 @@
 package com.penstack.dbobosstimer;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.sql.Timestamp;
@@ -21,7 +26,9 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.TimeZone;
 
 import static java.util.TimeZone.getTimeZone;
@@ -54,13 +61,24 @@ public long countdown,day;
     final String PREFS_NAME = "BDO_TIMER_PREFS";
     final String PREF_SERVER_CONSTANT = "0";
     final int DOESNT_EXIST = -1;
+    final ArrayList<String> NOTIFY_BOSS=new ArrayList<>();
+     Set<String> BossNotify=new HashSet<String>();
+    final String PREF_NOTIFY="NotificationList";
     SharedPreferences prefs ;
-
+    public String CHANNEL_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*createNotificationChannel();
 
+            CHANNEL_ID="Boss channel";
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentTitle("BOSS SPAWNING")
+                    .setContentText("Boss will spawn in 15mins!!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+*/
         intentSettings = new Intent(MainActivity.this, Settings.class);
         intentFirstTime = new Intent(MainActivity.this, firstTimeUseActivity.class);
 
@@ -223,7 +241,7 @@ public long countdown,day;
         TimeZone tz=TimeZone.getDefault();
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
 
-
+        Preferences();
         //if(server=="EU"){
         //    ServerSelection(BossDayEUList,2);
         //    }
@@ -360,6 +378,41 @@ public long countdown,day;
     {
 
         super.onResume();
+        Preferences();
+        /*BossDayList.clear();
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+        if(currentServerSelection == 1) {
+            ServerSelection(BossDayEUList, "+2");
+        }else if(currentServerSelection == 2){
+            ServerSelection(BossDayNAList, "-7");
+        }
+
+
+
+           BossNotify=prefs.getStringSet(PREF_NOTIFY,null);*/
+
+    }
+
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "bossTimer";
+            String description = "Notification for Boss spawning" ;
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            String CHANNEL_ID="Boss Channel";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+    private void Preferences(){
+
         BossDayList.clear();
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
@@ -368,6 +421,9 @@ public long countdown,day;
         }else if(currentServerSelection == 2){
             ServerSelection(BossDayNAList, "-7");
         }
-    }
 
+
+
+        BossNotify=prefs.getStringSet(PREF_NOTIFY,null);
+    }
 }
