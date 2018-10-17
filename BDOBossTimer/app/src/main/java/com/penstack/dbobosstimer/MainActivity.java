@@ -1,12 +1,16 @@
 package com.penstack.dbobosstimer;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +35,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
+import static android.support.v4.os.LocaleListCompat.create;
 import static java.util.TimeZone.getTimeZone;
 
 
@@ -66,19 +71,14 @@ public long countdown,day;
     final String PREF_NOTIFY="NotificationList";
     SharedPreferences prefs ;
     public String CHANNEL_ID;
+    Intent notifications;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*createNotificationChannel();
+        
 
-            CHANNEL_ID="Boss channel";
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.mipmap.ic_launcher_round)
-                    .setContentTitle("BOSS SPAWNING")
-                    .setContentText("Boss will spawn in 15mins!!")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-*/
         intentSettings = new Intent(MainActivity.this, Settings.class);
         intentFirstTime = new Intent(MainActivity.this, firstTimeUseActivity.class);
 
@@ -96,7 +96,7 @@ public long countdown,day;
         BossDayEUList.add(new Kutum(2,0,15,"EU",0)) ;
         BossDayEUList.add(new Karanda(2,2,0,"EU",0)) ;
         BossDayEUList.add(new Kzarka(2,5,0,"EU",0));
-         BossDayEUList.add(new Kzarka(2,9, 0, "EU",0));
+        BossDayEUList.add(new Kzarka(2,9, 0, "EU",0));
         BossDayEUList.add(new Nouver(2,12,0,"EU",0)) ;
         BossDayEUList.add(new Kutum( 2,16,0,"EU",0)) ;
         BossDayEUList.add(new Nouver(2,19,0,"EU",0)) ;
@@ -231,13 +231,7 @@ public long countdown,day;
 
 
 
-        bCalendar = Calendar.getInstance();
-        hour = bCalendar.get(Calendar.HOUR_OF_DAY);
-        minute=bCalendar.get(Calendar.MINUTE);
-        MDay = bCalendar.get(Calendar.DAY_OF_MONTH);
-        Wday = bCalendar.get(Calendar.DAY_OF_WEEK);
-        offset =(bCalendar.get(Calendar.DST_OFFSET)+bCalendar.get(Calendar.ZONE_OFFSET))/3600000;
-        int month=bCalendar.get(Calendar.MONTH);
+
         TimeZone tz=TimeZone.getDefault();
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
 
@@ -400,7 +394,7 @@ public long countdown,day;
             CharSequence name = "bossTimer";
             String description = "Notification for Boss spawning" ;
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            String CHANNEL_ID="Boss Channel";
+            String CHANNEL_ID="BossChannel";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
@@ -411,6 +405,14 @@ public long countdown,day;
     }
     private void Preferences(){
 
+
+        bCalendar = Calendar.getInstance();
+        hour = bCalendar.get(Calendar.HOUR_OF_DAY);
+        minute=bCalendar.get(Calendar.MINUTE);
+        MDay = bCalendar.get(Calendar.DAY_OF_MONTH);
+        Wday = bCalendar.get(Calendar.DAY_OF_WEEK);
+        offset =(bCalendar.get(Calendar.DST_OFFSET)+bCalendar.get(Calendar.ZONE_OFFSET))/3600000;
+        int month=bCalendar.get(Calendar.MONTH);
         BossDayList.clear();
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
@@ -421,7 +423,43 @@ public long countdown,day;
         }
 
 
-
+        createNotificationChannel();
         BossNotify=prefs.getStringSet(PREF_NOTIFY,null);
+        if (prefs.getBoolean("Karanda",false)){
+           // notifications = new Intent(this, AlertDialog.class);
+            //notifications.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifications, 0);
+
+            CHANNEL_ID="Bosschannel";
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentTitle("BOSS SPAWNING")
+                    .setContentText("Boss will spawn in 15mins!!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+            // Gets an instance of the NotificationManager service//
+
+            NotificationManager mNotificationManager =
+
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            // When you issue multiple notifications about the same type of event,
+            // it’s best practice for your app to try to update an existing notification
+            // with this new information, rather than immediately creating a new notification.
+            // If you want to update this notification at a later date, you need to assign it an ID.
+            // You can then use this ID whenever you issue a subsequent notification.
+            // If the previous notification is still visible, the system will update this existing notification,
+            // rather than create a new one. In this example, the notification’s ID is 001//
+
+
+
+                    mNotificationManager.notify(001, mBuilder.build());
+
+
+
+
+        }
+
     }
 }
