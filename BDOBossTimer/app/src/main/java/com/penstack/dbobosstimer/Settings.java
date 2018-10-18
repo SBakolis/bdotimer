@@ -1,5 +1,8 @@
 package com.penstack.dbobosstimer;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.widget.RadioButton;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +32,9 @@ public class Settings extends AppCompatActivity {
     SharedPreferences prefs;
     RadioButton rbEU,rbNa;
 
+    private PendingIntent pendingIntent;
+    private AlarmManager manager;
+    public Calendar calendar;
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,6 +226,24 @@ public class Settings extends AppCompatActivity {
         }
          BossNotify.addAll(NOTIFY_BOSS);
         prefs.edit().putStringSet(PREF_NOTIFY,BossNotify).apply();
+    }
+
+    public void startAlarm(View view, int dayOfTheWeek, int hourOfTheDay, int minutes) {
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        int interval = 1000 * 60 * 60 * 24 * 7;
+        calendar.set(Calendar.DAY_OF_WEEK, dayOfTheWeek);
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
+        calendar.set(Calendar.MINUTE, minutes);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+    }
+
+    public void cancelAlarm(View view) {
+        if (manager != null) {
+            manager.cancel(pendingIntent);
+            //Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
