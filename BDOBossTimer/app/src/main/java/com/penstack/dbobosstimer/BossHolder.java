@@ -40,7 +40,7 @@ public class BossHolder extends RecyclerView.ViewHolder {
 
                 public void onTick(long millisUntilFinished) {
 
-                    BossTime.setText("" + FinalTime(millisUntilFinished));
+                    BossTime.setText(""+FinalTime(millisUntilFinished));
 
                 }
 
