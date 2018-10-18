@@ -74,8 +74,7 @@ public long countdown,day;
     public String CHANNEL_ID;
     Intent notifications;
     public String RealDAY;
-    private PendingIntent pendingIntent;
-    private AlarmManager manager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,6 +239,7 @@ public long countdown,day;
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
 
         Preferences();
+
 
     }
 
@@ -498,8 +498,8 @@ public long countdown,day;
         }*/
 
     }
-
-    public void startAlarm(View view) {
+    //Alarm Tests
+    /*public void startAlarm(View view) {
         manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         int interval = 10000;
 
@@ -512,5 +512,5 @@ public long countdown,day;
             manager.cancel(pendingIntent);
             //Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
         }
-    }
+    } */
 }
