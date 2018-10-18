@@ -233,8 +233,8 @@ public long countdown,day;
         BossDayNAList.add(new Nouver(1,20,15,"NA",0)) ;
         BossDayNAList.add(new Kutum(1,22,15,"NA",0)) ;
 
-
-
+        intentSettings.putExtra("BossDayEUList",BossDayEUList);
+        intentSettings.putExtra("BossDayNAList",BossDayNAList);
 
         TimeZone tz=TimeZone.getDefault();
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");

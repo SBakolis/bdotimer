@@ -23,7 +23,10 @@ public class Settings extends AppCompatActivity {
     final ArrayList<String> NOTIFY_BOSS=new ArrayList<>();
     final Set<String> BossNotify=new HashSet<String>();
     final String PREF_NOTIFY="NotificationList";
+    ArrayList<Boss>  BossEU=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayEUList");
+    ArrayList<Boss>  BossNA=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayNAList");
     SharedPreferences prefs;
+    RadioButton rbEU,rbNa;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +34,8 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
 
          prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-       RadioButton rbEU=(RadioButton)findViewById(R.id.rbEU);
-       RadioButton rbNa=(RadioButton) findViewById(R.id.rbNA);
+       rbEU=(RadioButton)findViewById(R.id.rbEU);
+        rbNa=(RadioButton) findViewById(R.id.rbNA);
        CheckBox CheckKaranda=(CheckBox) findViewById(R.id.checkKaranda);
        CheckBox CheckKutum=(CheckBox) findViewById(R.id.checkKutum);
        CheckBox CheckKzarka=(CheckBox) findViewById(R.id.checkKzarka);
@@ -93,6 +96,21 @@ public class Settings extends AppCompatActivity {
                 if (checked2) {
                     NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
                     prefs.edit().putBoolean("Karanda",checked2).apply();
+                    if(rbEU.isChecked()){
+
+                        for(int w=0;w<BossEU.size();w++){
+
+                            BossEU.get(w).getBossDay();
+                            BossEU.get(w).getBossHour();
+                            BossEU.get(w).getBossMin();
+                        }
+                    }
+                    else
+                        for(int w=0;w<BossNA.size();w++){
+                            BossNA.get(w).getBossDay();
+                            BossNA.get(w).getBossHour();
+                            BossNA.get(w).getBossMin();
+                        }
                 } else
                     //NOTIFY_BOSS.add("");
                     prefs.edit().putBoolean("Karanda",checked2).apply();
@@ -102,7 +120,21 @@ public class Settings extends AppCompatActivity {
 
                     NOTIFY_BOSS.add("Kutum");// prefs.edit().putStringSet("Kutum",BossNotify).apply();
                     prefs.edit().putBoolean("Kutum",checked2).apply();
+                    if(rbEU.isChecked()){
 
+                        for(int w=0;w<BossEU.size();w++){
+                            BossEU.get(w).getBossDay();
+                            BossEU.get(w).getBossHour();
+                            BossEU.get(w).getBossMin();
+                        }
+                    }
+                    else
+                        for(int w=0;w<BossNA.size();w++){
+
+                            BossNA.get(w).getBossDay();
+                            BossNA.get(w).getBossHour();
+                            BossNA.get(w).getBossMin();
+                        }
                 }
                 else {
 
@@ -115,6 +147,20 @@ public class Settings extends AppCompatActivity {
 
                     NOTIFY_BOSS.add("Kzarka");
                     prefs.edit().putBoolean("Kzarka",checked2).apply();
+                    if(rbEU.isChecked()){
+
+                        for(int w=0;w<BossEU.size();w++){
+                            BossEU.get(w).getBossDay();
+                            BossEU.get(w).getBossHour();
+                            BossEU.get(w).getBossMin();
+                        }
+                    }
+                    else
+                        for(int w=0;w<BossNA.size();w++){
+                            BossNA.get(w).getBossDay();
+                            BossNA.get(w).getBossHour();
+                            BossNA.get(w).getBossMin();
+                        }
                 }
                 else {
 
