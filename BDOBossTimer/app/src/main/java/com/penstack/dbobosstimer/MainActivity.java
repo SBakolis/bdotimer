@@ -72,12 +72,12 @@ public long countdown,day;
     SharedPreferences prefs ;
     public String CHANNEL_ID;
     Intent notifications;
-
+    public String RealDAY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
 
         intentSettings = new Intent(MainActivity.this, Settings.class);
         intentFirstTime = new Intent(MainActivity.this, firstTimeUseActivity.class);
@@ -245,10 +245,13 @@ public long countdown,day;
 
              String v=Hours(Integer.toString(hour),offset,Soffset);//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
              int RealHour=Integer.parseInt(v);
-           // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
-            if((Wday==Slist.get(i).getBossDay() && (RealHour<Slist.get(i).getBossHour()) || RealHour==Slist.get(i).getBossHour()&& minute<Slist.get(i).getBossMin())){
+             String d=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+MDay+" "+hour+":"+minute;
+             int Realwday=UserDay(d,offset,Soffset)+1;// h evdomadiaia mera me thn opoia tha sugkrinoume th boss lista ,an px o xrhsths einai mia mera mprosta h to antitheto
 
-                s=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+MDay+" "+Slist.get(i).getBossHour()+":"+Slist.get(i).getBossMin()+":00";
+           // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
+            if(Realwday==(Slist.get(i).getBossDay()) && (RealHour<Slist.get(i).getBossHour() || (RealHour==Slist.get(i).getBossHour()&& minute<Slist.get(i).getBossMin()))){
+
+                s=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+RealDAY+" "+Slist.get(i).getBossHour()+":"+Slist.get(i).getBossMin()+":00";
                 countdown = Time(s,offset,Soffset);
 
                 day = bCalendar.getTimeInMillis();
@@ -257,8 +260,11 @@ public long countdown,day;
                 Boss nextBoss=Slist.get(i);
                 BossDayList.add(nextBoss);
             }
-            else if(Wday==(Slist.get(i).getBossDay()-1)){
-                s=bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+(MDay+1)+" "+Slist.get(i).getBossHour()+":"+Slist.get(i).getBossMin()+":00";
+            else if(Realwday==(Slist.get(i).getBossDay()-1)){
+
+                    int rd=Integer.parseInt(RealDAY);// to idio me thn realwDay
+
+                s=bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+(rd+1)+" "+Slist.get(i).getBossHour()+":"+Slist.get(i).getBossMin()+":00";
                 countdown=Time(s,offset,Soffset);
                 day = bCalendar.getTimeInMillis();
                 diff=(countdown-day);
@@ -291,8 +297,9 @@ public long countdown,day;
 
     }
     public String  Hours(String v,int Uoffset,String serverOff){ //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
+
         SimpleDateFormat hour = new SimpleDateFormat("H");
-        //String test=timeZone.getID();
+
 
         if(Uoffset>0) {
 
@@ -303,9 +310,33 @@ public long countdown,day;
         ParsePosition pos = new ParsePosition(0);
         k = hour.parse(v, pos);
         hour.setTimeZone(getTimeZone("GMT"+serverOff));
+
         String time=hour.format(k);
 
         return time;
+    }
+    public int UserDay(String d,int Uoffset,String serverOff){
+
+        SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm");
+        if(Uoffset>0) {
+
+            Day2.setTimeZone(getTimeZone("GMT+" + Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
+        }
+        else
+            Day2.setTimeZone(getTimeZone("GMT"+Uoffset));
+        ParsePosition pos = new ParsePosition(0);
+
+        Date newk=Day2.parse(d,pos);
+
+        Day2.setTimeZone(getTimeZone("GMT"+serverOff));
+
+
+        Day2.applyPattern("u");
+        String Uday=Day2.format(newk);
+        Day2.applyPattern("d");
+         RealDAY=Day2.format(newk);
+        return  Integer.parseInt(Uday);
+
     }
     public  long Time(String s,int Uoffset,String serverOff){
 
@@ -316,7 +347,7 @@ public long countdown,day;
             ParsePosition pos = new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
             k = sdf.parse(s, pos);//parsarei to string sto Date k
 
-            long n = k.getTime();
+
         if(Uoffset>0) {
 
             sdf.setTimeZone(getTimeZone("GMT+"+Uoffset)); //allazoume apo gmt+UTC+2(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
@@ -326,7 +357,8 @@ public long countdown,day;
 
 
             String time = sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
-            return n;
+        long n = k.getTime();
+        return n;
         }
 
     private void checkFirstRun() {
@@ -423,9 +455,9 @@ public long countdown,day;
         }
 
 
-        createNotificationChannel();
+       // createNotificationChannel();
         BossNotify=prefs.getStringSet(PREF_NOTIFY,null);
-        if (prefs.getBoolean("Karanda",false)){
+       /* if (prefs.getBoolean("Karanda",false)){
            // notifications = new Intent(this, AlertDialog.class);
             //notifications.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             //PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifications, 0);
@@ -459,7 +491,7 @@ public long countdown,day;
 
 
 
-        }
+        }*/
 
     }
 }
