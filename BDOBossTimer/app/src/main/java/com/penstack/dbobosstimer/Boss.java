@@ -1,12 +1,15 @@
 package com.penstack.dbobosstimer;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.sql.Time;
 import java.lang.String;
 import java.sql.Timestamp;
 
 //import static com.penstack.dbobosstimer.Karanda.Name;
 
-public class Boss   {
+public class Boss  implements Serializable {
 
     private int bossImage;
     private String Name;
