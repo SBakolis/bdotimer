@@ -11,12 +11,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,10 +40,12 @@ public class Settings extends AppCompatActivity {
     ArrayList<Boss>  BossNA;
     SharedPreferences prefs;
     RadioButton rbEU,rbNa;
-
+    CheckBox CheckKutum;
     private PendingIntent pendingIntent;
     private AlarmManager manager;
     public Calendar calendar;
+    ArrayList<AlarmManager> armlist=new ArrayList<>();
+    ArrayList<PendingIntent> pi=new ArrayList<>();
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +56,7 @@ public class Settings extends AppCompatActivity {
        rbEU=(RadioButton)findViewById(R.id.rbEU);
         rbNa=(RadioButton) findViewById(R.id.rbNA);
        CheckBox CheckKaranda=(CheckBox) findViewById(R.id.checkKaranda);
-       CheckBox CheckKutum=(CheckBox) findViewById(R.id.checkKutum);
+       CheckKutum=(CheckBox) findViewById(R.id.checkKutum);
        CheckBox CheckKzarka=(CheckBox) findViewById(R.id.checkKzarka);
        CheckBox CheckNouver=(CheckBox) findViewById(R.id.checkNouver);
        CheckBox CheckQuint=(CheckBox) findViewById(R.id.checkQuint);
@@ -115,13 +119,15 @@ public class Settings extends AppCompatActivity {
 
                         for (int w = 0; w < BossEU.size(); w++) {
 
-                            if (BossEU.get(w).getBossName() == "Karanda") {
+                            if (BossEU.get(w).getBossName().equals( "Karanda")) {
 
                                 NOTIFY_BOSS.add(BossEU.get(w));
 
                             }
                         }
                     } else {
+
+
                         for (int w = 0; w < BossNA.size(); w++) {
                             if (BossNA.get(w).getBossName() == "Karanda") {
 
@@ -141,17 +147,18 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putBoolean("Kutum", checked2).apply();
                     if (rbEU.isChecked()) {
 
-                        for (int w = 0; w < BossEU.size(); w++) {
+                          for (int w = 0; w < BossEU.size(); w++) {
 
-                            if (BossEU.get(w).getBossName() == "Kutum") {
+                              if (BossEU.get(w).getBossName() .equals( "Kutum")) {
 
-                                NOTIFY_BOSS.add(BossEU.get(w));
+                                  NOTIFY_BOSS.add(BossEU.get(w));
 
-                            }
-                        }
+                              }
+                          }
+
                     } else {
                         for (int w = 0; w < BossNA.size(); w++) {
-                            if (BossNA.get(w).getBossName() == "Kutum") {
+                            if (BossNA.get(w).getBossName() .equals( "Kutum")) {
 
                                 NOTIFY_BOSS.add(BossNA.get(w));
 
@@ -169,6 +176,7 @@ public class Settings extends AppCompatActivity {
 
                     //NOTIFY_BOSS.add("Kzarka");
                     prefs.edit().putBoolean("Kzarka", checked2).apply();
+
                     if (rbEU.isChecked()) {
 
                         for (int w = 0; w < BossEU.size(); w++) {
@@ -318,6 +326,7 @@ public class Settings extends AppCompatActivity {
 
             startAlarm(this, AlarmReceiver.class, p, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin());
 
+
         }
         if (NOTIFY_BOSS.size() != 0) {
             for (int z = NOTIFY_BOSS.size(); z < 60; z++) {
@@ -364,8 +373,10 @@ public class Settings extends AppCompatActivity {
         calendar.set(Calendar.DAY_OF_WEEK, dayOfTheWeek);
         calendar.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
         calendar.set(Calendar.MINUTE, minutes);
-
+         long N=calendar.getTimeInMillis();
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+        armlist.add(manager);
+         pi.add(pendingIntent);
     }
 
     public void cancelAlarm(Context context,Class<?> cls,int request_code) {
@@ -383,56 +394,18 @@ public class Settings extends AppCompatActivity {
         am.cancel(pendingIntent);
         pendingIntent.cancel();
     }
-    public static void showNotification(Context context,Class<?> cls,int i)
-
+    static public void notificationSetup(Context context, String title, String Context,int i)
     {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "Boss")
+                .setSmallIcon(R.drawable.karanda)
+                .setContentTitle(title)
+                .setContentText(Context)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
-
-
-
-
-        Intent notificationIntent = new Intent(context, cls);
-
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-
-
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-
-        stackBuilder.addParentStack(cls);
-
-        stackBuilder.addNextIntent(notificationIntent);
-
-
-
-
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(i
-
-                ,PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-
-        Notification notification = builder.setContentTitle("Boss")
-
-                .setContentText("Boss Spawning").setAutoCancel(true)
-
-
-
-                .setContentIntent(pendingIntent).build();
-
-
-
-        NotificationManager notificationManager = (NotificationManager)
-
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(i, notification);
-
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(i, mBuilder.build());
     }
 }
 

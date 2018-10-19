@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.widget.Toast;
 
 public class AlarmReceiver extends BroadcastReceiver
 {
@@ -24,12 +25,13 @@ public class AlarmReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
         // todo
         // Toast.makeText(arg0, "I'm running", Toast.LENGTH_SHORT).show();
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+/*        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             // Set the alarm here.
 
 
-        }
-        Settings.showNotification(context,MainActivity.class,intent.getIntExtra("id",0));
+        }*/
+        Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
+        Settings.notificationSetup(context,"Boss","Boss spawning",intent.getIntExtra("id",0));
 
 
     }
