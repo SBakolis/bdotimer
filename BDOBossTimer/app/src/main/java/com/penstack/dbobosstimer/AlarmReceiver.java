@@ -10,6 +10,10 @@ import android.support.v4.app.NotificationCompat;
 
 public class AlarmReceiver extends BroadcastReceiver
 {
+    String textTitle;
+    String textContent;
+    int notification_icon;
+
     @Override
     public void onReceive(Context arg0, Intent arg1) {
         // todo
