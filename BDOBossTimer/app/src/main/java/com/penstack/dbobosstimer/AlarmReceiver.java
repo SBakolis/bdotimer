@@ -16,6 +16,10 @@ import android.support.v4.app.TaskStackBuilder;
 
 public class AlarmReceiver extends BroadcastReceiver
 {
+    String textTitle;
+    String textContent;
+    int notification_icon;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         // todo

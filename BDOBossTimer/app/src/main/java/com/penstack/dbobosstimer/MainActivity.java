@@ -2,6 +2,7 @@ package com.penstack.dbobosstimer;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -239,6 +240,8 @@ public long countdown,day;
         TimeZone tz2=TimeZone.getTimeZone("GMT+2");
 
         Preferences();
+        createNotificationChannel();
+
 
 
     }
@@ -423,14 +426,14 @@ public long countdown,day;
     }
 
 
-    private void createNotificationChannel() {
+    public void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "bossTimer";
-            String description = "Notification for Boss spawning" ;
+            String description = "Notification for Boss spawning";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            String CHANNEL_ID="BossChannel";
+            String CHANNEL_ID = "Boss";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
@@ -439,6 +442,22 @@ public long countdown,day;
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+    public void notificationSetup(int Image, String title, String Context)
+    {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(Image)
+                .setContentTitle(title)
+                .setContentText(Context)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setChannelId("Boss");
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(1, mBuilder.build());
+    }
+
     private void Preferences(){
 
 
