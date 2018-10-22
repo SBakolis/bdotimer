@@ -5,6 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.penstack.dbobosstimer.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top|center"
+
+        >
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/bdoframe"
+        android:scaleType="fitXY"
+        />
+
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -13,6 +30,9 @@
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent">
+
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listView0"
         android:layout_width="match_parent"
@@ -44,5 +64,6 @@
             android:scaleType="fitCenter"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
+     </RelativeLayout>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
