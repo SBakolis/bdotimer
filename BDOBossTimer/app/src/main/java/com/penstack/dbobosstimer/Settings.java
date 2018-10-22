@@ -73,8 +73,8 @@ public class Settings extends AppCompatActivity {
        CheckOffin.setChecked(prefs.getBoolean("Offin",false));
        CheckVell.setChecked(prefs.getBoolean("Vell",false));
        CheckQuint.setChecked(prefs.getBoolean("Quint",false));
-       startAlarm(this,AlarmReceiver.class,101,6,22,8,"heh");
-       startAlarm(this,AlarmReceiver.class,200,6,22,9,"xax");
+       startAlarm(this,AlarmReceiver.class,101,2,10,19,"heh");
+       startAlarm(this,AlarmReceiver.class,200,2,10,19,"xax");
      }
 
     public void onRadioButtonClicked(View view) {
@@ -265,8 +265,8 @@ public class Settings extends AppCompatActivity {
             calendar.set(Calendar.DAY_OF_WEEK,Calendar.DAY_OF_WEEK+7);
         //calendar.setTimeInMillis(System.currentTimeMillis());
         long N=calendar.getTimeInMillis();
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000, pendingIntent);
-        //manager.setAndAllowWhileIdle(mana);
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+        //manager.setAndAllowWhileIdle();
 
     }
 
