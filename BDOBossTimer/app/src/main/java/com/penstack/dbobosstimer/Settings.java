@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TimeZone;
 
 public class Settings extends AppCompatActivity {
 
@@ -45,7 +46,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-    ArrayList<AlarmManager> armlist=new ArrayList<>();
+    static ArrayList<Long> armlist=new ArrayList<>();
     ArrayList<PendingIntent> pi=new ArrayList<>();
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,9 @@ public class Settings extends AppCompatActivity {
        CheckOffin.setChecked(prefs.getBoolean("Offin",false));
        CheckVell.setChecked(prefs.getBoolean("Vell",false));
        CheckQuint.setChecked(prefs.getBoolean("Quint",false));
-       startAlarm(this,AlarmReceiver.class,101,2,10,19,"heh");
-       startAlarm(this,AlarmReceiver.class,200,2,10,19,"xax");
+       startAlarm(this,AlarmReceiver.class,101,1,18,20,"heh");
+       startAlarm(this,AlarmReceiver.class,200,1,18,21,"xax");
+
      }
 
     public void onRadioButtonClicked(View view) {
@@ -195,18 +197,18 @@ public class Settings extends AppCompatActivity {
                 }
                 break;
         }
-
+        armlist.clear();
         if (rbEU.isChecked()) {
             FillNotifyList(BossEU);
         } else{
             FillNotifyList(BossNA);
             }
-                        startAlarm(this,AlarmReceiver.class,106,6,22,10,"ff");
-            if(!NOTIFY_BOSS.isEmpty()) {
+
                 for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
+
                     startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName());
                     }
-
+        if(!NOTIFY_BOSS.isEmpty()) {
                   for (int z = NOTIFY_BOSS.size(); z <= 60; z++) {
                     cancelAlarm(this, AlarmReceiver.class, z);
                     }
@@ -214,7 +216,8 @@ public class Settings extends AppCompatActivity {
                 else for (int z=0;z<60;z++){
                      cancelAlarm(this,AlarmReceiver.class,z+1);
             }
-                     //  int n=NOTIFY_BOSS.get(0).getBossDay(); // Log.d("Check boss",NOTIFY_BOSS.get(0).getBossName()+""+NOTIFY_BOSS.get(0).getBossHour()+","+NOTIFY_BOSS.get(0).getBossDay());
+
+           // Log.d("Check boss",""+armlist.get(1));
    }
 
          //BossNotify.addAll(NOTIFY_BOSS);
@@ -224,9 +227,9 @@ public class Settings extends AppCompatActivity {
     public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname) {
 
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2"));
 
-        Calendar MyCalendar=Calendar.getInstance();
+        Calendar MyCalendar=Calendar.getInstance(TimeZone.getTimeZone("GMT+2"));
         // Enable a receiver
 
         ComponentName receiver = new ComponentName(context, cls);
@@ -256,16 +259,24 @@ public class Settings extends AppCompatActivity {
         AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
         int interval = 1000 * 60 * 60 * 24 * 7;
+        if(dayOfTheWeek==7)
+            dayOfTheWeek=1;
+        else
+            dayOfTheWeek+=1;
 
         calendar.set(Calendar.DAY_OF_WEEK, dayOfTheWeek  );
         calendar.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
         calendar.set(Calendar.MINUTE, minutes );
+        long calendarTimeInMillis=calendar.getTimeInMillis();
+         //int pwd=calendar.get(Calendar.DAY_OF_MONTH)+7;
+           if(calendar.before(MyCalendar)) {
+              calendarTimeInMillis+=608400000 ; //calendar.setTimeInMillis(calendar.getTimeInMillis() + interval);
+           }
 
-           if(calendar.before(MyCalendar))
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.DAY_OF_WEEK+7);
-        //calendar.setTimeInMillis(System.currentTimeMillis());
-        long N=calendar.getTimeInMillis();
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+            armlist.add(calendarTimeInMillis);
+           //calendar.setTimeInMillis(System.currentTimeMillis());
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis, interval, pendingIntent);
         //manager.setAndAllowWhileIdle();
 
     }
