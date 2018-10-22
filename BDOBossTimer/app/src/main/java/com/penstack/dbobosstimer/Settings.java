@@ -121,6 +121,7 @@ public class Settings extends AppCompatActivity {
                     //NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
                     prefs.edit().putBoolean("Karanda", checked2).apply();
 
+
                 } else
                     //NOTIFY_BOSS.add("");
                     prefs.edit().putBoolean("Karanda", checked2).apply();
@@ -210,7 +211,7 @@ public class Settings extends AppCompatActivity {
                     }
         if(!NOTIFY_BOSS.isEmpty()) {
                   for (int z = NOTIFY_BOSS.size(); z <= 60; z++) {
-                    cancelAlarm(this, AlarmReceiver.class, z);
+                    cancelAlarm(this, AlarmReceiver.class, z+1);
                     }
                 }
                 else for (int z=0;z<60;z++){
@@ -317,27 +318,27 @@ public class Settings extends AppCompatActivity {
 
                 NOTIFY_BOSS.add(B.get(q));
 
-            else if (CheckKaranda.isChecked() && B.get(q).getBossName().equals("Karanda"))
+            else if (prefs.getBoolean("Karanda",false) && B.get(q).getBossName().equals("Karanda"))
 
                 NOTIFY_BOSS.add(B.get(q));
 
-            else if (CheckNouver.isChecked() && B.get(q).getBossName().equals("Nouver"))
+            else if (prefs.getBoolean("Nouver",false) && B.get(q).getBossName().equals("Nouver"))
 
                 NOTIFY_BOSS.add(B.get(q));
 
-            else if (CheckKzarka.isChecked() && B.get(q).getBossName().equals("Kzarka"))
+            else if (prefs.getBoolean("Kzarka",false) && B.get(q).getBossName().equals("Kzarka"))
 
                 NOTIFY_BOSS.add(B.get(q));
 
-            else if (CheckQuint.isChecked() && B.get(q).getBossName().equals("Quint"))
+            else if (prefs.getBoolean("Quint",false) && B.get(q).getBossName().equals("Quint"))
 
                 NOTIFY_BOSS.add(B.get(q));
 
-            else if (CheckVell.isChecked() && B.get(q).getBossName().equals("Vell"))
+            else if (prefs.getBoolean("Vell",false) && B.get(q).getBossName().equals("Vell"))
 
                 NOTIFY_BOSS.add(B.get(q));
 
-            else if (CheckOffin.isChecked() && B.get(q).getBossName().equals("Offin"))
+            else if (prefs.getBoolean("Offin",false) && B.get(q).getBossName().equals("Offin"))
 
                 NOTIFY_BOSS.add(B.get(q));
         }
