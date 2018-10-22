@@ -74,8 +74,8 @@ public class Settings extends AppCompatActivity {
        CheckOffin.setChecked(prefs.getBoolean("Offin",false));
        CheckVell.setChecked(prefs.getBoolean("Vell",false));
        CheckQuint.setChecked(prefs.getBoolean("Quint",false));
-       startAlarm(this,AlarmReceiver.class,101,1,18,20,"heh");
-       startAlarm(this,AlarmReceiver.class,200,1,18,21,"xax");
+       //startAlarm(this,AlarmReceiver.class,101,1,18,20,"heh");
+       //startAlarm(this,AlarmReceiver.class,200,1,18,21,"xax");
 
      }
 
@@ -205,20 +205,24 @@ public class Settings extends AppCompatActivity {
             FillNotifyList(BossNA);
             }
 
+            if(!NOTIFY_BOSS.isEmpty()) {
                 for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
 
                     startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName());
                     }
-        if(!NOTIFY_BOSS.isEmpty()) {
-                  for (int z = NOTIFY_BOSS.size(); z <= 60; z++) {
+
+                  for (int z = NOTIFY_BOSS.size(); z < 60; z++) {
                     cancelAlarm(this, AlarmReceiver.class, z+1);
                     }
                 }
-                else for (int z=0;z<60;z++){
-                     cancelAlarm(this,AlarmReceiver.class,z+1);
+             else {
+                for (int q = 1; q <= 60; q++) {
+                    cancelAlarm(this, AlarmReceiver.class, q);
+                }
             }
 
-           // Log.d("Check boss",""+armlist.get(1));
+
+           //Log.d("Check boss",""+getIntent(1));
    }
 
          //BossNotify.addAll(NOTIFY_BOSS);
