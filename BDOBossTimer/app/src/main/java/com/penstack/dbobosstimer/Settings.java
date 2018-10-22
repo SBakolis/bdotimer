@@ -215,9 +215,11 @@ public class Settings extends AppCompatActivity {
                     cancelAlarm(this, AlarmReceiver.class, z+1);
                     }
                 }
-        for (int q=1;q<=60;q++){
-            cancelAlarm(this,AlarmReceiver.class,q);
-        }
+             else {
+                for (int q = 1; q <= 60; q++) {
+                    cancelAlarm(this, AlarmReceiver.class, q);
+                }
+            }
 
 
            //Log.d("Check boss",""+getIntent(1));
