@@ -25,15 +25,18 @@ public class AlarmReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
         // todo
         // Toast.makeText(arg0, "I'm running", Toast.LENGTH_SHORT).show();
-/*        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            // Set the alarm here.
+        if (intent.getAction() != null && context != null) {
+            if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
+                // Set the alarm here.
+
+                Settings.startAlarm(context,AlarmReceiver.class,intent.getIntExtra("id",0),intent.getIntExtra("day",0),intent.getIntExtra("hour",0),intent.getIntExtra("minute",0),intent.getStringExtra("name"));
+            }
 
 
-        }*/
+
+        }
         Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
-        Settings.notificationSetup(context,"Boss","Boss spawning",intent.getIntExtra("id",0));
-
-
+        Settings.notificationSetup(context, ""+intent.getStringExtra("name"), "Boss spawning", intent.getIntExtra("id", 0));
     }
 
 }

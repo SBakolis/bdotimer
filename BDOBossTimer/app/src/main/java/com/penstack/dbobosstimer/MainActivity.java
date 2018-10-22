@@ -97,141 +97,141 @@ public long countdown,day;
 
         //----------------------------------EU BOSSES-----------------------------------------
         //Monday
-        BossDayEUList.add(new Kutum(2,0,15,"EU",0)) ;
-        BossDayEUList.add(new Karanda(2,2,0,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(2,5,0,"EU",0));
-        BossDayEUList.add(new Kzarka(2,9, 0, "EU",0));
-        BossDayEUList.add(new Nouver(2,12,0,"EU",0)) ;
-        BossDayEUList.add(new Kutum( 2,16,0,"EU",0)) ;
-        BossDayEUList.add(new Nouver(2,19,0,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(2,22,15,"EU",0)) ;
+        BossDayEUList.add(new Kutum(1,0,15,"EU",0)) ;
+        BossDayEUList.add(new Karanda(1,2,0,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(1,5,0,"EU",0));
+        BossDayEUList.add(new Kzarka(1,9, 0, "EU",0));
+        BossDayEUList.add(new Nouver(1,12,0,"EU",0)) ;
+        BossDayEUList.add(new Kutum( 1,16,0,"EU",0)) ;
+        BossDayEUList.add(new Nouver(1,19,0,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(1,22,15,"EU",0)) ;
         //Tuesday
-        BossDayEUList.add(new Karanda(3,0,15,"EU",0)) ;
-        BossDayEUList.add(new Kutum(3,2,0,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(3,5,0,"EU",0)) ;
-        BossDayEUList.add(new Kutum(3,9,0,"EU",0)) ;
-        BossDayEUList.add(new  Offin(3,12,0,"EU",0)) ;
-        BossDayEUList.add(new Nouver(3,16,0,"EU",0)) ;
-        BossDayEUList.add(new Karanda(3,19,0,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(3,22,15,"EU",0)) ;
-        BossDayEUList.add(new Nouver(3,22,15,"EU",0)) ;
+        BossDayEUList.add(new Karanda(2,0,15,"EU",0)) ;
+        BossDayEUList.add(new Kutum(2,2,0,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(2,5,0,"EU",0)) ;
+        BossDayEUList.add(new Kutum(2,9,0,"EU",0)) ;
+        BossDayEUList.add(new  Offin(2,12,0,"EU",0)) ;
+        BossDayEUList.add(new Nouver(2,16,0,"EU",0)) ;
+        BossDayEUList.add(new Karanda(2,19,0,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(2,22,15,"EU",0)) ;
+        BossDayEUList.add(new Nouver(2,22,15,"EU",0)) ;
         //Wednesday
-        BossDayEUList.add(new Kutum(4,0,15,"EU",0)) ;
-        BossDayEUList.add(new Karanda(4,2,0,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(4,5,0,"EU",0)) ;
-        BossDayEUList.add(new Karanda(4,9,0,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(4,16,0,"EU",0)) ;
-        BossDayEUList.add(new Kutum(4,19,0,"EU",0)) ;
-        BossDayEUList.add(new Karanda(4,22,15,"EU",0)) ;
-        BossDayEUList.add(new Kzarka(4,22,15,"EU",0)) ;
+        BossDayEUList.add(new Kutum(3,0,15,"EU",0)) ;
+        BossDayEUList.add(new Karanda(3,2,0,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(3,5,0,"EU",0)) ;
+        BossDayEUList.add(new Karanda(3,9,0,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(3,16,0,"EU",0)) ;
+        BossDayEUList.add(new Kutum(3,19,0,"EU",0)) ;
+        BossDayEUList.add(new Karanda(3,22,15,"EU",0)) ;
+        BossDayEUList.add(new Kzarka(3,22,15,"EU",0)) ;
         //Thursday
-        BossDayEUList.add(new Nouver(5,0,15,"EU",0)) ;
-        BossDayEUList.add(new Kutum(5,2,0,"EU",0)) ;
-        BossDayEUList.add(new Nouver(5,5,0,"EU",0)) ;
-        BossDayEUList.add(new Kutum(5,9,0,"EU",0)) ;
-        BossDayEUList.add(new Nouver(5,12,0,"EU",0)) ;
-        BossDayEUList.add(new Kutum(5,16,0,"EU",0)) ;
-        BossDayEUList.add(new Offin(5,19,0,"EU",0)) ;
-        BossDayEUList.add(new Karanda(5,22,15,"EU",0)) ;
+        BossDayEUList.add(new Nouver(4,0,15,"EU",0)) ;
+        BossDayEUList.add(new Kutum(4,2,0,"EU",0)) ;
+        BossDayEUList.add(new Nouver(4,5,0,"EU",0)) ;
+        BossDayEUList.add(new Kutum(4,9,0,"EU",0)) ;
+        BossDayEUList.add(new Nouver(4,12,0,"EU",0)) ;
+        BossDayEUList.add(new Kutum(4,16,0,"EU",0)) ;
+        BossDayEUList.add(new Offin(4,19,0,"EU",0)) ;
+        BossDayEUList.add(new Karanda(4,22,15,"EU",0)) ;
         //Friday
-        BossDayEUList.add(new Kzarka(6,0,15,"EU",0));
-        BossDayEUList.add(new Nouver(6,2,0,"EU",0));
-        BossDayEUList.add(new Karanda(6,5,0,"EU",0));
-        BossDayEUList.add(new Kutum(6,9,0,"EU",0));
-        BossDayEUList.add(new Karanda(6,12,0,"EU",0));
-        BossDayEUList.add(new Nouver(6,16,0,"EU",0));
-        BossDayEUList.add(new Kzarka(6,19,0,"EU",0));
-        BossDayEUList.add(new Kzarka(6,22,15,"EU",0));
-        BossDayEUList.add(new Kutum(6,22,15,"EU",0));
+        BossDayEUList.add(new Kzarka(5,0,15,"EU",0));
+        BossDayEUList.add(new Nouver(5,2,0,"EU",0));
+        BossDayEUList.add(new Karanda(5,5,0,"EU",0));
+        BossDayEUList.add(new Kutum(5,9,0,"EU",0));
+        BossDayEUList.add(new Karanda(5,12,0,"EU",0));
+        BossDayEUList.add(new Nouver(5,16,0,"EU",0));
+        BossDayEUList.add(new Kzarka(5,19,0,"EU",0));
+        BossDayEUList.add(new Kzarka(5,22,15,"EU",0));
+        BossDayEUList.add(new Kutum(5,22,15,"EU",0));
         //Saturday
-        BossDayEUList.add(new Karanda(7,0,15,"EU",0));
-        BossDayEUList.add(new Offin(7,2,0,"EU",0));
-        BossDayEUList.add(new Nouver(7,5,0,"EU",0));
-        BossDayEUList.add(new Kutum(7,9,0,"EU",0));
-        BossDayEUList.add(new Nouver(7,12,0,"EU",0));
-        BossDayEUList.add(new Quint(7,16,0,"EU",0));
-        BossDayEUList.add(new Kzarka(7,19,0,"EU",0));
-        BossDayEUList.add(new Karanda(7,19,0,"EU",0));
+        BossDayEUList.add(new Karanda(6,0,15,"EU",0));
+        BossDayEUList.add(new Offin(6,2,0,"EU",0));
+        BossDayEUList.add(new Nouver(6,5,0,"EU",0));
+        BossDayEUList.add(new Kutum(6,9,0,"EU",0));
+        BossDayEUList.add(new Nouver(6,12,0,"EU",0));
+        BossDayEUList.add(new Quint(6,16,0,"EU",0));
+        BossDayEUList.add(new Kzarka(6,19,0,"EU",0));
+        BossDayEUList.add(new Karanda(6,19,0,"EU",0));
         //Sunday
-        BossDayEUList.add(new Nouver(1,0,15,"EU",0));
-        BossDayEUList.add(new Kutum(1,0,15,"EU",0));
-        BossDayEUList.add(new Kzarka(1,2,0,"EU",0));
-        BossDayEUList.add(new Kutum(1,5,0,"EU",0));
-        BossDayEUList.add(new Nouver(1,9,0,"EU",0));
-        BossDayEUList.add(new Kzarka(1,12,0,"EU",0));
-        BossDayEUList.add(new Vell(1,16,0,"EU",0));
-        BossDayEUList.add(new Karanda(1,19,0,"EU",0));
-        BossDayEUList.add(new Kzarka(1,22,15,"EU",0));
-        BossDayEUList.add(new Nouver(1,22,15,"EU",0));
+        BossDayEUList.add(new Nouver(7,0,15,"EU",0));
+        BossDayEUList.add(new Kutum(7,0,15,"EU",0));
+        BossDayEUList.add(new Kzarka(7,2,0,"EU",0));
+        BossDayEUList.add(new Kutum(7,5,0,"EU",0));
+        BossDayEUList.add(new Nouver(7,9,0,"EU",0));
+        BossDayEUList.add(new Kzarka(7,12,0,"EU",0));
+        BossDayEUList.add(new Vell(7,16,0,"EU",0));
+        BossDayEUList.add(new Karanda(7,19,0,"EU",0));
+        BossDayEUList.add(new Kzarka(7,22,15,"EU",0));
+        BossDayEUList.add(new Nouver(7,22,15,"EU",0));
 
         //----------------------------------NA BOSSES-----------------------------------------
         //Monday
-        BossDayNAList.add(new Karanda(2,0,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(2,3,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(2,7,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(2,10,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(2,14,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(2,17,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(2,20,15,"NA",0)) ;
-        BossDayNAList.add(new Karanda(2,22,15,"NA",0)) ;
-        //Tuesday
-        BossDayNAList.add(new Kutum(3,0,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(3,3,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(3,7,0,"NA",0)) ;
-        BossDayNAList.add(new Offin(3,10,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(3,14,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(3,17,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(3,20,15,"NA",0)) ;
-        BossDayNAList.add(new Nouver(3,20,15,"NA",0)) ;
-        BossDayNAList.add(new Kutum(3,22,15,"NA",0)) ;
-        //Wednesday
-        BossDayNAList.add(new Karanda(4,0,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(4,7,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(4,10,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(4,14,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(4,17,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(4,20,15,"NA",0)) ;
-        BossDayNAList.add(new Karanda(4,20,15,"NA",0)) ;
-        BossDayNAList.add(new Nouver(4,22,15,"NA",0)) ;
-        //Thursday
-        BossDayNAList.add(new Kutum(5,0,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(5,3,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(5,7,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(5,10,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(5,14,0,"NA",0)) ;
-        BossDayNAList.add(new Offin(5,17,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(5,20,15,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(5,22,15,"NA",0)) ;
-        //Friday
-        BossDayNAList.add(new Nouver(6,0,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(6,3,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(6,7,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(6,10,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(6,14,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(6,17,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(6,20,15,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(6,20,15,"NA",0)) ;
-        BossDayNAList.add(new Karanda(6,22,15,"NA",0)) ;
-        //Saturday
-        BossDayNAList.add(new Offin(7,0,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(7,3,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(7,7,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(7,10,0,"NA",0)) ;
-        BossDayNAList.add(new Quint(7,14,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(7,17,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(7,17,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(7,22,15,"NA",0)) ;
-        BossDayNAList.add(new Kutum(7,22,15,"NA",0)) ;
-        //Sunday
-        BossDayNAList.add(new Kzarka(1,0,0,"NA",0)) ;
-        BossDayNAList.add(new Kutum(1,3,0,"NA",0)) ;
-        BossDayNAList.add(new Nouver(1,7,0,"NA",0)) ;
-        BossDayNAList.add(new Kzarka(1,10,0,"NA",0)) ;
-        BossDayNAList.add(new Vell(1,14,0,"NA",0)) ;
-        BossDayNAList.add(new Karanda(1,17,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(1,0,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(1,3,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(1,7,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(1,10,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(1,14,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(1,17,0,"NA",0)) ;
         BossDayNAList.add(new Kzarka(1,20,15,"NA",0)) ;
-        BossDayNAList.add(new Nouver(1,20,15,"NA",0)) ;
-        BossDayNAList.add(new Kutum(1,22,15,"NA",0)) ;
+        BossDayNAList.add(new Karanda(1,22,15,"NA",0)) ;
+        //Tuesday
+        BossDayNAList.add(new Kutum(2,0,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(2,3,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(2,7,0,"NA",0)) ;
+        BossDayNAList.add(new Offin(2,10,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(2,14,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(2,17,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(2,20,15,"NA",0)) ;
+        BossDayNAList.add(new Nouver(2,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kutum(2,22,15,"NA",0)) ;
+        //Wednesday
+        BossDayNAList.add(new Karanda(3,0,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(3,7,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(3,10,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(3,14,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(3,17,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(3,20,15,"NA",0)) ;
+        BossDayNAList.add(new Karanda(3,20,15,"NA",0)) ;
+        BossDayNAList.add(new Nouver(3,22,15,"NA",0)) ;
+        //Thursday
+        BossDayNAList.add(new Kutum(4,0,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(4,3,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(4,7,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(4,10,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(4,14,0,"NA",0)) ;
+        BossDayNAList.add(new Offin(4,17,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(4,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(4,22,15,"NA",0)) ;
+        //Friday
+        BossDayNAList.add(new Nouver(5,0,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(5,3,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(5,7,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(5,10,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(5,14,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(5,17,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(5,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(5,20,15,"NA",0)) ;
+        BossDayNAList.add(new Karanda(5,22,15,"NA",0)) ;
+        //Saturday
+        BossDayNAList.add(new Offin(6,0,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(6,3,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(6,7,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(6,10,0,"NA",0)) ;
+        BossDayNAList.add(new Quint(6,14,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(6,17,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(6,17,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(6,22,15,"NA",0)) ;
+        BossDayNAList.add(new Kutum(6,22,15,"NA",0)) ;
+        //Sunday
+        BossDayNAList.add(new Kzarka(7,0,0,"NA",0)) ;
+        BossDayNAList.add(new Kutum(7,3,0,"NA",0)) ;
+        BossDayNAList.add(new Nouver(7,7,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(7,10,0,"NA",0)) ;
+        BossDayNAList.add(new Vell(7,14,0,"NA",0)) ;
+        BossDayNAList.add(new Karanda(7,17,0,"NA",0)) ;
+        BossDayNAList.add(new Kzarka(7,20,15,"NA",0)) ;
+        BossDayNAList.add(new Nouver(7,20,15,"NA",0)) ;
+        BossDayNAList.add(new Kutum(7,22,15,"NA",0)) ;
 
         intentSettings.putExtra("BossDayEUList",BossDayEUList);
         intentSettings.putExtra("BossDayNAList",BossDayNAList);
@@ -253,7 +253,7 @@ public long countdown,day;
              String v=Hours(Integer.toString(hour),offset,Soffset);//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
              int RealHour=Integer.parseInt(v);
              String d=+bCalendar.get(Calendar.YEAR)+"-"+(bCalendar.get(Calendar.MONTH)+1)+"-"+MDay+" "+hour+":"+minute;
-             int Realwday=UserDay(d,offset,Soffset)+1;// h evdomadiaia mera me thn opoia tha sugkrinoume th boss lista ,an px o xrhsths einai mia mera mprosta h to antitheto
+             int Realwday=UserDay(d,offset,Soffset);// h evdomadiaia mera me thn opoia tha sugkrinoume th boss lista ,an px o xrhsths einai mia mera mprosta h to antitheto
 
            // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
             if(Realwday==(Slist.get(i).getBossDay()) && (RealHour<Slist.get(i).getBossHour() || (RealHour==Slist.get(i).getBossHour()&& minute<Slist.get(i).getBossMin()))){
@@ -267,7 +267,7 @@ public long countdown,day;
                 Boss nextBoss=Slist.get(i);
                 BossDayList.add(nextBoss);
             }
-            else if(Realwday==(Slist.get(i).getBossDay()-1)){
+            else if((Realwday==Slist.get(i).getBossDay()-1) || (Realwday==7 && Slist.get(i).getBossDay()==1)){
 
                     int rd=Integer.parseInt(RealDAY);// to idio me thn realwDay
 
