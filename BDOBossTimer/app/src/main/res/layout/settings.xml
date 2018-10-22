@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
+
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top|center"
+
     >
 
-    <TextView
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/bdoframe"
+                android:scaleType="fitXY"
+                />
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+     android:gravity="center">
+
+        <TextView
         android:id="@+id/serverText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Server:"
         android:textSize="30dp"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:paddingTop="25dp"
          />
 
-    <RadioGroup
+        <RadioGroup
         android:id="@+id/ServerGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +56,9 @@
         android:paddingRight="60dp"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:layout_marginTop="5dp"/>
+        android:textColor="@android:color/white"
+        android:layout_marginTop="5dp"
+        android:buttonTint="@android:color/white"/>
 
         <RadioButton
             android:id="@+id/rbEU"
@@ -47,7 +68,9 @@
             android:onClick="onRadioButtonClicked"
             android:text="EU"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:buttonTint="@android:color/white"/>
     </RadioGroup>
 
     <TextView
@@ -58,6 +81,7 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:paddingTop="15dp"
+        android:textColor="@android:color/white"
         />
 <LinearLayout
     android:layout_width="wrap_content"
@@ -74,7 +98,10 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"
+        />
 
     <CheckBox
         android:id="@+id/checkKutum"
@@ -84,7 +111,9 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"/>
 
     <CheckBox
         android:id="@+id/checkKzarka"
@@ -94,7 +123,9 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"/>
 
     <CheckBox
         android:id="@+id/checkNouver"
@@ -104,7 +135,9 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"/>
 
     <CheckBox
         android:id="@+id/checkOffin"
@@ -114,7 +147,9 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"/>
 
     <CheckBox
         android:id="@+id/checkQuint"
@@ -124,7 +159,9 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"/>
 
     <CheckBox
         android:id="@+id/checkVell"
@@ -134,9 +171,13 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:onClick="onCheckboxClicked"/>
-</LinearLayout>
+        android:textColor="@android:color/white"
+        android:onClick="onCheckboxClicked"
+        android:buttonTint="@android:color/white"/>
+ </LinearLayout>
+ </LinearLayout>
+
+ </RelativeLayout>
 
 
-</LinearLayout>
 </android.support.constraint.ConstraintLayout>
