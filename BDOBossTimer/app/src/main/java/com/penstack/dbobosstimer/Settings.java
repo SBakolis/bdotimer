@@ -211,7 +211,7 @@ public class Settings extends AppCompatActivity {
                     }
         if(!NOTIFY_BOSS.isEmpty()) {
                   for (int z = NOTIFY_BOSS.size(); z <= 60; z++) {
-                    cancelAlarm(this, AlarmReceiver.class, z);
+                    cancelAlarm(this, AlarmReceiver.class, z+1);
                     }
                 }
                 else for (int z=0;z<60;z++){
