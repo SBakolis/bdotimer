@@ -43,7 +43,7 @@ public class Settings extends AppCompatActivity {
     SharedPreferences prefs;
     RadioButton rbEU,rbNa;
     CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin;
-
+        int BossSize;
 
 
     static ArrayList<Long> armlist=new ArrayList<>();
@@ -74,8 +74,7 @@ public class Settings extends AppCompatActivity {
        CheckOffin.setChecked(prefs.getBoolean("Offin",false));
        CheckVell.setChecked(prefs.getBoolean("Vell",false));
        CheckQuint.setChecked(prefs.getBoolean("Quint",false));
-       startAlarm(this,AlarmReceiver.class,101,1,18,20,"heh");
-       startAlarm(this,AlarmReceiver.class,200,1,18,21,"xax");
+       
 
      }
 
@@ -202,27 +201,32 @@ public class Settings extends AppCompatActivity {
         if (rbEU.isChecked()) {
             FillNotifyList(BossEU);
         } else{
-            FillNotifyList(BossNA);
+            //FillNotifyList(BossNA);
             }
 
+            if(!NOTIFY_BOSS.isEmpty()) {
+
+               for (int z = 1; z < BossSize; z++) {
+                    cancelAlarm(this, AlarmReceiver.class, z+BossSize);
+                }
                 for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
 
                     startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName());
                     }
-        if(!NOTIFY_BOSS.isEmpty()) {
-                  for (int z = NOTIFY_BOSS.size(); z <= 60; z++) {
-                    cancelAlarm(this, AlarmReceiver.class, z+1);
-                    }
+
+
                 }
-                else for (int z=0;z<60;z++){
-                     cancelAlarm(this,AlarmReceiver.class,z+1);
+             else {
+                for (int q = 1; q <= 60; q++) {
+                    cancelAlarm(this, AlarmReceiver.class, q);
+                }
             }
 
-           // Log.d("Check boss",""+armlist.get(1));
+
+
    }
 
-         //BossNotify.addAll(NOTIFY_BOSS);
-        //prefs.edit().putStringSet(PREF_NOTIFY,BossNotify).apply();
+
 
 
     public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname) {
@@ -230,7 +234,7 @@ public class Settings extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2"));
 
-        Calendar MyCalendar=Calendar.getInstance(TimeZone.getTimeZone("GMT+2"));
+        Calendar MyCalendar=Calendar.getInstance();
         // Enable a receiver
 
         ComponentName receiver = new ComponentName(context, cls);
@@ -259,13 +263,15 @@ public class Settings extends AppCompatActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
+
         int interval = 1000 * 60 * 60 * 24 * 7;
         if(dayOfTheWeek==7)
             dayOfTheWeek=1;
         else
-            dayOfTheWeek+=1;
+            dayOfTheWeek++;
 
         calendar.set(Calendar.DAY_OF_WEEK, dayOfTheWeek  );
+
         calendar.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
         calendar.set(Calendar.MINUTE, minutes );
         long calendarTimeInMillis=calendar.getTimeInMillis();
@@ -276,7 +282,7 @@ public class Settings extends AppCompatActivity {
 
             armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
-
+            Log.d("intent",""+intent1.getIntExtra("id",0));
         manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis, interval, pendingIntent);
         //manager.setAndAllowWhileIdle();
 
@@ -312,38 +318,52 @@ public class Settings extends AppCompatActivity {
     }
     public void FillNotifyList(ArrayList<Boss> B){
 
-        for (int q = 0; q <B.size();q++){
+        for (int q = 0; q <B.size();q++) {
 
-            if(prefs.getBoolean("Kutum",false) && B.get(q).getBossName().equals("Kutum"))
-
-                NOTIFY_BOSS.add(B.get(q));
-
-            else if (prefs.getBoolean("Karanda",false) && B.get(q).getBossName().equals("Karanda"))
+            if (prefs.getBoolean("Kutum", false) && B.get(q).getBossName().equals("Kutum")) {
 
                 NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
+            } else if (prefs.getBoolean("Karanda", false) && B.get(q).getBossName().equals("Karanda"))
 
-            else if (prefs.getBoolean("Nouver",false) && B.get(q).getBossName().equals("Nouver"))
-
-                NOTIFY_BOSS.add(B.get(q));
-
-            else if (prefs.getBoolean("Kzarka",false) && B.get(q).getBossName().equals("Kzarka"))
+            {
 
                 NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
+            } else if (prefs.getBoolean("Nouver", false) && B.get(q).getBossName().equals("Nouver"))
 
-            else if (prefs.getBoolean("Quint",false) && B.get(q).getBossName().equals("Quint"))
-
-                NOTIFY_BOSS.add(B.get(q));
-
-            else if (prefs.getBoolean("Vell",false) && B.get(q).getBossName().equals("Vell"))
+            {
 
                 NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
+            } else if (prefs.getBoolean("Kzarka", false) && B.get(q).getBossName().equals("Kzarka"))
 
-            else if (prefs.getBoolean("Offin",false) && B.get(q).getBossName().equals("Offin"))
+            {
 
                 NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
+            } else if (prefs.getBoolean("Quint", false) && B.get(q).getBossName().equals("Quint"))
+
+            {
+
+                NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, NOTIFY_BOSS.get(q).getBossDay(), NOTIFY_BOSS.get(q).getBossHour(), NOTIFY_BOSS.get(q).getBossMin(), NOTIFY_BOSS.get(q).getBossName());
+            } else if (prefs.getBoolean("Vell", false) && B.get(q).getBossName().equals("Vell"))
+
+            {
+
+                NOTIFY_BOSS.add(B.get(q));
+                // startAlarm(this, AlarmReceiver.class, q, NOTIFY_BOSS.get(q).getBossDay(), NOTIFY_BOSS.get(q).getBossHour(), NOTIFY_BOSS.get(q).getBossMin(), NOTIFY_BOSS.get(q).getBossName());
+            } else if (prefs.getBoolean("Offin", false) && B.get(q).getBossName().equals("Offin"))
+
+            {
+
+                NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, NOTIFY_BOSS.get(q).getBossDay(), NOTIFY_BOSS.get(q).getBossHour(), NOTIFY_BOSS.get(q).getBossMin(), NOTIFY_BOSS.get(q).getBossName());
+            }
+
         }
-
-
+             BossSize=NOTIFY_BOSS.size();
     }
 }
 
