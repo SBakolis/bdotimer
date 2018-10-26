@@ -43,7 +43,7 @@ public class Settings extends AppCompatActivity {
     SharedPreferences prefs;
     RadioButton rbEU,rbNa;
     CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin;
-        int BossSize;
+        int BossSize,Soffset;
 
 
     static ArrayList<Long> armlist=new ArrayList<>();
@@ -74,7 +74,7 @@ public class Settings extends AppCompatActivity {
        CheckOffin.setChecked(prefs.getBoolean("Offin",false));
        CheckVell.setChecked(prefs.getBoolean("Vell",false));
        CheckQuint.setChecked(prefs.getBoolean("Quint",false));
-       
+
 
      }
 
@@ -200,8 +200,10 @@ public class Settings extends AppCompatActivity {
         armlist.clear();
         if (rbEU.isChecked()) {
             FillNotifyList(BossEU);
+             Soffset=2;
         } else{
-            //FillNotifyList(BossNA);
+            FillNotifyList(BossNA);
+            Soffset=-7;
             }
 
             if(!NOTIFY_BOSS.isEmpty()) {
@@ -211,7 +213,7 @@ public class Settings extends AppCompatActivity {
                 }
                 for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
 
-                    startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName());
+                    startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),Soffset);
                     }
 
 
@@ -229,10 +231,15 @@ public class Settings extends AppCompatActivity {
 
 
 
-    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname) {
+    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset) {
 
-
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2"));
+        Calendar calendar;
+       if(Soffset<0){
+             calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"+Soffset));
+        }
+         else{
+           calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+"+Soffset));
+       }
 
         Calendar MyCalendar=Calendar.getInstance();
         // Enable a receiver
