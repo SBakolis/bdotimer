@@ -200,7 +200,7 @@ public class Settings extends AppCompatActivity {
         armlist.clear();
         if (rbEU.isChecked()) {
             FillNotifyList(BossEU);
-             Soffset=2;
+             Soffset=1;
         } else{
             FillNotifyList(BossNA);
             Soffset=-7;
@@ -263,6 +263,7 @@ public class Settings extends AppCompatActivity {
             intent1.putExtra("hour",hourOfTheDay);
             intent1.putExtra("minute",minutes);
             intent1.putExtra("name", bossname);
+        intent1.putExtra("offset", Soffset);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
 
                request_code, intent1,
