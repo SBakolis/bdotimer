@@ -472,7 +472,7 @@ public long countdown,day;
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
         if(currentServerSelection == 1) {
-            ServerSelection(BossDayEUList, "+2");
+            ServerSelection(BossDayEUList, "+1");
         }else if(currentServerSelection == 2){
             ServerSelection(BossDayNAList, "-7");
         }
