@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.view.View;
 import android.widget.Toast;
@@ -43,7 +44,9 @@ public class Settings extends AppCompatActivity {
     SharedPreferences prefs;
     RadioButton rbEU,rbNa;
     CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin;
-        int BossSize,Soffset;
+    int BossSize,Soffset;
+    public ImageView backButton;
+    Intent intentMain ;
 
 
     static ArrayList<Long> armlist=new ArrayList<>();
@@ -52,11 +55,24 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
        BossNA=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayNAList");
        BossEU=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayEUList");
+
          prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-       rbEU=(RadioButton)findViewById(R.id.rbEU);
+
+        rbEU=(RadioButton)findViewById(R.id.rbEU);
         rbNa=(RadioButton) findViewById(R.id.rbNA);
+
+       intentMain = new Intent(Settings.this, MainActivity.class);
+
+        backButton = (ImageView)findViewById(R.id.settButton);
+        backButton.setOnClickListener(new View.OnClickListener(){
+           public void onClick(View v) {
+               startActivity(intentMain);
+           }
+        });
+
         CheckKaranda=(CheckBox) findViewById(R.id.checkKaranda);
         CheckKutum=(CheckBox) findViewById(R.id.checkKutum);
         CheckKzarka=(CheckBox) findViewById(R.id.checkKzarka);
