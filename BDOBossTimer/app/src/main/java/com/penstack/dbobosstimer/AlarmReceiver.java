@@ -37,7 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver
 
 
         }
-        Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
+
         Settings.notificationSetup(context, ""+intent.getStringExtra("name"), "Boss spawning", intent.getIntExtra("id", 0),intent.getIntExtra("image",0));
     }
 
