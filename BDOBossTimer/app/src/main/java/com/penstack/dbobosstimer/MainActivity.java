@@ -324,7 +324,7 @@ public long countdown,day;
     }
     public int UserDay(String d,int Uoffset,String serverOff){
 
-        SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm");
+        SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm",Locale.ENGLISH);
         if(Uoffset>0) {
 
             Day2.setTimeZone(getTimeZone("GMT+" + Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
@@ -338,11 +338,37 @@ public long countdown,day;
         Day2.setTimeZone(getTimeZone("GMT"+serverOff));
 
 
-        Day2.applyPattern("u");
+        Day2.applyPattern("E");
         String Uday=Day2.format(newk);
+        int IntDay=1;
+        switch (Uday) {
+            case "Mon":
+                IntDay=1;
+                break;
+            case "Tue":
+                IntDay=2;
+                break;
+            case "Wed":
+                IntDay=3;
+                break;
+            case "Thu":
+                IntDay=4;
+                break;
+            case "Fri":
+                IntDay=5;
+                break;
+            case "Sat":
+                IntDay=6;
+                break;
+            case "Sun":
+                IntDay=7;
+                break;
+
+
+        }
         Day2.applyPattern("d");
          RealDAY=Day2.format(newk);
-        return  Integer.parseInt(Uday);
+        return  IntDay;
 
     }
     public  long Time(String s,int Uoffset,String serverOff){
