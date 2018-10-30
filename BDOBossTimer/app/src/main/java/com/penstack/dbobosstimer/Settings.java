@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -337,7 +338,8 @@ public class Settings extends AppCompatActivity {
 
         PendingIntent notify=stackBuilder.getPendingIntent(100, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "Boss")
-                .setSmallIcon(BossIm)
+                .setSmallIcon(R.drawable.smallicon)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.drawable.bdotimericon))
                 .setContentTitle(title)
                 .setContentText(SContext)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
