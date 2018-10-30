@@ -7,177 +7,189 @@
     android:layout_height="match_parent">
 
 
-
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="top|center"
-
-    >
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/bdoframe"
-                android:scaleType="fitXY"
-                />
-
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:orientation="vertical"
-     android:gravity="center">
-
-        <TextView
-        android:id="@+id/serverText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Server:"
-        android:textSize="30dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:paddingTop="25dp"
-         />
-
-        <RadioGroup
-        android:id="@+id/ServerGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-    <RadioButton android:id="@+id/rbNA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NA"
-        android:onClick="onRadioButtonClicked"
-        android:paddingRight="60dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="5dp"
-        android:buttonTint="@android:color/white"/>
-
-        <RadioButton
-            android:id="@+id/rbEU"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:onClick="onRadioButtonClicked"
-            android:text="EU"
-            android:textSize="20dp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:buttonTint="@android:color/white"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/notificationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notifications:"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:paddingTop="15dp"
-        android:textColor="@android:color/white"
-        />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginRight="15dp"
-    android:paddingTop="10dp">
-
-    <CheckBox
-        android:id="@+id/checkKaranda"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Karanda"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"
-        />
+        android:layout_height="match_parent"
+        android:gravity="top|center"
+        android:orientation="vertical"
 
-    <CheckBox
-        android:id="@+id/checkKutum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kutumm"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"/>
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <CheckBox
-        android:id="@+id/checkKzarka"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kzarka"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"/>
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bdoframe" />
 
-    <CheckBox
-        android:id="@+id/checkNouver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nouver"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/checkOffin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Offin"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"/>
+            <TextView
+                android:id="@+id/serverText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="25dp"
+                android:text="Select Server:"
+                android:textColor="@android:color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
-    <CheckBox
-        android:id="@+id/checkQuint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quint / Muraka"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"/>
+            <RadioGroup
+                android:id="@+id/ServerGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/checkVell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vell"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:onClick="onCheckboxClicked"
-        android:buttonTint="@android:color/white"/>
- </LinearLayout>
- </LinearLayout>
+                <RadioButton
+                    android:id="@+id/rbNA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onRadioButtonClicked"
+                    android:paddingRight="60dp"
+                    android:text="NA"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
- </RelativeLayout>
+                <RadioButton
+                    android:id="@+id/rbEU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="EU"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/notificationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Notifications:"
+                android:textColor="@android:color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/checkKaranda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Karanda"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkKutum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Kutumm"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkKzarka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Kzarka"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkNouver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Nouver"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkOffin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Offin"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkQuint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Quint / Muraka"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkVell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Vell"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/settButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="23dp"
+            android:layout_marginRight="23dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/back_button" />
+
+
+    </RelativeLayout>
 
 
 </android.support.constraint.ConstraintLayout>

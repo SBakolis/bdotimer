@@ -52,8 +52,8 @@
 
         <ImageView
             android:id="@+id/settButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:clickable = "true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -61,8 +61,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="7dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/settings_button" />
 
      </RelativeLayout>
     </RelativeLayout>
