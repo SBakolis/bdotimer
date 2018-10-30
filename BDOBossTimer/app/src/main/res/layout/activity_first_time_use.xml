@@ -37,7 +37,7 @@
             android:textSize="30dp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:paddingTop="120dp"
+            android:paddingTop="65dp"
             />
 
     <TextView
@@ -82,12 +82,39 @@
             android:buttonTint="@android:color/white"/>
     </RadioGroup>
 
+        <TextView
+            android:id="@+id/optOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/personalizedAdMob"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:id="@+id/privacyPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privatePolicy"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
         <Button
             android:id="@+id/firstStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="spot taken." />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Continue" />
     </LinearLayout>
    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

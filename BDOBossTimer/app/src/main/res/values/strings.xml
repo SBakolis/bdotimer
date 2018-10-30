@@ -1,3 +1,5 @@
 <resources>
         <string name="app_name">BDO Boss Timer</string>
+        <string name="personalizedAdMob">You can <a href="https://www.google.com/settings/ads">opt out</a> of personalized Ads.</string>
+        <string name="privatePolicy">By continuing you agree with our <a href="https://www.google.com/settings/ads">Privacy Policy</a></string>
 </resources>
