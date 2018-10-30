@@ -107,11 +107,10 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("EU", checked).apply();// na apothikeuei kai to oti einai checkarismeno
                     prefs.edit().putBoolean("NA",false).apply();
+                    FillNotifyList(BossEU,1);
                 }
                 else
-
                     prefs.edit().putBoolean("EU", checked).apply();// na to ksetickarei
-
                 break;
             case R.id.rbNA:
                 if (checked){
@@ -119,6 +118,7 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("NA", checked).apply();
                     prefs.edit().putBoolean("EU", false).apply();
+                    FillNotifyList(BossNA,-7);
                 }
                 else
                     prefs.edit().putBoolean("NA",checked).apply();
@@ -217,30 +217,15 @@ public class Settings extends AppCompatActivity {
         }
         armlist.clear();
         if (rbEU.isChecked()) {
-            FillNotifyList(BossEU);
-             Soffset=1;
+            Soffset=1;
+            FillNotifyList(BossEU,Soffset);
+
         } else{
-            FillNotifyList(BossNA);
             Soffset=-7;
+            FillNotifyList(BossNA,Soffset);
+
             }
 
-            if(!NOTIFY_BOSS.isEmpty()) {
-
-               for (int z = 1; z < BossSize; z++) {
-                    cancelAlarm(this, AlarmReceiver.class, z+BossSize);
-                }
-                for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
-
-                    startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),Soffset,NOTIFY_BOSS.get(p).getBossImage());
-                    }
-
-
-                }
-             else {
-                for (int q = 1; q <= 60; q++) {
-                    cancelAlarm(this, AlarmReceiver.class, q);
-                }
-            }
 
 
 
@@ -351,7 +336,7 @@ public class Settings extends AppCompatActivity {
         // notificationId is a unique int for each notification that you must define
         notificationManager.notify(i, mBuilder.build());
     }
-    public void FillNotifyList(ArrayList<Boss> B){
+    public void FillNotifyList(ArrayList<Boss> B,int soffset){
 
         for (int q = 0; q <B.size();q++) {
 
@@ -399,6 +384,24 @@ public class Settings extends AppCompatActivity {
 
         }
              BossSize=NOTIFY_BOSS.size();
+        if(!NOTIFY_BOSS.isEmpty()) {
+
+            for (int z = 1; z < BossSize; z++) {
+                cancelAlarm(this, AlarmReceiver.class, z+BossSize);
+            }
+            for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
+
+                startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage());
+            }
+
+
+        }
+        else {
+            for (int q = 1; q <= 60; q++) {
+                cancelAlarm(this, AlarmReceiver.class, q);
+            }
+        }
+
     }
 }
 
