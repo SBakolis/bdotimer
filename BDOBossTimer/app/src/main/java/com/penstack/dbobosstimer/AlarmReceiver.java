@@ -30,7 +30,7 @@ public class AlarmReceiver extends BroadcastReceiver
                 // Set the alarm here.
 
 
-                Settings.startAlarm(context,AlarmReceiver.class,intent.getIntExtra("id",0),intent.getIntExtra("day",0),intent.getIntExtra("hour",0),intent.getIntExtra("minute",0),intent.getStringExtra("name"),intent.getIntExtra("offset",0));
+                Settings.startAlarm(context,AlarmReceiver.class,intent.getIntExtra("id",0),intent.getIntExtra("day",0),intent.getIntExtra("hour",0),intent.getIntExtra("minute",0),intent.getStringExtra("name"),intent.getIntExtra("offset",0),intent.getIntExtra("image",0));
 
             }
 
@@ -38,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver
 
         }
         Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
-        Settings.notificationSetup(context, ""+intent.getStringExtra("name"), "Boss spawning", intent.getIntExtra("id", 0));
+        Settings.notificationSetup(context, ""+intent.getStringExtra("name"), "Boss spawning", intent.getIntExtra("id", 0),intent.getIntExtra("image",0));
     }
 
 }
