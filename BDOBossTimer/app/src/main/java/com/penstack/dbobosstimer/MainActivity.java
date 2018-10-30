@@ -324,7 +324,7 @@ public long countdown,day;
     }
     public int UserDay(String d,int Uoffset,String serverOff){
 
-        SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm");
+        SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm",Locale.ENGLISH);
         if(Uoffset>0) {
 
             Day2.setTimeZone(getTimeZone("GMT+" + Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
