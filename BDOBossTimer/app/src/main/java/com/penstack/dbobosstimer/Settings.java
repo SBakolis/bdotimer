@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -229,7 +230,7 @@ public class Settings extends AppCompatActivity {
                 }
                 for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
 
-                    startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),Soffset);
+                    startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),Soffset,NOTIFY_BOSS.get(p).getBossImage());
                     }
 
 
@@ -247,7 +248,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset) {
+    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset,int BossImage) {
 
         Calendar calendar;
        if(Soffset<0){
@@ -279,6 +280,7 @@ public class Settings extends AppCompatActivity {
             intent1.putExtra("hour",hourOfTheDay);
             intent1.putExtra("minute",minutes);
             intent1.putExtra("name", bossname);
+            intent1.putExtra("image",BossImage);
         intent1.putExtra("offset", Soffset);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
 
@@ -327,13 +329,20 @@ public class Settings extends AppCompatActivity {
         am.cancel(pendingIntent);
         pendingIntent.cancel();
     }
-    static public void notificationSetup(Context context, String title, String Context,int i)
+    static public void notificationSetup(Context context, String title, String SContext,int i,int BossIm)
     {
+         Intent main=new Intent(context,MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(main);
+
+        PendingIntent notify=stackBuilder.getPendingIntent(100, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "Boss")
-                .setSmallIcon(R.drawable.karanda)
+                .setSmallIcon(BossIm)
                 .setContentTitle(title)
-                .setContentText(Context)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setContentText(SContext)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(notify);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
