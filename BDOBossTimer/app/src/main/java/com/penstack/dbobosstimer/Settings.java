@@ -294,9 +294,9 @@ public class Settings extends AppCompatActivity {
 
             armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
-            Log.d("intent",""+intent1.getIntExtra("id",0));
-        manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis, interval, pendingIntent);
-        //manager.setAndAllowWhileIdle();
+            
+        manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis-600000, interval, pendingIntent);
+
 
     }
 
