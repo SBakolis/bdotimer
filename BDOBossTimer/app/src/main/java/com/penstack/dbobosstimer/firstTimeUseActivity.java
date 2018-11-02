@@ -5,10 +5,14 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+
+
 
 public class firstTimeUseActivity extends AppCompatActivity {
 
@@ -24,11 +28,17 @@ public class firstTimeUseActivity extends AppCompatActivity {
     int currentServerSelection;
     SharedPreferences prefs;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_time_use);
+
+        GdprHelper gdprHelper = new GdprHelper(this);
+        gdprHelper.initialise();
+
+
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
@@ -73,4 +83,5 @@ public class firstTimeUseActivity extends AppCompatActivity {
                 break;
         }
     }
+
 }

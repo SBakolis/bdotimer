@@ -37,6 +37,11 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import static android.support.v4.os.LocaleListCompat.create;
 import static java.util.TimeZone.getTimeZone;
 
@@ -75,12 +80,24 @@ public long countdown,day;
     public String CHANNEL_ID;
     Intent notifications;
     public String RealDAY;
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Ads
+        MobileAds.initialize(this, "ca-app-pub-6028798031014902~9858159713");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        if (mInterstitialAd.isLoaded()) {
+           // mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
 
 
         intentSettings = new Intent(MainActivity.this, Settings.class);
@@ -409,10 +426,9 @@ public long countdown,day;
 
         // Check for first run or upgrade
         if (currentVersionCode == savedVersionCode) {
-
             // This is just a normal run
+            setAdvListener();
             return;
-
         } else if (savedVersionCode == DOESNT_EXIST) {
 
             //first time
@@ -558,4 +574,28 @@ public long countdown,day;
             //Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
         }
     } */
+
+    public void setAdvListener()
+    {
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                CountDownTimer Adtimer = new CountDownTimer(7000, 1000)
+                {
+                    public void onTick(long millisUntilFinished)
+                    {
+
+                    }
+                    public void onFinish()
+                    {
+                        mInterstitialAd.show();
+                        //Log.d("TAG", "The interstitial loaded yet.");
+                    }
+                };
+                Adtimer.start();
+            }
+        });
+    }
+
+
 }
