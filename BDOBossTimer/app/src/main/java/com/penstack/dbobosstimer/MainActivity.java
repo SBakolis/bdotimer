@@ -567,7 +567,7 @@ public long countdown,day;
 
     public void setAdvListener() {
         MobileAds.initialize(this, "ca-app-pub-6028798031014902~9858159713");
-        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
