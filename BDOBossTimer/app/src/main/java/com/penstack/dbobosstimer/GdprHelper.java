@@ -19,15 +19,17 @@ import java.net.URL;
 public class GdprHelper {
 
     private static final String PUBLISHER_ID = "pub-6028798031014902";
-    private static final String PRIVACY_URL = "https://sbakolis.github.io/quadpolicy/";
-    private static final String MARKET_URL_PAID_VERSION = "market://details?id=com.example.app.pro";
+    private static final String PRIVACY_URL = "https://penstackteam.github.io/bdobosstimerpolicy/";
+    //private static final String MARKET_URL_PAID_VERSION = "market://details?id=com.example.app.pro";
     final String PREFS_NAME = "BDO_TIMER_PREFS";
-    final String GDPRCONSENT = "-1";
+
+     String GDPRCONSENT = "-1";
     final int NOCONSENTGIVEN = 0;
     final int CONSENTGIVEN = 1;
     SharedPreferences prefs;
 
     private final Context context;
+    private  int con = 0 ;
 
     private ConsentForm consentForm;
 
@@ -85,21 +87,14 @@ public class GdprHelper {
                         if (userPrefersAdFree) {
                            // redirectToPaidVersion();
                         }
-                        if(consentStatus == ConsentStatus.PERSONALIZED)
-                        {
-                            prefs.edit().putInt(GDPRCONSENT, CONSENTGIVEN).apply();
-                            Log.d("TAG", "done");
-                        }else{
-                            prefs.edit().putInt(GDPRCONSENT, NOCONSENTGIVEN).apply();
-                            Log.d("TAG", "done1");
-                        }
+                        GDPRConsentR(consentStatus);
                     }
 
                     @Override
                     public void onConsentFormError(String errorDescription) {
                         // Consent form error. Would be nice to have some proper logging
                         if (BuildConfig.BUILD_TYPE.equals("debug")) {
-                            Toast.makeText(context, errorDescription, Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(context, errorDescription, Toast.LENGTH_LONG).show();
                         }
                     }
                 })
@@ -118,6 +113,33 @@ public class GdprHelper {
             e.printStackTrace();
         }
         return privacyUrl;
+    }
+
+    private int GDPRConsentR(ConsentStatus consentStatus)
+    {
+
+
+        switch(consentStatus)
+        {
+            case PERSONALIZED:
+                //prefs.edit().putInt(GDPRCONSENT, CONSENTGIVEN).apply();
+                con =  1;
+               // Log.d("TAG", "done");
+                break;
+            case NON_PERSONALIZED:
+                //prefs.edit().putInt(GDPRCONSENT, NOCONSENTGIVEN).apply();
+                con = 0;
+               // Log.d("TAG", "done0");
+                break;
+            case UNKNOWN:
+                con = 0;
+        }
+        return con;
+    }
+
+    public int getCon()
+    {
+        return con;
     }
 
   /*  private void redirectToPaidVersion() {

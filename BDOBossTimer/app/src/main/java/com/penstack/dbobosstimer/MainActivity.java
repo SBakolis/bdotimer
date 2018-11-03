@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
     public void setAdvListener() {
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-6028798031014902~9858159713");
         mInterstitialAd = new InterstitialAd(getApplicationContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-6028798031014902/3127307828");
 
         getUserGDPRConsent = prefs.getInt(GDPRCONSENT , DOESNT_EXIST);
         if(getUserGDPRConsent != 1) {

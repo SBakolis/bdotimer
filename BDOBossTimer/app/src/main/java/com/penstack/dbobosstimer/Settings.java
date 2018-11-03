@@ -18,6 +18,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -49,19 +50,32 @@ public class Settings extends AppCompatActivity {
     int BossSize,Soffset;
     public ImageView backButton;
     Intent intentMain ;
+    Button policyButton;
+    String GDPRCONSENT = "-1";
+    final int NOCONSENTGIVEN = 0;
+    final int CONSENTGIVEN = 1;
 
-
-    static ArrayList<Long> armlist=new ArrayList<>();
-    ArrayList<PendingIntent> pi=new ArrayList<>();
+    //static ArrayList<Long> armlist=new ArrayList<>();
+   // ArrayList<PendingIntent> pi=new ArrayList<>();
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+      final GdprHelper gdprHelper = new GdprHelper(Settings.this);
 
        BossNA=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayNAList");
        BossEU=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayEUList");
 
-         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+       prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+       policyButton = (Button)findViewById(R.id.conButton);
+
+       policyButton.setOnClickListener(new View.OnClickListener() {
+          public void onClick(View v) {
+              gdprHelper.resetConsent();
+              gdprHelper.initialise();
+          }
+        });
 
         rbEU=(RadioButton)findViewById(R.id.rbEU);
         rbNa=(RadioButton) findViewById(R.id.rbNA);
@@ -72,6 +86,16 @@ public class Settings extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v) {
                //startActivity(intentMain);
+               int  conPass = gdprHelper.getCon();
+
+               switch (conPass){
+                   case 0:
+                       prefs.edit().putInt(GDPRCONSENT, NOCONSENTGIVEN).apply();
+                       Log.d("TAG1", conPass + "");
+                   case 1:
+                       prefs.edit().putInt(GDPRCONSENT, CONSENTGIVEN).apply();
+                       Log.d("TAG1", conPass + "");
+               }
                Settings.this.finish();
            }
         });
@@ -216,7 +240,7 @@ public class Settings extends AppCompatActivity {
                 }
                 break;
         }
-        armlist.clear();
+        //armlist.clear();
         if (rbEU.isChecked()) {
             Soffset=1;
             FillNotifyList(BossEU,Soffset);
@@ -293,7 +317,7 @@ public class Settings extends AppCompatActivity {
               calendarTimeInMillis+=608400000 ; //calendar.setTimeInMillis(calendar.getTimeInMillis() + interval);
            }
 
-            armlist.add(calendarTimeInMillis);
+            //armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
             
         manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis-600000, interval, pendingIntent);
