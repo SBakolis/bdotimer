@@ -38,6 +38,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -81,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
     public String CHANNEL_ID;
     Intent notifications;
     public String RealDAY;
+
+    final String GDPRCONSENT = "-1";
+    //final int NOCONSENTGIVEN = 0;
+    int getUserGDPRConsent;
     private InterstitialAd mInterstitialAd;
     boolean adAlreadyAppeared = false;
 
@@ -99,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentSettings);
             }
         });
+
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         checkFirstRun();
 
@@ -566,7 +573,17 @@ public class MainActivity extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        getUserGDPRConsent = prefs.getInt(GDPRCONSENT , DOESNT_EXIST);
+        if(getUserGDPRConsent != 1) {
+            Bundle extras = new Bundle();
+            extras.putString("npa", "1");
+
+            mInterstitialAd.loadAd(new AdRequest.Builder()
+                    .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                    .build());
+        }else {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        }
         if (mInterstitialAd.isLoaded()) {
             // mInterstitialAd.show();
         } else {

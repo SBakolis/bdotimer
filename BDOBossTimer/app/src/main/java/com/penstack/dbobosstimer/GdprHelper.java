@@ -2,6 +2,7 @@ package com.penstack.dbobosstimer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,6 +21,11 @@ public class GdprHelper {
     private static final String PUBLISHER_ID = "pub-6028798031014902";
     private static final String PRIVACY_URL = "https://sbakolis.github.io/quadpolicy/";
     private static final String MARKET_URL_PAID_VERSION = "market://details?id=com.example.app.pro";
+    final String PREFS_NAME = "BDO_TIMER_PREFS";
+    final String GDPRCONSENT = "-1";
+    final int NOCONSENTGIVEN = 0;
+    final int CONSENTGIVEN = 1;
+    SharedPreferences prefs;
 
     private final Context context;
 
@@ -74,12 +80,19 @@ public class GdprHelper {
 
                     @Override
                     public void onConsentFormClosed(
-                            ConsentStatus consentStatus, Boolean userPrefersAdFree) {
+                            ConsentStatus consentStatus ,Boolean userPrefersAdFree) { //,Boolean userPrefersAdFree
                         // Consent form was closed. This callback method contains all the data about user's selection, that you can use.
                         if (userPrefersAdFree) {
                            // redirectToPaidVersion();
                         }
-                        Log.d("TAG", consentStatus.toString());
+                        if(consentStatus == ConsentStatus.PERSONALIZED)
+                        {
+                            prefs.edit().putInt(GDPRCONSENT, CONSENTGIVEN).apply();
+                            Log.d("TAG", "done");
+                        }else{
+                            prefs.edit().putInt(GDPRCONSENT, NOCONSENTGIVEN).apply();
+                            Log.d("TAG", "done1");
+                        }
                     }
 
                     @Override
@@ -92,7 +105,6 @@ public class GdprHelper {
                 })
                 .withPersonalizedAdsOption()
                 .withNonPersonalizedAdsOption()
-                .withAdFreeOption()
                 .build();
         consentForm.load();
     }
