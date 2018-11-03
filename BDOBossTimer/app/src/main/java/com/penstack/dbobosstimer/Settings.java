@@ -71,7 +71,8 @@ public class Settings extends AppCompatActivity {
         backButton = (ImageView)findViewById(R.id.settButton);
         backButton.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v) {
-               startActivity(intentMain);
+               //startActivity(intentMain);
+               Settings.this.finish();
            }
         });
 

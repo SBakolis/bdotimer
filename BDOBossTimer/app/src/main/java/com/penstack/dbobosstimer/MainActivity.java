@@ -81,23 +81,13 @@ public long countdown,day;
     Intent notifications;
     public String RealDAY;
     private InterstitialAd mInterstitialAd;
+    boolean adAlreadyAppeared = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Ads
-        MobileAds.initialize(this, "ca-app-pub-6028798031014902~9858159713");
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        if (mInterstitialAd.isLoaded()) {
-           // mInterstitialAd.show();
-        } else {
-            Log.d("TAG", "The interstitial wasn't loaded yet.");
-        }
 
 
         intentSettings = new Intent(MainActivity.this, Settings.class);
@@ -263,7 +253,7 @@ public long countdown,day;
 
     }
 
-        public void ServerSelection(ArrayList<Boss> Slist,String Soffset){for( i=0;i<Slist.size();i++){
+        public void ServerSelection(ArrayList<Boss> Slist,String Soffset){for( i=0;i<Slist.size()  ;i++){
 
 
 
@@ -575,26 +565,41 @@ public long countdown,day;
         }
     } */
 
-    public void setAdvListener()
-    {
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                CountDownTimer Adtimer = new CountDownTimer(7000, 1000)
-                {
-                    public void onTick(long millisUntilFinished)
-                    {
+    public void setAdvListener() {
+        MobileAds.initialize(this, "ca-app-pub-6028798031014902~9858159713");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
-                    }
-                    public void onFinish()
-                    {
-                        mInterstitialAd.show();
-                        //Log.d("TAG", "The interstitial loaded yet.");
-                    }
-                };
-                Adtimer.start();
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        if (mInterstitialAd.isLoaded()) {
+            // mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+
+        final CountDownTimer Adtimer = new CountDownTimer(7000, 1000) {
+            public void onTick(long millisUntilFinished)
+            {
+
             }
-        });
+
+            public void onFinish() {
+                adAlreadyAppeared = true;
+                mInterstitialAd.show();
+                //Log.d("TAG", "The interstitial loaded yet.");
+            }
+        };
+
+        if (adAlreadyAppeared == false) {
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    Adtimer.start();
+                    //mInterstitialAd.show();
+                }
+
+            });
+        }
     }
 
 

@@ -3,6 +3,7 @@ package com.penstack.dbobosstimer;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.ads.consent.ConsentForm;
@@ -78,6 +79,7 @@ public class GdprHelper {
                         if (userPrefersAdFree) {
                            // redirectToPaidVersion();
                         }
+                        Log.d("TAG", consentStatus.toString());
                     }
 
                     @Override
