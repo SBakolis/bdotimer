@@ -319,7 +319,7 @@ public class Settings extends AppCompatActivity {
 
             //armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
-            
+
         manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis-600000, interval, pendingIntent);
 
 
