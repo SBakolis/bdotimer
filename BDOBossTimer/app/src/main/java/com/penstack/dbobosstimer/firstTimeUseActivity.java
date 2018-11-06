@@ -45,11 +45,11 @@ public class firstTimeUseActivity extends AppCompatActivity {
 
         currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
 
-        //TextView optOut = (TextView) findViewById(R.id.optOut);
-        //optOut.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView optOut = (TextView) findViewById(R.id.optOut);
+        optOut.setMovementMethod(LinkMovementMethod.getInstance());
 
-        // TextView privacyPocicy = (TextView) findViewById(R.id.privacyPolicy);
-        //privacyPocicy.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView privacyPocicy = (TextView) findViewById(R.id.privacyPolicy);
+        privacyPocicy.setMovementMethod(LinkMovementMethod.getInstance());
 
         firstStart =  (Button)findViewById(R.id.firstStart);
         intentToMain = new Intent(firstTimeUseActivity.this, MainActivity.class);
