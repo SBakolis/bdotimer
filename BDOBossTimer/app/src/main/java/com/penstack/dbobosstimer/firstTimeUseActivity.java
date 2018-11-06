@@ -43,12 +43,13 @@ public class firstTimeUseActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
-        currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
+
         RadioButton frbEU=(RadioButton)findViewById(R.id.frbEU);
            frbEU.setChecked(true);
         prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
         prefs.edit().putBoolean("EU", true).apply();
         prefs.edit().putBoolean("NA",false).apply();
+        currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
         TextView optOut = (TextView) findViewById(R.id.optOut);
         optOut.setMovementMethod(LinkMovementMethod.getInstance());
 
