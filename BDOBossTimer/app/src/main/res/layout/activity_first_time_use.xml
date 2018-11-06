@@ -82,7 +82,7 @@
             android:buttonTint="@android:color/white"/>
     </RadioGroup>
 
-      <!--  <TextView
+        <TextView
             android:id="@+id/optOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />
-        -->
+       
 
         <Button
             android:id="@+id/firstStart"
