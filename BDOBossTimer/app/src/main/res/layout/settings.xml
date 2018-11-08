@@ -107,7 +107,7 @@
                     android:layout_marginTop="5dp"
                     android:buttonTint="@android:color/white"
                     android:onClick="onCheckboxClicked"
-                    android:text="Kutumm"
+                    android:text="Kutum"
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
                     android:textStyle="bold" />
