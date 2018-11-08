@@ -323,9 +323,7 @@ public class Settings extends AppCompatActivity {
            //calendar.setTimeInMillis(System.currentTimeMillis());
         calendarTimeInMillis-=600000;
         intent1.putExtra("time",calendarTimeInMillis);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendarTimeInMillis, pendingIntent);
-        else
+       
             manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,interval, pendingIntent);
 
     }
@@ -347,7 +345,7 @@ public class Settings extends AppCompatActivity {
     }
     static public void notificationSetup(Context context, String title, String SContext,int i,int BossIm)
     {
-         Intent main=new Intent(context,MainActivity.class);
+         Intent main=new Intent(context,SplashActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntentWithParentStack(main);
 
