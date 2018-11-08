@@ -38,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver
 
         }
 
-        Settings.notificationSetup(context, ""+intent.getStringExtra("name"), "Boss spawning", intent.getIntExtra("id", 0),intent.getIntExtra("image",0));
+        Settings.notificationSetup(context, ""+intent.getStringExtra("name"), ""+intent.getStringExtra("name")+" is about to spawn", intent.getIntExtra("id", 0),intent.getIntExtra("image",0));
     }
 
 }

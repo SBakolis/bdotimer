@@ -1,16 +1,15 @@
 package com.penstack.dbobosstimer;
 
-import android.app.ActivityManager;
-import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.Notification;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+
 import android.os.CountDownTimer;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -21,15 +20,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioButton;
+
+
 import android.widget.TextView;
 
 import java.sql.Timestamp;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,13 +37,14 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
+
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
-import static android.support.v4.os.LocaleListCompat.create;
+
 import static java.util.TimeZone.getTimeZone;
 
 
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
 
@@ -509,7 +510,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentServerSelection == 1) {
             ServerSelection(BossDayEUList, "+1");
         } else if (currentServerSelection == 2) {
-            ServerSelection(BossDayNAList, "-7");
+            ServerSelection(BossDayNAList, "-8");
         }
 
 
