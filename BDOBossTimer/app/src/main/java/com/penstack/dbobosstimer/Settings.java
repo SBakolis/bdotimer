@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -246,7 +247,7 @@ public class Settings extends AppCompatActivity {
             FillNotifyList(BossEU,Soffset);
 
         } else{
-            Soffset=-7;
+            Soffset=-8;
             FillNotifyList(BossNA,Soffset);
 
             }
@@ -292,7 +293,8 @@ public class Settings extends AppCompatActivity {
             intent1.putExtra("minute",minutes);
             intent1.putExtra("name", bossname);
             intent1.putExtra("image",BossImage);
-        intent1.putExtra("offset", Soffset);
+            intent1.putExtra("offset", Soffset);
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
 
                request_code, intent1,
@@ -319,9 +321,12 @@ public class Settings extends AppCompatActivity {
 
             //armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
-
-        manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis-600000, interval, pendingIntent);
-
+        calendarTimeInMillis-=600000;
+        intent1.putExtra("time",calendarTimeInMillis);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendarTimeInMillis, pendingIntent);
+        else
+            manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,interval, pendingIntent);
 
     }
 

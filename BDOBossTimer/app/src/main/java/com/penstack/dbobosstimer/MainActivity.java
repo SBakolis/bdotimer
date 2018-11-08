@@ -510,7 +510,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentServerSelection == 1) {
             ServerSelection(BossDayEUList, "+1");
         } else if (currentServerSelection == 2) {
-            ServerSelection(BossDayNAList, "-7");
+            ServerSelection(BossDayNAList, "-8");
         }
 
 
