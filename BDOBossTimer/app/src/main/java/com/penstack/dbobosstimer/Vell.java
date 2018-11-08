@@ -2,7 +2,7 @@ package com.penstack.dbobosstimer;
 
 public class Vell extends Boss {
 
-    private static final int bossImage = R.drawable.vell;
+    private static final int bossImage = R.drawable.vell2;
     private static  final String Name="Vell";
 
     public Vell(int Day,int Hour,int Minute,String Tmz,long TimeLeft){

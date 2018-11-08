@@ -57,7 +57,7 @@
         android:orientation="horizontal"
         >
 
-        <RadioButton android:id="@+id/rbNA"
+        <RadioButton android:id="@+id/frbNA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NA"
@@ -70,7 +70,7 @@
             android:buttonTint="@android:color/white"/>
 
         <RadioButton
-            android:id="@+id/rbEU"
+            android:id="@+id/frbEU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -82,7 +82,7 @@
             android:buttonTint="@android:color/white"/>
     </RadioGroup>
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/optOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:layout_marginRight="10dp"
             />
        
-
+-->
         <Button
             android:id="@+id/firstStart"
             android:layout_width="match_parent"
