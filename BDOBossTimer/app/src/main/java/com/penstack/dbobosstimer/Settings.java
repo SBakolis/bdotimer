@@ -260,7 +260,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset,int BossImage) {
+    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset,int BossImage,long time) {
 
         Calendar calendar;
        if(Soffset<0){
@@ -285,24 +285,6 @@ public class Settings extends AppCompatActivity {
 
 
 
-
-        Intent intent1 = new Intent(context, cls);
-            intent1.putExtra("id",request_code);
-            intent1.putExtra("day",dayOfTheWeek);
-            intent1.putExtra("hour",hourOfTheDay);
-            intent1.putExtra("minute",minutes);
-            intent1.putExtra("name", bossname);
-            intent1.putExtra("image",BossImage);
-            intent1.putExtra("offset", Soffset);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-
-               request_code, intent1,
-
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-
-
         int interval = 1000 * 60 * 60 * 24 * 7;
         if(dayOfTheWeek==7)
             dayOfTheWeek=1;
@@ -322,10 +304,36 @@ public class Settings extends AppCompatActivity {
             //armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
         calendarTimeInMillis-=600000;
-        intent1.putExtra("time",calendarTimeInMillis);
-       
-            manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,interval, pendingIntent);
+        if(time!=0){
 
+             calendarTimeInMillis=time;
+        }
+           Log.d("timeinmillis",""+calendarTimeInMillis);
+        Intent intent1 = new Intent(context, cls);
+        intent1.putExtra("id",request_code);
+        intent1.putExtra("day",dayOfTheWeek);
+        intent1.putExtra("hour",hourOfTheDay);
+        intent1.putExtra("minute",minutes);
+        intent1.putExtra("name", bossname);
+        intent1.putExtra("image",BossImage);
+        intent1.putExtra("offset", Soffset);
+        intent1.putExtra("FirsTime",calendarTimeInMillis);
+        intent1.putExtra("time",time);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+
+                request_code, intent1,
+
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+
+
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                   manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,pendingIntent);
+           }
+           else
+               manager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTimeInMillis,interval, pendingIntent);
     }
 
     public void cancelAlarm(Context context,Class<?> cls,int request_code) {
@@ -414,21 +422,18 @@ public class Settings extends AppCompatActivity {
              BossSize=NOTIFY_BOSS.size();
         if(!NOTIFY_BOSS.isEmpty()) {
 
-            for (int z = 1; z < BossSize; z++) {
-                cancelAlarm(this, AlarmReceiver.class, z+BossSize);
-            }
-            for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
 
-                startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage());
-            }
-
-
-        }
-        else {
             for (int q = 1; q <= 60; q++) {
                 cancelAlarm(this, AlarmReceiver.class, q);
             }
+            for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
+
+                startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage(),0);
+            }
+
+
         }
+
 
     }
 }
