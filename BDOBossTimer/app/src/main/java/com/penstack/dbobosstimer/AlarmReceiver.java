@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -19,31 +20,28 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import static android.app.AlarmManager.RTC_WAKEUP;
 import static android.content.Context.ALARM_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
 
 public class AlarmReceiver extends BroadcastReceiver
 {
     String textTitle;
     String textContent;
     int notification_icon;
-
+    SharedPreferences preferences;
     @Override
     public void onReceive(Context context, Intent intent) {
         // todo
         // Toast.makeText(arg0, "I'm running", Toast.LENGTH_SHORT).show();
-        if (intent.getAction() != null && context != null) {
-            if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
-                // Set the alarm here.
-
-
-                Settings.startAlarm(context,AlarmReceiver.class,intent.getIntExtra("id",0),intent.getIntExtra("day",0),intent.getIntExtra("hour",0),intent.getIntExtra("minute",0),intent.getStringExtra("name"),intent.getIntExtra("offset",0),intent.getIntExtra("image",0),intent.getLongExtra("time",0));
-
-            }
-
-
-
-        }
 
         Settings.notificationSetup(context, ""+intent.getStringExtra("name"), ""+intent.getStringExtra("name")+" is about to spawn", intent.getIntExtra("id", 0),intent.getIntExtra("image",0));
            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
