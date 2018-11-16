@@ -26,6 +26,10 @@ import android.widget.RadioButton;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -41,7 +45,7 @@ public class Settings extends AppCompatActivity {
     final int NASERVER_CONSTANT = 2;
     final String PREF_SERVER_CONSTANT = "0";
     final ArrayList<Boss> NOTIFY_BOSS=new ArrayList<>();
-    final Set<String> BossNotify=new HashSet<String>();
+
     final String PREF_NOTIFY="NotificationList";
     ArrayList<Boss>  BossEU;
     ArrayList<Boss>  BossNA;
@@ -64,11 +68,15 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
       final GdprHelper gdprHelper = new GdprHelper(Settings.this);
 
-       BossNA=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayNAList");
-       BossEU=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayEUList");
+
 
        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
+       String jsonEU=prefs.getString("EuList",null);
+       String jsonNA=prefs.getString("NaList",null);
+       Type type=new TypeToken<ArrayList<Boss>>(){}.getType();
+       Gson gson=new Gson();
+       BossEU=gson.fromJson(jsonEU,type);
+       BossNA=gson.fromJson(jsonNA,type);
        policyButton = (Button)findViewById(R.id.conButton);
 
        policyButton.setOnClickListener(new View.OnClickListener() {
@@ -336,7 +344,7 @@ public class Settings extends AppCompatActivity {
                manager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTimeInMillis,interval, pendingIntent);
     }
 
-    public void cancelAlarm(Context context,Class<?> cls,int request_code) {
+    static public void cancelAlarm(Context context,Class<?> cls,int request_code) {
 
         ComponentName receiver = new ComponentName(context, cls);
         PackageManager pm = context.getPackageManager();
@@ -420,19 +428,20 @@ public class Settings extends AppCompatActivity {
 
         }
              BossSize=NOTIFY_BOSS.size();
-        if(!NOTIFY_BOSS.isEmpty()) {
+
 
 
             for (int q = 1; q <= 60; q++) {
                 cancelAlarm(this, AlarmReceiver.class, q);
             }
-            for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
+
+            if(!NOTIFY_BOSS.isEmpty()){
+                for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
 
                 startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage(),0);
+                }
+
             }
-
-
-        }
 
 
     }
