@@ -278,7 +278,9 @@ public class MainActivity extends AppCompatActivity {
     private void checkFirstRun() {
 
         final String PREFS_NAME = "BDO_TIMER_PREFS";
+
         final String PREF_VERSION_CODE_KEY = "5";
+
         final int DOESNT_EXIST = -1;
 
         // Get current version code
