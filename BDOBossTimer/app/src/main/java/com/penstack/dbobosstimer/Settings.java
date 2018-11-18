@@ -26,6 +26,10 @@ import android.widget.RadioButton;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -41,7 +45,7 @@ public class Settings extends AppCompatActivity {
     final int NASERVER_CONSTANT = 2;
     final String PREF_SERVER_CONSTANT = "0";
     final ArrayList<Boss> NOTIFY_BOSS=new ArrayList<>();
-    final Set<String> BossNotify=new HashSet<String>();
+
     final String PREF_NOTIFY="NotificationList";
     ArrayList<Boss>  BossEU;
     ArrayList<Boss>  BossNA;
@@ -64,11 +68,15 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
       final GdprHelper gdprHelper = new GdprHelper(Settings.this);
 
-       BossNA=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayNAList");
-       BossEU=(ArrayList<Boss>) getIntent().getSerializableExtra("BossDayEUList");
+
 
        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
+       String jsonEU=prefs.getString("EuList",null);
+       String jsonNA=prefs.getString("NaList",null);
+       Type type=new TypeToken<ArrayList<Boss>>(){}.getType();
+       Gson gson=new Gson();
+       BossEU=gson.fromJson(jsonEU,type);
+       BossNA=gson.fromJson(jsonNA,type);
        policyButton = (Button)findViewById(R.id.conButton);
 
        policyButton.setOnClickListener(new View.OnClickListener() {
@@ -260,7 +268,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset,int BossImage) {
+    public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset,int BossImage,long time) {
 
         Calendar calendar;
        if(Soffset<0){
@@ -285,24 +293,6 @@ public class Settings extends AppCompatActivity {
 
 
 
-
-        Intent intent1 = new Intent(context, cls);
-            intent1.putExtra("id",request_code);
-            intent1.putExtra("day",dayOfTheWeek);
-            intent1.putExtra("hour",hourOfTheDay);
-            intent1.putExtra("minute",minutes);
-            intent1.putExtra("name", bossname);
-            intent1.putExtra("image",BossImage);
-            intent1.putExtra("offset", Soffset);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-
-               request_code, intent1,
-
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-
-
         int interval = 1000 * 60 * 60 * 24 * 7;
         if(dayOfTheWeek==7)
             dayOfTheWeek=1;
@@ -322,13 +312,39 @@ public class Settings extends AppCompatActivity {
             //armlist.add(calendarTimeInMillis);
            //calendar.setTimeInMillis(System.currentTimeMillis());
         calendarTimeInMillis-=600000;
-        intent1.putExtra("time",calendarTimeInMillis);
-       
-            manager.setRepeating(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,interval, pendingIntent);
+        if(time!=0){
 
+             calendarTimeInMillis=time;
+        }
+           Log.d("timeinmillis",""+calendarTimeInMillis);
+        Intent intent1 = new Intent(context, cls);
+        intent1.putExtra("id",request_code);
+        intent1.putExtra("day",dayOfTheWeek);
+        intent1.putExtra("hour",hourOfTheDay);
+        intent1.putExtra("minute",minutes);
+        intent1.putExtra("name", bossname);
+        intent1.putExtra("image",BossImage);
+        intent1.putExtra("offset", Soffset);
+        intent1.putExtra("FirsTime",calendarTimeInMillis);
+        intent1.putExtra("time",time);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+
+                request_code, intent1,
+
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+
+
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                   manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,pendingIntent);
+           }
+           else
+               manager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTimeInMillis,interval, pendingIntent);
     }
 
-    public void cancelAlarm(Context context,Class<?> cls,int request_code) {
+    static public void cancelAlarm(Context context,Class<?> cls,int request_code) {
 
         ComponentName receiver = new ComponentName(context, cls);
         PackageManager pm = context.getPackageManager();
@@ -412,23 +428,21 @@ public class Settings extends AppCompatActivity {
 
         }
              BossSize=NOTIFY_BOSS.size();
-        if(!NOTIFY_BOSS.isEmpty()) {
-
-            for (int z = 1; z < BossSize; z++) {
-                cancelAlarm(this, AlarmReceiver.class, z+BossSize);
-            }
-            for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
-
-                startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage());
-            }
 
 
-        }
-        else {
+
             for (int q = 1; q <= 60; q++) {
                 cancelAlarm(this, AlarmReceiver.class, q);
             }
-        }
+
+            if(!NOTIFY_BOSS.isEmpty()){
+                for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
+
+                startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage(),0);
+                }
+
+            }
+
 
     }
 }

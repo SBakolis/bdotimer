@@ -6,7 +6,9 @@ android {
         applicationId "com.penstack.dbobosstimer"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
+       
+        versionCode 5
+
         versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -26,7 +28,7 @@ dependencies {
     implementation "com.android.support:support-compat:27.+"
     implementation 'com.google.android.gms:play-services-ads:17.0.0'
     implementation 'com.google.android.ads.consent:consent-library:1.0.6'
-
+    implementation 'com.google.code.gson:gson:2.8.5'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
