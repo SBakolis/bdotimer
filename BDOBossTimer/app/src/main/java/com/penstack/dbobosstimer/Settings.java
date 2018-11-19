@@ -51,7 +51,7 @@ public class Settings extends AppCompatActivity {
     ArrayList<Boss>  BossNA;
     SharedPreferences prefs;
     RadioButton rbEU,rbNa;
-    CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin;
+    CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin,CheckGarmoth;
     int BossSize,Soffset;
     public ImageView backButton;
     Intent intentMain ;
@@ -109,6 +109,7 @@ public class Settings extends AppCompatActivity {
            }
         });
 
+        CheckGarmoth = (CheckBox) findViewById(R.id.checkGarmoth);
         CheckKaranda=(CheckBox) findViewById(R.id.checkKaranda);
         CheckKutum=(CheckBox) findViewById(R.id.checkKutum);
         CheckKzarka=(CheckBox) findViewById(R.id.checkKzarka);
@@ -119,6 +120,7 @@ public class Settings extends AppCompatActivity {
 
        rbEU.setChecked(prefs.getBoolean("EU",false));
        rbNa.setChecked(prefs.getBoolean("NA",false));
+       CheckGarmoth.setChecked(prefs.getBoolean("Garmoth",false));
        CheckKaranda.setChecked(prefs.getBoolean("Karanda",false));
        CheckKzarka.setChecked(prefs.getBoolean("Kzarka",false));
        CheckKutum.setChecked(prefs.getBoolean("Kutum",false));
@@ -167,6 +169,16 @@ public class Settings extends AppCompatActivity {
         NOTIFY_BOSS.clear();
 
         switch (view.getId()) {
+            case R.id.checkGarmoth:
+                if (checked2) {
+                    //NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
+                    prefs.edit().putBoolean("Garmoth", checked2).apply();
+
+
+                } else
+                    //NOTIFY_BOSS.add("");
+                    prefs.edit().putBoolean("Garmoth", checked2).apply();
+                break;
             case R.id.checkKaranda:
                 if (checked2) {
                     //NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
@@ -389,6 +401,13 @@ public class Settings extends AppCompatActivity {
                 NOTIFY_BOSS.add(B.get(q));
                 //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
             } else if (prefs.getBoolean("Karanda", false) && B.get(q).getBossName().equals("Karanda"))
+
+            {
+
+                NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
+            }
+            else if (prefs.getBoolean("Garmoth", false) && B.get(q).getBossName().equals("Garmoth"))
 
             {
 
