@@ -149,8 +149,14 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putBoolean("SEA", false).apply();
                     FillNotifyList(BossNA,-8);
                 }
+                else
+                {
+                    prefs.edit().putBoolean("NA",checked).apply();
+                }
+                break;
             case R.id.rbSEA:
-                if (checked) {
+                if (checked)
+                {
 
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, SEASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("SEA", checked).apply();
@@ -159,8 +165,9 @@ public class Settings extends AppCompatActivity {
                     FillNotifyList(BossNA, 8);
                 }
                 else
-                    prefs.edit().putBoolean("NA",checked).apply();
-
+                {
+                    prefs.edit().putBoolean("SEA",checked).apply();
+                }
                 break;
         }
     }
@@ -248,15 +255,15 @@ public class Settings extends AppCompatActivity {
             Soffset=1;
             FillNotifyList(BossEU,Soffset);
         }
+        else if(rbNA.isChecked())
+        {
+            Soffset=-8;
+            FillNotifyList(BossNA,Soffset);
+        }
         else if(rbSEA.isChecked())
         {
             Soffset=7;
             FillNotifyList(BossEU,Soffset);
-        }
-        else
-        {
-            Soffset=-8;
-            FillNotifyList(BossNA,Soffset);
         }
    }
 
