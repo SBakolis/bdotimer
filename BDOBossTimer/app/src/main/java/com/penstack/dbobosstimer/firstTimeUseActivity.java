@@ -19,10 +19,9 @@ public class firstTimeUseActivity extends AppCompatActivity {
     Intent intentToMain;
     Button firstStart;
     final String PREFS_NAME = "BDO_TIMER_PREFS";
-    final String EUSERVER = "EU";
-    final String NASERVER = "NA";
     final int EUSERVER_CONSTANT = 1;
     final int NASERVER_CONSTANT = 2;
+    final int SEASERVER_CONSTANT = 3;
     final String PREF_SERVER_CONSTANT = "0";
     final int DOESNT_EXIST = -1;
     int currentServerSelection;
@@ -49,6 +48,7 @@ public class firstTimeUseActivity extends AppCompatActivity {
         prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
         prefs.edit().putBoolean("EU", true).apply();
         prefs.edit().putBoolean("NA",false).apply();
+        prefs.edit().putBoolean("SEA",false).apply();
         currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
        // TextView optOut = (TextView) findViewById(R.id.optOut);
         //optOut.setMovementMethod(LinkMovementMethod.getInstance());
@@ -94,6 +94,7 @@ public class firstTimeUseActivity extends AppCompatActivity {
                     currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
                     prefs.edit().putBoolean("EU", checked).apply();
                     prefs.edit().putBoolean("NA",false).apply();
+                    prefs.edit().putBoolean("SEA",false).apply();
                 }
                 break;
             case R.id.frbNA:
@@ -101,6 +102,16 @@ public class firstTimeUseActivity extends AppCompatActivity {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("NA", checked).apply();
                     prefs.edit().putBoolean("EU", false).apply();
+                    prefs.edit().putBoolean("SEA",false).apply();
+                    currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+                }
+                break;
+            case R.id.frbSEA:
+                if (checked){
+                    prefs.edit().putInt(PREF_SERVER_CONSTANT, SEASERVER_CONSTANT).apply();
+                    prefs.edit().putBoolean("SEA", checked).apply();
+                    prefs.edit().putBoolean("EU",false).apply();
+                    prefs.edit().putBoolean("NA",false).apply();
                     currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
                 }
                 break;

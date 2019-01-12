@@ -477,7 +477,7 @@ public class MainActivity extends AppCompatActivity {
             BossDaySEAList.add(new Karanda(6, 1, 30, "SEA", 0));
             BossDaySEAList.add(new Nouver(6, 7, 0, "SEA", 0));
             BossDaySEAList.add(new Kzarka(6, 11, 0, "SEA", 0));
-            BossDaySEAList.add(new Kutum(6, , 11, "SEA", 0));
+            BossDaySEAList.add(new Kutum(6,  11,0, "SEA", 0));
             BossDaySEAList.add(new Karanda(6, 15, 0, "SEA", 0));
             BossDaySEAList.add(new Nouver(6, 15, 0, "SEA", 0));
             BossDaySEAList.add(new Quint(6, 20, 0, "SEA", 0));
@@ -696,7 +696,7 @@ public class MainActivity extends AppCompatActivity {
             BossDaySEAList.add(new Karanda(6, 1, 30, "SEA", 0));
             BossDaySEAList.add(new Nouver(6, 7, 0, "SEA", 0));
             BossDaySEAList.add(new Kzarka(6, 11, 0, "SEA", 0));
-            BossDaySEAList.add(new Kutum(6, , 11, "SEA", 0));
+            BossDaySEAList.add(new Kutum(6, 11,0, "SEA", 0));
             BossDaySEAList.add(new Karanda(6, 15, 0, "SEA", 0));
             BossDaySEAList.add(new Nouver(6, 15, 0, "SEA", 0));
             BossDaySEAList.add(new Quint(6, 20, 0, "SEA", 0));
