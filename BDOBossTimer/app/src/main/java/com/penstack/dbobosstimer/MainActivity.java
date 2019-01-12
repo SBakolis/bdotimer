@@ -11,8 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 
 import android.os.CountDownTimer;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public final ArrayList<Boss> BossDayList = new ArrayList<>();
     public  ArrayList<Boss> BossDayEUList = new ArrayList<>();
     public  ArrayList<Boss> BossDayNAList = new ArrayList<>();
+    public  ArrayList<Boss> BossDaySEAList = new ArrayList<>();
     private RecyclerView listView;
     private BossAdapter BossAdapter;
     private Calendar bCalendar;
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     final String PREFS_NAME = "BDO_TIMER_PREFS";
     final String PREF_SERVER_CONSTANT = "0";
     final int DOESNT_EXIST = -1;
-    final ArrayList<String> NOTIFY_BOSS = new ArrayList<>();
     Set<String> BossNotify = new HashSet<String>();
     final String PREF_NOTIFY = "NotificationList";
     SharedPreferences prefs;
@@ -87,71 +85,62 @@ public class MainActivity extends AppCompatActivity {
     public String RealDAY;
 
     final String GDPRCONSENT = "-1";
-    //final int NOCONSENTGIVEN = 0;
     int getUserGDPRConsent;
     private InterstitialAd mInterstitialAd;
     boolean adAlreadyAppeared = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-
         intentSettings = new Intent(MainActivity.this, Settings.class);
         intentFirstTime = new Intent(MainActivity.this, firstTimeUseActivity.class);
-
         settButton = (ImageView) findViewById(R.id.settButton);
         settButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intentSettings);
             }
         });
-
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
         checkFirstRun();
         String jsonEU=prefs.getString("EuList",null);
         String jsonNA=prefs.getString("NaList",null);
+        String jsonSEA=prefs.getString("SeaList",null);
         Type type=new TypeToken<ArrayList<Boss>>(){}.getType();
         Gson gson=new Gson();
         BossDayEUList=gson.fromJson(jsonEU,type);
         BossDayNAList=gson.fromJson(jsonNA,type);
-
-        TimeZone tz = TimeZone.getDefault();
-        TimeZone tz2 = TimeZone.getTimeZone("GMT+2");
-
+        BossDaySEAList=gson.fromJson(jsonSEA,type);
         Preferences();
         createNotificationChannel();
-
-
     }
 
-    public void ServerSelection(ArrayList<Boss> Slist, String Soffset) {
-        for (i = 0; i < Slist.size() ; i++) {
-
-
+    public void ServerSelection(ArrayList<Boss> Slist, String Soffset)
+    {
+        for (i = 0; i < Slist.size() ; i++)
+        {
             String v = Hours(Integer.toString(hour), offset, Soffset);//briskei thn wra tou xrhsth gia na th sugkrinei me twn bosses
             int RealHour = Integer.parseInt(v);
             String d = +bCalendar.get(Calendar.YEAR) + "-" + (bCalendar.get(Calendar.MONTH) + 1) + "-" + MDay + " " + hour + ":" + minute;
             int Realwday = UserDay(d, offset, Soffset);// h evdomadiaia mera me thn opoia tha sugkrinoume th boss lista ,an px o xrhsths einai mia mera mprosta h to antitheto
 
             // ta ekana int ola sto Boss object  gia na kanw pio grhgora prakseis,vriskei ta boss auths ths hmeras kai ths epomenhs p prolavainei o xrhsths
-            if (Realwday == (Slist.get(i).getBossDay()) && (RealHour < Slist.get(i).getBossHour() || (RealHour == Slist.get(i).getBossHour() && minute < Slist.get(i).getBossMin()))) {
+            if (Realwday == (Slist.get(i).getBossDay()) && (RealHour < Slist.get(i).getBossHour() || (RealHour == Slist.get(i).getBossHour() && minute < Slist.get(i).getBossMin())))
+            {
 
                 s = +bCalendar.get(Calendar.YEAR) + "-" + (bCalendar.get(Calendar.MONTH) + 1) + "-" + RealDAY + " " + Slist.get(i).getBossHour() + ":" + Slist.get(i).getBossMin() + ":00";
                 countdown = Time(s, offset, Soffset);
-
                 day = bCalendar.getTimeInMillis();
                 diff = (countdown - day);
                 Slist.get(i).setTimeLeft(diff);
                 Boss nextBoss = Slist.get(i);
                 BossDayList.add(nextBoss);
-            } else if ((Realwday == Slist.get(i).getBossDay() - 1) || (Realwday == 7 && Slist.get(i).getBossDay() == 1)) {
-
+            }
+            else if ((Realwday == Slist.get(i).getBossDay() - 1) || (Realwday == 7 && Slist.get(i).getBossDay() == 1))
+            {
                 int rd = Integer.parseInt(RealDAY);// to idio me thn realwDay
-
                 s = bCalendar.get(Calendar.YEAR) + "-" + (bCalendar.get(Calendar.MONTH) + 1) + "-" + (rd + 1) + " " + Slist.get(i).getBossHour() + ":" + Slist.get(i).getBossMin() + ":00";
                 countdown = Time(s, offset, Soffset);
                 day = bCalendar.getTimeInMillis();
@@ -159,20 +148,19 @@ public class MainActivity extends AppCompatActivity {
                 Slist.get(i).setTimeLeft(diff);
                 Boss nextBoss = Slist.get(i);
                 BossDayList.add(nextBoss);
-
             }
 
         }
-        for (int j = 0; j < BossDayList.size(); j++) {//sortarei me auksousa seira
-            for (int l = j + 1; l < BossDayList.size(); l++) {
-                if (BossDayList.get(l).getTimeLeft() <= BossDayList.get(j).getTimeLeft()) {
-
+        for (int j = 0; j < BossDayList.size(); j++)
+        {//sortarei me auksousa seira
+            for (int l = j + 1; l < BossDayList.size(); l++)
+            {
+                if (BossDayList.get(l).getTimeLeft() <= BossDayList.get(j).getTimeLeft())
+                {
                     Boss newBoss = BossDayList.get(j);
                     BossDayList.set(j, BossDayList.get(l));
                     BossDayList.set(l, newBoss);
-
                 }
-
             }
         }
         //ftiaxnw ton bossadapter kai pernaw to recycle view sth lista,ton layoutmanager ton evala giati alliws den emfanizontan
@@ -185,44 +173,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String Hours(String v, int Uoffset, String serverOff) { //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
+    public String Hours(String v, int Uoffset, String serverOff)
+    { //vriskei thn  wra tou xrhsth se sxesh me tou server gia na th sugkrinei me auth twn bosses
 
         SimpleDateFormat hour = new SimpleDateFormat("H");
-
-
-        if (Uoffset > 0) {
-
+        if (Uoffset > 0)
+        {
             hour.setTimeZone(getTimeZone("GMT+" + Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
-        } else
+        }
+        else {
             hour.setTimeZone(getTimeZone("GMT" + Uoffset));
+        }
+
         ParsePosition pos = new ParsePosition(0);
         k = hour.parse(v, pos);
         hour.setTimeZone(getTimeZone("GMT" + serverOff));
-
         String time = hour.format(k);
 
         return time;
     }
 
-    public int UserDay(String d, int Uoffset, String serverOff) {
-
+    public int UserDay(String d, int Uoffset, String serverOff)
+    {
         SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm", Locale.ENGLISH);
-        if (Uoffset > 0) {
-
+        if (Uoffset > 0)
+        {
             Day2.setTimeZone(getTimeZone("GMT+" + Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
-        } else
+        }
+        else
+        {
             Day2.setTimeZone(getTimeZone("GMT" + Uoffset));
+        }
+
         ParsePosition pos = new ParsePosition(0);
-
         Date newk = Day2.parse(d, pos);
-
         Day2.setTimeZone(getTimeZone("GMT" + serverOff));
-
-
         Day2.applyPattern("E");
         String Uday = Day2.format(newk);
         int IntDay = 1;
-        switch (Uday) {
+        switch (Uday)
+        {
             case "Mon":
                 IntDay = 1;
                 break;
@@ -244,43 +234,39 @@ public class MainActivity extends AppCompatActivity {
             case "Sun":
                 IntDay = 7;
                 break;
-
-
         }
         Day2.applyPattern("d");
         RealDAY = Day2.format(newk);
         return IntDay;
-
     }
 
-    public long Time(String s, int Uoffset, String serverOff) {
-
+    public long Time(String s, int Uoffset, String serverOff)
+    {
         String tim = "GMT" + serverOff;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:mm:ss");//tou lew pws na ta emfanizei
         sdf.setTimeZone(getTimeZone("GMT" + serverOff));//tou lew to timezone tou string pou tou dinw
-        //sdf.setTimeZone(TimeZone.getTimeZone("GMT+" + bCalendar.get(Calendar.DST_OFFSET) + ""));
         ParsePosition pos = new ParsePosition(0);//tou lew apo pou na arxisei na diavazei,dld apo thn arxh
         k = sdf.parse(s, pos);//parsarei to string sto Date k
 
-
-        if (Uoffset > 0) {
-
+        if (Uoffset > 0)
+        {
             sdf.setTimeZone(getTimeZone("GMT+" + Uoffset)); //allazoume apo gmt+UTC+2(edw ==CEST,otan tha ginei CET tha allaksoume apla thn wra stis listes tou EU) se auto tou xrhsth
-        } else
+        }
+        else
+        {
             sdf.setTimeZone(getTimeZone("GMT" + Uoffset));
-
+        }
 
         String time = sdf.format(k);//to emfanizw me to format p to dwsa sto sdf
         long n = k.getTime();
         return n;
     }
 
-    private void checkFirstRun() {
+    private void checkFirstRun()
+    {
 
         final String PREFS_NAME = "BDO_TIMER_PREFS";
-
         final String PREF_VERSION_CODE_KEY = "5";
-
         final int DOESNT_EXIST = -1;
 
         // Get current version code
@@ -291,15 +277,19 @@ public class MainActivity extends AppCompatActivity {
         int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
 
         // Check for first run or upgrade
-        if (currentVersionCode == savedVersionCode) {
+        if (currentVersionCode == savedVersionCode)
+        {
             // This is just a normal run
             setAdvListener();
             return;
-        } else if (savedVersionCode == DOESNT_EXIST) {
-
+        }
+        else if (savedVersionCode == DOESNT_EXIST)
+        {
             //first time
              ArrayList<Boss> BossDayEUList = new ArrayList<>();
              ArrayList<Boss> BossDayNAList = new ArrayList<>();
+             ArrayList<Boss> BossDaySEAList= new ArrayList<>();
+
 //----------------------------------EU BOSSES-----------------------------------------
             //Monday
             BossDayEUList.add(new Kutum(1, 0, 15, "EU", 0));
@@ -437,17 +427,76 @@ public class MainActivity extends AppCompatActivity {
             BossDayNAList.add(new Kzarka(7, 20, 15, "NA", 0));
             BossDayNAList.add(new Nouver(7, 20, 15, "NA", 0));
             BossDayNAList.add(new Kutum(7, 22, 15, "NA", 0));
+            //----------------------------------SEA BOSSES-----------------------------------------
+            //Monday
+            BossDaySEAList.add(new Nouver(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(1, 1, 30, "SEA", 0));
+            BossDaySEAList.add(new Karanda(1, 7, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(1, 15, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(1, 20, 0, "SEA", 0));
+            //Tuesday
+            BossDaySEAList.add(new Offin(2, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(2, 1 , 30, "SEA", 0));
+            BossDaySEAList.add(new Kutum(2, 7, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(2, 11, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(2, 11, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(2, 15, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(2, 20, 0, "SEA", 0));
+            //Wednesday
+            BossDaySEAList.add(new Nouver(3, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(3, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(3, 1, 30, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(3, 7, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(3, 15, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(3, 20, 0, "SEA", 0));
+            //Thursday
+            BossDaySEAList.add(new Offin(4, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(4, 1, 30, "SEA", 0));
+            BossDaySEAList.add(new Nouver(4, 7, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(4, 11, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(4, 15, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(4, 20, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(4, 20, 0, "SEA", 0));
+            //Friday
+            BossDaySEAList.add(new Kzarka(5, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(5, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(5, 1, 30, "SEA", 0));
+            BossDaySEAList.add(new Kutum(5, 7, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(5, 15, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(5, 20, 0, "SEA", 0));
+            //Saturday
+            BossDaySEAList.add(new Offin(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Quint(1, 0, 0, "SEA", 0));
+            // Sunday
+            BossDaySEAList.add(new Karanda(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kzarka(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Kutum(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Nouver(1, 0, 0, "SEA", 0));
+            BossDaySEAList.add(new Karanda(1, 0, 0, "SEA", 0));
             Gson gson=new Gson();
             String jsonEu=gson.toJson(BossDayEUList);
             String jsonNa=gson.toJson(BossDayNAList);
+            String jsonSea=gson.toJson(BossDaySEAList);
             prefs.edit().putString("EuList",jsonEu).apply();
             prefs.edit().putString("NaList",jsonNa).apply();
+            prefs.edit().putString("SeaList",jsonSea).apply();
             startActivity(intentFirstTime);
             prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+
             return;
 
-        } else if (currentVersionCode > savedVersionCode) {
-
+        }
+        else if (currentVersionCode > savedVersionCode)
+        {
             // update
             return;
         }
@@ -457,25 +506,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume() {
-
+    public void onResume()
+    {
         super.onResume();
         Preferences();
-
-
     }
 
-
-    public void createNotificationChannel() {
+    public void createNotificationChannel()
+    {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
             CharSequence name = "bossTimer";
             String description = "Notification for Boss spawning";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             String CHANNEL_ID = "Boss";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
+
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
@@ -485,30 +534,33 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void Preferences() {
-
-
+    private void Preferences()
+    {
         bCalendar = Calendar.getInstance();
         hour = bCalendar.get(Calendar.HOUR_OF_DAY);
         minute = bCalendar.get(Calendar.MINUTE);
         MDay = bCalendar.get(Calendar.DAY_OF_MONTH);
         Wday = bCalendar.get(Calendar.DAY_OF_WEEK);
         offset = (bCalendar.get(Calendar.DST_OFFSET) + bCalendar.get(Calendar.ZONE_OFFSET)) / 3600000;
-        int month = bCalendar.get(Calendar.MONTH);
         BossDayList.clear();
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
-        if (currentServerSelection == 1) {
+        if (currentServerSelection == 1)
+        {
             ServerSelection(BossDayEUList, "+1");
-        } else if (currentServerSelection == 2) {
+        }
+        else if (currentServerSelection == 2)
+        {
             ServerSelection(BossDayNAList, "-8");
+        }
+        else if (currentServerSelection == 3)
+        {
+                ServerSelection(BossDayNAList, "+8");
         }
 
 
-        // createNotificationChannel();
+            // createNotificationChannel();
         BossNotify = prefs.getStringSet(PREF_NOTIFY, null);
-
-
     }
 
 
