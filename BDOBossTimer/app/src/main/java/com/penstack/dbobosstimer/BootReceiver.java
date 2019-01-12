@@ -89,6 +89,10 @@ public class BootReceiver extends BroadcastReceiver {
                 {
                     ALARM_BOSS.add(B.get(q));
                 }
+                else if (preferences.getBoolean("Garmoth", false) && B.get(q).getBossName().equals("Garmoth"))
+                {
+                    ALARM_BOSS.add(B.get(q));
+                }
             }
 
             Calendar calendar;
