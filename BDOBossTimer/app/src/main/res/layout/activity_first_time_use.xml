@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="NA"
             android:onClick="onRadioButtonClicked"
-            android:paddingRight="60dp"
+            android:paddingRight="30dp"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="@android:color/white"
@@ -79,7 +79,19 @@
             android:textSize="20dp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
+            android:paddingRight="30dp"
             android:buttonTint="@android:color/white"/>
+        <RadioButton
+            android:id="@+id/frbSEA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@android:color/white"
+            android:onClick="onRadioButtonClicked"
+            android:text="SEA"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </RadioGroup>
 
        <!-- <TextView

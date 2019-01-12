@@ -1,8 +1,6 @@
 package com.penstack.dbobosstimer;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -24,7 +21,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,26 +28,25 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.TimeZone;
 
 public class Settings extends AppCompatActivity {
 
     final String PREFS_NAME = "BDO_TIMER_PREFS";
-    //final String EUSERVER = "EU";
-    //final String NASERVER = "NA";
     final int EUSERVER_CONSTANT = 1;
     final int NASERVER_CONSTANT = 2;
+    final int SEASERVER_CONSTANT = 3;
     final String PREF_SERVER_CONSTANT = "0";
     final ArrayList<Boss> NOTIFY_BOSS=new ArrayList<>();
 
-    final String PREF_NOTIFY="NotificationList";
     ArrayList<Boss>  BossEU;
     ArrayList<Boss>  BossNA;
+    ArrayList<Boss>  BossSEA;
     SharedPreferences prefs;
-    RadioButton rbEU,rbNa;
+
+    RadioButton rbEU,rbNA,rbSEA;
     CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin,CheckGarmoth;
+
     int BossSize,Soffset;
     public ImageView backButton;
     Intent intentMain ;
@@ -59,10 +54,7 @@ public class Settings extends AppCompatActivity {
     String GDPRCONSENT = "-1";
     final int NOCONSENTGIVEN = 0;
     final int CONSENTGIVEN = 1;
-
-    //static ArrayList<Long> armlist=new ArrayList<>();
-   // ArrayList<PendingIntent> pi=new ArrayList<>();
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
@@ -73,10 +65,12 @@ public class Settings extends AppCompatActivity {
        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
        String jsonEU=prefs.getString("EuList",null);
        String jsonNA=prefs.getString("NaList",null);
+       String jsonSEA=prefs.getString("SeaList",null);
        Type type=new TypeToken<ArrayList<Boss>>(){}.getType();
        Gson gson=new Gson();
        BossEU=gson.fromJson(jsonEU,type);
        BossNA=gson.fromJson(jsonNA,type);
+       BossSEA=gson.fromJson(jsonSEA,type);
        policyButton = (Button)findViewById(R.id.conButton);
 
        policyButton.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +81,8 @@ public class Settings extends AppCompatActivity {
         });
 
         rbEU=(RadioButton)findViewById(R.id.rbEU);
-        rbNa=(RadioButton) findViewById(R.id.rbNA);
-
+        rbNA=(RadioButton) findViewById(R.id.rbNA);
+        rbSEA=(RadioButton) findViewById(R.id.rbSEA);
        intentMain = new Intent(Settings.this, MainActivity.class);
 
         backButton = (ImageView)findViewById(R.id.settButton);
@@ -119,8 +113,12 @@ public class Settings extends AppCompatActivity {
         CheckOffin=(CheckBox) findViewById(R.id.checkOffin);
 
        rbEU.setChecked(prefs.getBoolean("EU",false));
-       rbNa.setChecked(prefs.getBoolean("NA",false));
+
+       rbNA.setChecked(prefs.getBoolean("NA",false));
+       rbSEA.setChecked(prefs.getBoolean("SEA",false));
+
        CheckGarmoth.setChecked(prefs.getBoolean("Garmoth",false));
+
        CheckKaranda.setChecked(prefs.getBoolean("Karanda",false));
        CheckKzarka.setChecked(prefs.getBoolean("Kzarka",false));
        CheckKutum.setChecked(prefs.getBoolean("Kutum",false));
@@ -143,6 +141,7 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("EU", checked).apply();// na apothikeuei kai to oti einai checkarismeno
                     prefs.edit().putBoolean("NA",false).apply();
+                    prefs.edit().putBoolean("SEA", false).apply();
                     FillNotifyList(BossEU,1);
                 }
                 else
@@ -154,11 +153,28 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("NA", checked).apply();
                     prefs.edit().putBoolean("EU", false).apply();
-                    FillNotifyList(BossNA,-7);
+                    prefs.edit().putBoolean("SEA", false).apply();
+                    FillNotifyList(BossNA,-8);
                 }
                 else
+                {
                     prefs.edit().putBoolean("NA",checked).apply();
+                }
+                break;
+            case R.id.rbSEA:
+                if (checked)
+                {
 
+                    prefs.edit().putInt(PREF_SERVER_CONSTANT, SEASERVER_CONSTANT).apply();
+                    prefs.edit().putBoolean("SEA", checked).apply();
+                    prefs.edit().putBoolean("EU", false).apply();
+                    prefs.edit().putBoolean("NA", false).apply();
+                    FillNotifyList(BossNA, 8);
+                }
+                else
+                {
+                    prefs.edit().putBoolean("SEA",checked).apply();
+                }
                 break;
         }
     }
@@ -167,6 +183,7 @@ public class Settings extends AppCompatActivity {
         // Is the view now checked?
         boolean checked2 = ((CheckBox) view).isChecked();
         NOTIFY_BOSS.clear();
+
 
         switch (view.getId()) {
             case R.id.checkGarmoth:
@@ -180,101 +197,91 @@ public class Settings extends AppCompatActivity {
                     prefs.edit().putBoolean("Garmoth", checked2).apply();
                 break;
             case R.id.checkKaranda:
-                if (checked2) {
-                    //NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Karanda", checked2).apply();
-
-
-                } else
-                    //NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Karanda", checked2).apply();
-                break;
+                }
+                    break;
             case R.id.checkKutum:
-                if (checked2) {
-
-                    //NOTIFY_BOSS.add("Kutum");// prefs.edit().putStringSet("Kutum",BossNotify).apply();
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Kutum", checked2).apply();
-                } else {
-
-                    //NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Kutum", checked2).apply();
                 }
                 break;
             case R.id.checkKzarka:
-                if (checked2) {
-
-                    //NOTIFY_BOSS.add("Kzarka");
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Kzarka", checked2).apply();
-
-
-                } else {
-
-                    //NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Kzarka", checked2).apply();
                 }
                 break;
             case R.id.checkNouver:
-                if (checked2) {
-
-                    //NOTIFY_BOSS.add("Nouver");
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Nouver", checked2).apply();
-
-                } else {
-                    // NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Nouver", checked2).apply();
                 }
                 break;
             case R.id.checkQuint:
-                if (checked2) {
-
-                    //NOTIFY_BOSS.add("Quint");//prefs.edit().putStringSet("Quint",BossNotify).apply();
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Quint", checked2).apply();
-
-                } else {
-
-                    //NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Quint", checked2).apply();
                 }
                 break;
             case R.id.checkVell:
-                if (checked2) {
-
-                    //NOTIFY_BOSS.add("Vell");// prefs.edit().putString(NOTIFY_BOSS.get(5),"Vell").apply();
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Vell", checked2).apply();
-
-                } else {
-
-                    //NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Vell", checked2).apply();
                 }
                 break;
             case R.id.checkOffin:
-                if (checked2) {
-
-                    //NOTIFY_BOSS.add("Offin");// prefs.edit().putString(NOTIFY_BOSS.get(6),"Offin").apply();
+                if (checked2)
+                {
                     prefs.edit().putBoolean("Offin", checked2).apply();
-
-                } else {
-
-                    // NOTIFY_BOSS.add("");
+                }
+                else
+                {
                     prefs.edit().putBoolean("Offin", checked2).apply();
                 }
                 break;
         }
-        //armlist.clear();
-        if (rbEU.isChecked()) {
+        if (rbEU.isChecked())
+        {
             Soffset=1;
             FillNotifyList(BossEU,Soffset);
-
-        } else{
+        }
+        else if(rbNA.isChecked())
+        {
             Soffset=-8;
             FillNotifyList(BossNA,Soffset);
-
-            }
-
-
-
-
+        }
+        else if(rbSEA.isChecked())
+        {
+            Soffset=7;
+            FillNotifyList(BossEU,Soffset);
+        }
    }
 
 
@@ -283,10 +290,12 @@ public class Settings extends AppCompatActivity {
     public static void startAlarm(Context context,Class<?> cls,int request_code, int dayOfTheWeek, int hourOfTheDay, int minutes,String bossname,int Soffset,int BossImage,long time) {
 
         Calendar calendar;
-       if(Soffset<0){
+       if(Soffset<0)
+       {
              calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"+Soffset));
-        }
-         else{
+       }
+       else
+       {
            calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+"+Soffset));
        }
 
@@ -297,38 +306,33 @@ public class Settings extends AppCompatActivity {
 
         PackageManager pm = context.getPackageManager();
 
-        pm.setComponentEnabledSetting(receiver,
-
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-
-                PackageManager.DONT_KILL_APP);
-
-
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
         int interval = 1000 * 60 * 60 * 24 * 7;
-        if(dayOfTheWeek==7)
-            dayOfTheWeek=1;
+        if(dayOfTheWeek==7) {
+            dayOfTheWeek = 1;
+        }
         else
+        {
             dayOfTheWeek++;
+        }
 
         calendar.set(Calendar.DAY_OF_WEEK, dayOfTheWeek  );
 
         calendar.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
         calendar.set(Calendar.MINUTE, minutes );
         long calendarTimeInMillis=calendar.getTimeInMillis();
-         //int pwd=calendar.get(Calendar.DAY_OF_MONTH)+7;
-           if(calendar.before(MyCalendar)) {
-              calendarTimeInMillis+=608400000 ; //calendar.setTimeInMillis(calendar.getTimeInMillis() + interval);
-           }
-
-            //armlist.add(calendarTimeInMillis);
-           //calendar.setTimeInMillis(System.currentTimeMillis());
-        calendarTimeInMillis-=600000;
-        if(time!=0){
-
-             calendarTimeInMillis=time;
+        if(calendar.before(MyCalendar))
+        {
+              calendarTimeInMillis+=608400000 ;
         }
-           Log.d("timeinmillis",""+calendarTimeInMillis);
+
+        calendarTimeInMillis-=600000;
+        if(time!=0)
+        {
+            calendarTimeInMillis=time;
+        }
+        Log.d("timeinmillis",""+calendarTimeInMillis);
         Intent intent1 = new Intent(context, cls);
         intent1.putExtra("id",request_code);
         intent1.putExtra("day",dayOfTheWeek);
@@ -340,30 +344,26 @@ public class Settings extends AppCompatActivity {
         intent1.putExtra("FirsTime",calendarTimeInMillis);
         intent1.putExtra("time",time);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-
-                request_code, intent1,
-
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, request_code, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
-
-           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                   manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,pendingIntent);
-           }
-           else
-               manager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTimeInMillis,interval, pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendarTimeInMillis,pendingIntent);
+        }
+        else
+        {
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTimeInMillis, interval, pendingIntent);
+        }
     }
 
-    static public void cancelAlarm(Context context,Class<?> cls,int request_code) {
+    static public void cancelAlarm(Context context,Class<?> cls,int request_code)
+    {
 
         ComponentName receiver = new ComponentName(context, cls);
         PackageManager pm = context.getPackageManager();
 
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
         Intent intent1 = new Intent(context, cls);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, request_code, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -373,7 +373,7 @@ public class Settings extends AppCompatActivity {
     }
     static public void notificationSetup(Context context, String title, String SContext,int i,int BossIm)
     {
-         Intent main=new Intent(context,SplashActivity.class);
+        Intent main=new Intent(context,SplashActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntentWithParentStack(main);
 
@@ -394,17 +394,20 @@ public class Settings extends AppCompatActivity {
     }
     public void FillNotifyList(ArrayList<Boss> B,int soffset){
 
-        for (int q = 0; q <B.size();q++) {
+        for (int q = 0; q <B.size();q++)
+        {
 
-            if (prefs.getBoolean("Kutum", false) && B.get(q).getBossName().equals("Kutum")) {
-
-                NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
-            } else if (prefs.getBoolean("Karanda", false) && B.get(q).getBossName().equals("Karanda"))
-
+            if (prefs.getBoolean("Kutum", false) && B.get(q).getBossName().equals("Kutum"))
             {
 
                 NOTIFY_BOSS.add(B.get(q));
+                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
+            }
+            else if (prefs.getBoolean("Karanda", false) && B.get(q).getBossName().equals("Karanda"))
+            {
+                NOTIFY_BOSS.add(B.get(q));
+
+
                 //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
             }
             else if (prefs.getBoolean("Garmoth", false) && B.get(q).getBossName().equals("Garmoth"))
@@ -415,47 +418,38 @@ public class Settings extends AppCompatActivity {
                 //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
             } else if (prefs.getBoolean("Nouver", false) && B.get(q).getBossName().equals("Nouver"))
 
-            {
-
-                NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
-            } else if (prefs.getBoolean("Kzarka", false) && B.get(q).getBossName().equals("Kzarka"))
 
             {
-
                 NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
-            } else if (prefs.getBoolean("Quint", false) && B.get(q).getBossName().equals("Quint"))
-
+            }
+            else if (prefs.getBoolean("Kzarka", false) && B.get(q).getBossName().equals("Kzarka"))
             {
-
                 NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, NOTIFY_BOSS.get(q).getBossDay(), NOTIFY_BOSS.get(q).getBossHour(), NOTIFY_BOSS.get(q).getBossMin(), NOTIFY_BOSS.get(q).getBossName());
-            } else if (prefs.getBoolean("Vell", false) && B.get(q).getBossName().equals("Vell"))
-
+            }
+            else if (prefs.getBoolean("Quint", false) && B.get(q).getBossName().equals("Quint"))
             {
-
                 NOTIFY_BOSS.add(B.get(q));
-                // startAlarm(this, AlarmReceiver.class, q, NOTIFY_BOSS.get(q).getBossDay(), NOTIFY_BOSS.get(q).getBossHour(), NOTIFY_BOSS.get(q).getBossMin(), NOTIFY_BOSS.get(q).getBossName());
-            } else if (prefs.getBoolean("Offin", false) && B.get(q).getBossName().equals("Offin"))
-
+            }
+            else if (prefs.getBoolean("Vell", false) && B.get(q).getBossName().equals("Vell"))
             {
-
                 NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, NOTIFY_BOSS.get(q).getBossDay(), NOTIFY_BOSS.get(q).getBossHour(), NOTIFY_BOSS.get(q).getBossMin(), NOTIFY_BOSS.get(q).getBossName());
+            }
+            else if (prefs.getBoolean("Offin", false) && B.get(q).getBossName().equals("Offin"))
+            {
+                NOTIFY_BOSS.add(B.get(q));
             }
 
         }
              BossSize=NOTIFY_BOSS.size();
-
-
-
-            for (int q = 1; q <= 60; q++) {
+            for (int q = 1; q <= 60; q++)
+            {
                 cancelAlarm(this, AlarmReceiver.class, q);
             }
 
-            if(!NOTIFY_BOSS.isEmpty()){
-                for (int p = 0; p < NOTIFY_BOSS.size(); p++) {
+            if(!NOTIFY_BOSS.isEmpty())
+            {
+                for (int p = 0; p < NOTIFY_BOSS.size(); p++)
+                {
 
                 startAlarm(this, AlarmReceiver.class, p+1, NOTIFY_BOSS.get(p).getBossDay(), NOTIFY_BOSS.get(p).getBossHour(), NOTIFY_BOSS.get(p).getBossMin(),NOTIFY_BOSS.get(p).getBossName(),soffset,NOTIFY_BOSS.get(p).getBossImage(),0);
                 }

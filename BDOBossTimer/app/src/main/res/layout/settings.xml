@@ -52,7 +52,7 @@
                     android:layout_marginTop="5dp"
                     android:buttonTint="@android:color/white"
                     android:onClick="onRadioButtonClicked"
-                    android:paddingRight="60dp"
+                    android:paddingRight="30dp"
                     android:text="NA"
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
@@ -65,7 +65,19 @@
                     android:layout_marginTop="5dp"
                     android:buttonTint="@android:color/white"
                     android:onClick="onRadioButtonClicked"
+                    android:paddingRight="30dp"
                     android:text="EU"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <RadioButton
+                    android:id="@+id/rbSEA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="SEA"
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
                     android:textStyle="bold" />
