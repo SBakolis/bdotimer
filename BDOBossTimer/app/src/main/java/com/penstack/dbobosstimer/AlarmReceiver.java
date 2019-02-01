@@ -40,8 +40,7 @@ public class AlarmReceiver extends BroadcastReceiver
     SharedPreferences preferences;
     @Override
     public void onReceive(Context context, Intent intent) {
-        // todo
-        // Toast.makeText(arg0, "I'm running", Toast.LENGTH_SHORT).show();
+
 
         Settings.notificationSetup(context, ""+intent.getStringExtra("name"), ""+intent.getStringExtra("name")+" is about to spawn", intent.getIntExtra("id", 0),intent.getIntExtra("image",0));
            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
