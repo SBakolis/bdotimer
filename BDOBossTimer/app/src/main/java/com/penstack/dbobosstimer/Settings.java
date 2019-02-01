@@ -1,5 +1,4 @@
 package com.penstack.dbobosstimer;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -14,31 +13,28 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
-
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.view.View;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class Settings extends AppCompatActivity {
-
+public class Settings extends AppCompatActivity
+{
     final String PREFS_NAME = "BDO_TIMER_PREFS";
     final int EUSERVER_CONSTANT = 1;
     final int NASERVER_CONSTANT = 2;
     final int SEASERVER_CONSTANT = 3;
     final String PREF_SERVER_CONSTANT = "0";
     final ArrayList<Boss> NOTIFY_BOSS=new ArrayList<>();
-
+    final int DOESNT_EXIST = -1;
     ArrayList<Boss>  BossEU;
     ArrayList<Boss>  BossNA;
     ArrayList<Boss>  BossSEA;
@@ -47,51 +43,59 @@ public class Settings extends AppCompatActivity {
     RadioButton rbEU,rbNA,rbSEA;
     CheckBox CheckKutum,CheckKzarka,CheckKaranda,CheckNouver,CheckQuint,CheckVell,CheckOffin,CheckGarmoth;
 
-    int BossSize,Soffset;
+    int BossSize,currentServerSelection;
+    boolean shouldNotify,shouldGetChecked;
     public ImageView backButton;
     Intent intentMain ;
     Button policyButton;
     String GDPRCONSENT = "-1";
     final int NOCONSENTGIVEN = 0;
     final int CONSENTGIVEN = 1;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-      final GdprHelper gdprHelper = new GdprHelper(Settings.this);
+        final GdprHelper gdprHelper = new GdprHelper(Settings.this);
 
+        shouldGetChecked=false;
+        shouldNotify=false;
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String jsonEU=prefs.getString("EuList",null);
+        String jsonNA=prefs.getString("NaList",null);
+        String jsonSEA=prefs.getString("SeaList",null);
+        Type type=new TypeToken<ArrayList<Boss>>(){}.getType();
+        Gson gson=new Gson();
+        BossEU=gson.fromJson(jsonEU,type);
+        BossNA=gson.fromJson(jsonNA,type);
+        BossSEA=gson.fromJson(jsonSEA,type);
+        policyButton = (Button)findViewById(R.id.conButton);
 
-
-       prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-       String jsonEU=prefs.getString("EuList",null);
-       String jsonNA=prefs.getString("NaList",null);
-       String jsonSEA=prefs.getString("SeaList",null);
-       Type type=new TypeToken<ArrayList<Boss>>(){}.getType();
-       Gson gson=new Gson();
-       BossEU=gson.fromJson(jsonEU,type);
-       BossNA=gson.fromJson(jsonNA,type);
-       BossSEA=gson.fromJson(jsonSEA,type);
-       policyButton = (Button)findViewById(R.id.conButton);
-
-       policyButton.setOnClickListener(new View.OnClickListener() {
-          public void onClick(View v) {
+        policyButton.setOnClickListener(new View.OnClickListener()
+       {
+          public void onClick(View v)
+          {
               gdprHelper.resetConsent();
               gdprHelper.initialise();
-          }
-        });
+           }
+       });
 
         rbEU=(RadioButton)findViewById(R.id.rbEU);
         rbNA=(RadioButton) findViewById(R.id.rbNA);
         rbSEA=(RadioButton) findViewById(R.id.rbSEA);
-       intentMain = new Intent(Settings.this, MainActivity.class);
+        intentMain = new Intent(Settings.this, MainActivity.class);
 
         backButton = (ImageView)findViewById(R.id.settButton);
-        backButton.setOnClickListener(new View.OnClickListener(){
-           public void onClick(View v) {
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
+           public void onClick(View v)
+           {
                //startActivity(intentMain);
-               int  conPass = gdprHelper.getCon();
+               int conPass = gdprHelper.getCon();
 
-               switch (conPass){
+               switch (conPass)
+               {
                    case 0:
                        prefs.edit().putInt(GDPRCONSENT, NOCONSENTGIVEN).apply();
                        Log.d("TAG1", conPass + "");
@@ -99,8 +103,9 @@ public class Settings extends AppCompatActivity {
                        prefs.edit().putInt(GDPRCONSENT, CONSENTGIVEN).apply();
                        Log.d("TAG1", conPass + "");
                }
+
                Settings.this.finish();
-           }
+            }
         });
 
         CheckGarmoth = (CheckBox) findViewById(R.id.checkGarmoth);
@@ -111,50 +116,79 @@ public class Settings extends AppCompatActivity {
         CheckQuint=(CheckBox) findViewById(R.id.checkQuint);
         CheckVell=(CheckBox) findViewById(R.id.checkVell);
         CheckOffin=(CheckBox) findViewById(R.id.checkOffin);
+        rbEU.setChecked(prefs.getBoolean("EU",false));
+        rbNA.setChecked(prefs.getBoolean("NA",false));
+        rbSEA.setChecked(prefs.getBoolean("SEA",false));
+        //Log.d("server",""+prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST));
+        currentServerSelection=prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+        if(currentServerSelection==3)
+        {
+            CheckGarmoth.setVisibility(View.INVISIBLE);
+            CheckVell.setVisibility(View.INVISIBLE);
+            CheckVell.setEnabled(false);
+            CheckGarmoth.setEnabled(false);
+            shouldGetChecked=true;
+        }
+        CheckGarmoth.setChecked(prefs.getBoolean("Garmoth",false));
+        CheckKaranda.setChecked(prefs.getBoolean("Karanda",false));
+        CheckKzarka.setChecked(prefs.getBoolean("Kzarka",false));
+        CheckKutum.setChecked(prefs.getBoolean("Kutum",false));
+        CheckNouver.setChecked(prefs.getBoolean("Nouver",false));
+        CheckOffin.setChecked(prefs.getBoolean("Offin",false));
+        CheckVell.setChecked(prefs.getBoolean("Vell",false));
+        CheckQuint.setChecked(prefs.getBoolean("Quint",false));
+    }
 
-       rbEU.setChecked(prefs.getBoolean("EU",false));
-
-       rbNA.setChecked(prefs.getBoolean("NA",false));
-       rbSEA.setChecked(prefs.getBoolean("SEA",false));
-
-       CheckGarmoth.setChecked(prefs.getBoolean("Garmoth",false));
-
-       CheckKaranda.setChecked(prefs.getBoolean("Karanda",false));
-       CheckKzarka.setChecked(prefs.getBoolean("Kzarka",false));
-       CheckKutum.setChecked(prefs.getBoolean("Kutum",false));
-       CheckNouver.setChecked(prefs.getBoolean("Nouver",false));
-       CheckOffin.setChecked(prefs.getBoolean("Offin",false));
-       CheckVell.setChecked(prefs.getBoolean("Vell",false));
-       CheckQuint.setChecked(prefs.getBoolean("Quint",false));
-
-
-     }
-
-    public void onRadioButtonClicked(View view) {
+    public void onRadioButtonClicked(View view)
+    {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
+        shouldNotify=true;
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch(view.getId())
+        {
             case R.id.rbEU:
-                if (checked) {
+                if (checked)
+                {
+
+                    if(shouldGetChecked)
+                   {
+
+                       CheckGarmoth.setChecked(prefs.getBoolean("Garmoth", false));
+                       CheckVell.setChecked(prefs.getBoolean("Vell", false));
+                       CheckVell.setVisibility(View.VISIBLE);
+                       CheckGarmoth.setVisibility(View.VISIBLE);
+                       CheckVell.setEnabled(true);
+                       CheckGarmoth.setEnabled(true);
+                       shouldGetChecked=false;
+                   }
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("EU", checked).apply();// na apothikeuei kai to oti einai checkarismeno
                     prefs.edit().putBoolean("NA",false).apply();
                     prefs.edit().putBoolean("SEA", false).apply();
-                    FillNotifyList(BossEU,1);
+
                 }
                 else
                     prefs.edit().putBoolean("EU", checked).apply();// na to ksetickarei
                 break;
             case R.id.rbNA:
-                if (checked){
-
+                if (checked)
+                {
+                    Log.d("checkna",""+shouldGetChecked);
+                    if(shouldGetChecked)
+                    {
+                        CheckGarmoth.setChecked(prefs.getBoolean("Garmoth", false));
+                        CheckVell.setChecked(prefs.getBoolean("Vell", false));
+                        CheckVell.setVisibility(View.VISIBLE);
+                        CheckGarmoth.setVisibility(View.VISIBLE);
+                        CheckVell.setEnabled(true);
+                        CheckGarmoth.setEnabled(true);
+                        shouldGetChecked=false;
+                    }
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("NA", checked).apply();
                     prefs.edit().putBoolean("EU", false).apply();
                     prefs.edit().putBoolean("SEA", false).apply();
-                    FillNotifyList(BossNA,-8);
                 }
                 else
                 {
@@ -164,12 +198,18 @@ public class Settings extends AppCompatActivity {
             case R.id.rbSEA:
                 if (checked)
                 {
-
+                    shouldGetChecked=true;
+                    CheckGarmoth.setChecked(false);
+                    CheckVell.setChecked(false);
+                    CheckVell.setVisibility(View.INVISIBLE);
+                    CheckGarmoth.setVisibility(View.INVISIBLE);
+                    CheckVell.setEnabled(false);
+                    CheckGarmoth.setEnabled(false);
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, SEASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("SEA", checked).apply();
                     prefs.edit().putBoolean("EU", false).apply();
                     prefs.edit().putBoolean("NA", false).apply();
-                    FillNotifyList(BossNA, 8);
+
                 }
                 else
                 {
@@ -183,105 +223,44 @@ public class Settings extends AppCompatActivity {
         // Is the view now checked?
         boolean checked2 = ((CheckBox) view).isChecked();
         NOTIFY_BOSS.clear();
-
+        shouldNotify=true;
 
         switch (view.getId()) {
             case R.id.checkGarmoth:
-                if (checked2) {
-                    //NOTIFY_BOSS.add("Karanda");//prefs.edit().putStringSet("Karanda",BossNotify).apply();
                     prefs.edit().putBoolean("Garmoth", checked2).apply();
-
-
-                } else
-                    //NOTIFY_BOSS.add("");
-                    prefs.edit().putBoolean("Garmoth", checked2).apply();
-                break;
+                    Log.d("test",""+checked2);
+                    break;
             case R.id.checkKaranda:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Karanda", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Karanda", checked2).apply();
-                }
+                Log.d("test",""+checked2);
                     break;
             case R.id.checkKutum:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Kutum", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Kutum", checked2).apply();
-                }
+
+                Log.d("test",""+checked2);
                 break;
             case R.id.checkKzarka:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Kzarka", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Kzarka", checked2).apply();
-                }
-                break;
+                Log.d("test",""+checked2);
+                    break;
             case R.id.checkNouver:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Nouver", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Nouver", checked2).apply();
-                }
-                break;
+                Log.d("test",""+checked2);
+                    break;
             case R.id.checkQuint:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Quint", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Quint", checked2).apply();
-                }
-                break;
+                Log.d("test",""+checked2);
+                    break;
             case R.id.checkVell:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Vell", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Vell", checked2).apply();
-                }
-                break;
+                Log.d("test",""+checked2);
+                    break;
             case R.id.checkOffin:
-                if (checked2)
-                {
                     prefs.edit().putBoolean("Offin", checked2).apply();
-                }
-                else
-                {
-                    prefs.edit().putBoolean("Offin", checked2).apply();
-                }
-                break;
+                Log.d("test",""+checked2);
+                    break;
         }
-        if (rbEU.isChecked())
-        {
-            Soffset=1;
-            FillNotifyList(BossEU,Soffset);
-        }
-        else if(rbNA.isChecked())
-        {
-            Soffset=-8;
-            FillNotifyList(BossNA,Soffset);
-        }
-        else if(rbSEA.isChecked())
-        {
-            Soffset=7;
-            FillNotifyList(BossEU,Soffset);
-        }
+
    }
 
 
@@ -332,7 +311,7 @@ public class Settings extends AppCompatActivity {
         {
             calendarTimeInMillis=time;
         }
-        Log.d("timeinmillis",""+calendarTimeInMillis);
+       // Log.d("timeinmillis",""+calendarTimeInMillis);
         Intent intent1 = new Intent(context, cls);
         intent1.putExtra("id",request_code);
         intent1.putExtra("day",dayOfTheWeek);
@@ -397,44 +376,36 @@ public class Settings extends AppCompatActivity {
         for (int q = 0; q <B.size();q++)
         {
 
-            if (prefs.getBoolean("Kutum", false) && B.get(q).getBossName().equals("Kutum"))
+            if ( CheckKutum.isChecked() && B.get(q).getBossName().equals("Kutum"))
             {
 
                 NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
             }
-            else if (prefs.getBoolean("Karanda", false) && B.get(q).getBossName().equals("Karanda"))
-            {
-                NOTIFY_BOSS.add(B.get(q));
-
-
-                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
-            }
-            else if (prefs.getBoolean("Garmoth", false) && B.get(q).getBossName().equals("Garmoth"))
-
-            {
-
-                NOTIFY_BOSS.add(B.get(q));
-                //startAlarm(this, AlarmReceiver.class, q, B.get(q).getBossDay(), B.get(q).getBossHour(), B.get(q).getBossMin(), B.get(q).getBossName());
-            } else if (prefs.getBoolean("Nouver", false) && B.get(q).getBossName().equals("Nouver"))
-
-
+            else if ( CheckKaranda.isChecked() && B.get(q).getBossName().equals("Karanda"))
             {
                 NOTIFY_BOSS.add(B.get(q));
             }
-            else if (prefs.getBoolean("Kzarka", false) && B.get(q).getBossName().equals("Kzarka"))
+            else if (CheckGarmoth.isChecked() && B.get(q).getBossName().equals("Garmoth"))
             {
                 NOTIFY_BOSS.add(B.get(q));
             }
-            else if (prefs.getBoolean("Quint", false) && B.get(q).getBossName().equals("Quint"))
+            else if (CheckNouver.isChecked() && B.get(q).getBossName().equals("Nouver"))
             {
                 NOTIFY_BOSS.add(B.get(q));
             }
-            else if (prefs.getBoolean("Vell", false) && B.get(q).getBossName().equals("Vell"))
+            else if (CheckKzarka.isChecked() && B.get(q).getBossName().equals("Kzarka"))
             {
                 NOTIFY_BOSS.add(B.get(q));
             }
-            else if (prefs.getBoolean("Offin", false) && B.get(q).getBossName().equals("Offin"))
+            else if (CheckQuint.isChecked() && B.get(q).getBossName().equals("Quint"))
+            {
+                NOTIFY_BOSS.add(B.get(q));
+            }
+            else if (CheckVell.isChecked() && B.get(q).getBossName().equals("Vell"))
+            {
+                NOTIFY_BOSS.add(B.get(q));
+            }
+            else if (CheckOffin.isChecked() && B.get(q).getBossName().equals("Offin"))
             {
                 NOTIFY_BOSS.add(B.get(q));
             }
@@ -458,6 +429,34 @@ public class Settings extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onPause()
+    {
+         super.onPause();
+        currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+       // Log.d("shouldNotifyPause",""+shouldNotify);
+       if(shouldNotify)
+       {
+           switch (currentServerSelection)
+           {
+                case (1):
+                FillNotifyList(BossEU,1);
+                shouldNotify=false;
+                break;
+                case(2):
+                FillNotifyList(BossNA,-8);
+                shouldNotify=false;
+                break;
+                case (3):
+                FillNotifyList(BossSEA,8);
+                shouldNotify=false;
+                break;
+                default:
+                break;
+           }
+       }
+    }
+
 }
 
 

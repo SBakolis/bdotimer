@@ -36,10 +36,8 @@ public class firstTimeUseActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_time_use);
-
         final GdprHelper gdprHelper = new GdprHelper(this);
         gdprHelper.initialise();
-
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
 
@@ -60,12 +58,13 @@ public class firstTimeUseActivity extends AppCompatActivity {
         intentToMain = new Intent(firstTimeUseActivity.this, MainActivity.class);
         firstStart.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                if(  currentServerSelection != -1)
+                if(currentServerSelection != -1)
                 {
                     startActivity(intentToMain);
                     int  conPass = gdprHelper.getCon();
                     Log.d("TAG", conPass + "");
-                    switch (conPass){
+                    switch (conPass)
+                    {
                         case 0:
                             prefs.edit().putInt(GDPRCONSENT, NOCONSENTGIVEN).apply();
                             // Log.d("TAG1", conPass + "");
@@ -82,14 +81,17 @@ public class firstTimeUseActivity extends AppCompatActivity {
         });
     }
 
-    public void onRadioButtonClicked(View view) {
+    public void onRadioButtonClicked(View view)
+    {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch(view.getId())
+        {
             case R.id.frbEU:
-                if (checked){
+                if (checked)
+                {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, EUSERVER_CONSTANT).apply();
                     currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT,DOESNT_EXIST);
                     prefs.edit().putBoolean("EU", checked).apply();
@@ -98,7 +100,8 @@ public class firstTimeUseActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.frbNA:
-                if (checked) {
+                if (checked)
+                {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, NASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("NA", checked).apply();
                     prefs.edit().putBoolean("EU", false).apply();
@@ -107,7 +110,8 @@ public class firstTimeUseActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.frbSEA:
-                if (checked){
+                if (checked)
+                {
                     prefs.edit().putInt(PREF_SERVER_CONSTANT, SEASERVER_CONSTANT).apply();
                     prefs.edit().putBoolean("SEA", checked).apply();
                     prefs.edit().putBoolean("EU",false).apply();

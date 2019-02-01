@@ -99,17 +99,7 @@
                 android:layout_marginRight="15dp"
                 android:orientation="vertical"
                 android:paddingTop="10dp">
-                <CheckBox
-                    android:id="@+id/checkGarmoth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
 
-                    android:buttonTint="@android:color/white"
-                    android:onClick="onCheckboxClicked"
-                    android:text="Garmoth"
-                    android:textColor="@android:color/white"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
                 <CheckBox
                     android:id="@+id/checkKaranda"
                     android:layout_width="match_parent"
@@ -182,6 +172,17 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
+                <CheckBox
+                    android:id="@+id/checkGarmoth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:buttonTint="@android:color/white"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Garmoth"
+                    android:textColor="@android:color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
                 <CheckBox
                     android:id="@+id/checkVell"
                     android:layout_width="wrap_content"

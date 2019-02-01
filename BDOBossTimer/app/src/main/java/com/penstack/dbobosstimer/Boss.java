@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 //import static com.penstack.dbobosstimer.Karanda.Name;
 
-public class Boss  implements Serializable {
+public class Boss {
 
     private int bossImage;
     private String Name;
@@ -17,7 +17,7 @@ public class Boss  implements Serializable {
     private int Hour;
     private int Minute;
     String Tmz;// de kserw an xreiazetai en telei
-    long TimeLeft;
+    private long TimeLeft;
 
     public Boss(int Day,int Hour,int Minute,String Tmz,String Name,long TimeLeft, int bossImage){
 

@@ -16,17 +16,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
-
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
-public class BootReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver
+{
 
     final String PREFS_NAME = "BDO_TIMER_PREFS";
 
-    public void onReceive(Context context, Intent intent) {
-        // todo
-
+    public void onReceive(Context context, Intent intent)
+    {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED"))
         {
@@ -36,8 +35,7 @@ public class BootReceiver extends BroadcastReceiver {
             String jsonEU = preferences.getString("EuList", null);
             String jsonNA = preferences.getString("NaList", null);
             String jsonSEA = preferences.getString("SeaList", null);
-            Type type = new TypeToken<ArrayList<Boss>>() {
-            }.getType();
+            Type type = new TypeToken<ArrayList<Boss>>() {}.getType();
             Gson gson = new Gson();
             ArrayList<Boss> BossEU = gson.fromJson(jsonEU, type);
             ArrayList<Boss> BossNA = gson.fromJson(jsonNA, type);
@@ -81,7 +79,7 @@ public class BootReceiver extends BroadcastReceiver {
                 {
                     ALARM_BOSS.add(B.get(q));
                 }
-                else if (preferences.getBoolean("Vell", false) && B.get(q).getBossName().equals("Vell"))
+                else if (preferences.getBoolean("Vell", false) && !(aOff==8) && B.get(q).getBossName().equals("Vell"))
                 {
                     ALARM_BOSS.add(B.get(q));
                 }
@@ -89,7 +87,7 @@ public class BootReceiver extends BroadcastReceiver {
                 {
                     ALARM_BOSS.add(B.get(q));
                 }
-                else if (preferences.getBoolean("Garmoth", false) && B.get(q).getBossName().equals("Garmoth"))
+                else if (preferences.getBoolean("Garmoth", false) &&  !(aOff==8) && B.get(q).getBossName().equals("Garmoth"))
                 {
                     ALARM_BOSS.add(B.get(q));
                 }

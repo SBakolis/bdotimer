@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     final String PREFS_NAME = "BDO_TIMER_PREFS";
     final String PREF_SERVER_CONSTANT = "0";
     final int DOESNT_EXIST = -1;
-    Set<String> BossNotify = new HashSet<String>();
     final String PREF_NOTIFY = "NotificationList";
     SharedPreferences prefs;
     public String CHANNEL_ID;
@@ -132,9 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
                 s = +bCalendar.get(Calendar.YEAR) + "-" + (bCalendar.get(Calendar.MONTH) + 1) + "-" + RealDAY + " " + Slist.get(i).getBossHour() + ":" + Slist.get(i).getBossMin() + ":00";
                 countdown = Time(s, offset, Soffset);
-                day = bCalendar.getTimeInMillis();
-                diff = (countdown - day);
-                Slist.get(i).setTimeLeft(diff);
+                Slist.get(i).setTimeLeft(countdown);
                 Boss nextBoss = Slist.get(i);
                 BossDayList.add(nextBoss);
             }
@@ -143,9 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 int rd = Integer.parseInt(RealDAY);// to idio me thn realwDay
                 s = bCalendar.get(Calendar.YEAR) + "-" + (bCalendar.get(Calendar.MONTH) + 1) + "-" + (rd + 1) + " " + Slist.get(i).getBossHour() + ":" + Slist.get(i).getBossMin() + ":00";
                 countdown = Time(s, offset, Soffset);
-                day = bCalendar.getTimeInMillis();
-                diff = (countdown - day);
-                Slist.get(i).setTimeLeft(diff);
+                Slist.get(i).setTimeLeft(countdown);
                 Boss nextBoss = Slist.get(i);
                 BossDayList.add(nextBoss);
             }
@@ -198,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat Day2 = new SimpleDateFormat("yyyy-M-d H:mm", Locale.ENGLISH);
         if (Uoffset > 0)
         {
-            Day2.setTimeZone(getTimeZone("GMT+" + Uoffset));//"GMT+"+offset.getOffset(new Date().getTime())));
+            Day2.setTimeZone(getTimeZone("GMT+" + Uoffset));
         }
         else
         {
@@ -268,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         final String PREFS_NAME = "BDO_TIMER_PREFS";
 
 
-        final String PREF_VERSION_CODE_KEY = "8";
+        final String PREF_VERSION_CODE_KEY = "10";
 
 
         final int DOESNT_EXIST = -1;
@@ -294,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
              ArrayList<Boss> BossDayNAList = new ArrayList<>();
              ArrayList<Boss> BossDaySEAList= new ArrayList<>();
 
-//----------------------------------EU BOSSES-----------------------------------------
+            //----------------------------------EU BOSSES-----------------------------------------
             //Monday
             BossDayEUList.add(new Kutum(1, 0, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 0, 15, "EU", 0));
@@ -513,7 +508,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Boss> BossDayNAList = new ArrayList<>();
             ArrayList<Boss> BossDaySEAList= new ArrayList<>();
 
-//----------------------------------EU BOSSES-----------------------------------------
+            //----------------------------------EU BOSSES-----------------------------------------
             //Monday
             BossDayEUList.add(new Kutum(1, 0, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 0, 15, "EU", 0));
@@ -657,7 +652,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayNAList.add(new Kutum(7, 22, 15, "NA", 0));
             BossDayNAList.add(new Karanda(7, 22, 15, "NA", 0));
            
-          //----------------------------------SEA BOSSES-----------------------------------------
+            //----------------------------------SEA BOSSES-----------------------------------------
             //Monday
             BossDaySEAList.add(new Nouver(1, 0, 0, "SEA", 0));
             BossDaySEAList.add(new Kutum(1, 0, 0, "SEA", 0));
@@ -767,6 +762,7 @@ public class MainActivity extends AppCompatActivity {
         BossDayList.clear();
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int currentServerSelection = prefs.getInt(PREF_SERVER_CONSTANT, DOESNT_EXIST);
+        // Log.d("server",""+(currentServerSelection==3));
         if (currentServerSelection == 1)
         {
             ServerSelection(BossDayEUList, "+1");
@@ -777,12 +773,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (currentServerSelection == 3)
         {
-                ServerSelection(BossDayNAList, "+8");
+                ServerSelection(BossDaySEAList, "+8");
         }
-
-
-            // createNotificationChannel();
-        BossNotify = prefs.getStringSet(PREF_NOTIFY, null);
     }
 
 
@@ -790,7 +782,7 @@ public class MainActivity extends AppCompatActivity {
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-6028798031014902~9858159713");
         mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-6028798031014902/3127307828");
-
+        //test:ca-app-pub-3940256099942544/1033173712      official:  ca-app-pub-6028798031014902/3127307828
         getUserGDPRConsent = prefs.getInt(GDPRCONSENT , DOESNT_EXIST);
         if(getUserGDPRConsent != 1) {
             Bundle extras = new Bundle();
@@ -820,7 +812,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        if (adAlreadyAppeared == false) {
+        if (!adAlreadyAppeared) {
             mInterstitialAd.setAdListener(new AdListener() {
                 @Override
                 public void onAdLoaded() {
