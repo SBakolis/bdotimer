@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         final String PREFS_NAME = "BDO_TIMER_PREFS";
 
 
-        final String PREF_VERSION_CODE_KEY = "11";
+        final String PREF_VERSION_CODE_KEY = "12";
 
 
         final int DOESNT_EXIST = -1;
@@ -320,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayEUList.add(new Offin(3, 19, 0, "EU", 0));
             BossDayEUList.add(new Karanda(3, 22, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 22, 15, "EU", 0));
+            BossDayEUList.add(new Quint(3, 23, 15, "EU", 0));
             //Thursday
             BossDayEUList.add(new Nouver(4, 0, 15, "EU", 0));
             BossDayEUList.add(new Kutum(4, 2, 0, "EU", 0));
@@ -389,6 +390,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayNAList.add(new Offin(3, 17, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(3, 20, 15, "NA", 0));
             BossDayNAList.add(new Karanda(3, 20, 15, "NA", 0));
+            BossDayNAList.add(new Quint(3, 21, 15, "NA", 0));
             BossDayNAList.add(new Nouver(3, 22, 15, "NA", 0));
             //Thursday
             BossDayNAList.add(new Kutum(4, 0, 0, "NA", 0));
@@ -538,6 +540,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayEUList.add(new Offin(3, 19, 0, "EU", 0));
             BossDayEUList.add(new Karanda(3, 22, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 22, 15, "EU", 0));
+            BossDayEUList.add(new Quint(3, 23, 15, "EU", 0));
             //Thursday
             BossDayEUList.add(new Nouver(4, 0, 15, "EU", 0));
             BossDayEUList.add(new Kutum(4, 2, 0, "EU", 0));
@@ -607,6 +610,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayNAList.add(new Offin(3, 17, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(3, 20, 15, "NA", 0));
             BossDayNAList.add(new Karanda(3, 20, 15, "NA", 0));
+            BossDayNAList.add(new Quint(3, 21, 15, "NA", 0));
             BossDayNAList.add(new Nouver(3, 22, 15, "NA", 0));
             //Thursday
             BossDayNAList.add(new Kutum(4, 0, 0, "NA", 0));
