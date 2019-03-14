@@ -444,7 +444,7 @@ public class Settings extends AppCompatActivity
                 shouldNotify=false;
                 break;
                 case(2):
-                FillNotifyList(BossNA,-8);
+                FillNotifyList(BossNA,-7);
                 shouldNotify=false;
                 break;
                 case (3):
