@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         final String PREFS_NAME = "BDO_TIMER_PREFS";
 
 
-        final String PREF_VERSION_CODE_KEY = "10";
+        final String PREF_VERSION_CODE_KEY = "12";
 
 
         final int DOESNT_EXIST = -1;
@@ -292,11 +292,11 @@ public class MainActivity extends AppCompatActivity {
             //----------------------------------EU BOSSES-----------------------------------------
             //Monday
             BossDayEUList.add(new Kutum(1, 0, 15, "EU", 0));
-            BossDayEUList.add(new Kzarka(1, 0, 15, "EU", 0));
+            BossDayEUList.add(new Karanda(1, 0, 15, "EU", 0));
             BossDayEUList.add(new Karanda(1, 2, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 5, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 9, 0, "EU", 0));
-            BossDayEUList.add(new Nouver(1, 12, 0, "EU", 0));
+            BossDayEUList.add(new Offin(1, 12, 0, "EU", 0));
             BossDayEUList.add(new Kutum(1, 16, 0, "EU", 0));
             BossDayEUList.add(new Nouver(1, 19, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 22, 15, "EU", 0));
@@ -304,30 +304,31 @@ public class MainActivity extends AppCompatActivity {
             BossDayEUList.add(new Karanda(2, 0, 15, "EU", 0));
             BossDayEUList.add(new Kutum(2, 2, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(2, 5, 0, "EU", 0));
-            BossDayEUList.add(new Kutum(2, 9, 0, "EU", 0));
-            BossDayEUList.add(new Offin(2, 12, 0, "EU", 0));
+            BossDayEUList.add(new Nouver(2, 9, 0, "EU", 0));
+            BossDayEUList.add(new Kutum(2, 12, 0, "EU", 0));
             BossDayEUList.add(new Nouver(2, 16, 0, "EU", 0));
             BossDayEUList.add(new Karanda(2, 19, 0, "EU", 0));
             BossDayEUList.add(new Garmoth(2, 22, 15, "EU", 0));
-            BossDayEUList.add(new Nouver(2, 22, 15, "EU", 0));
+
             //Wednesday
             BossDayEUList.add(new Kutum(3, 0, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 0, 15, "EU", 0));
             BossDayEUList.add(new Karanda(3, 2, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 5, 0, "EU", 0));
             BossDayEUList.add(new Karanda(3, 9, 0, "EU", 0));
-            BossDayEUList.add(new Kzarka(3, 16, 0, "EU", 0));
-            BossDayEUList.add(new Kutum(3, 19, 0, "EU", 0));
+            BossDayEUList.add(new Kutum(3, 16, 0, "EU", 0));
+            BossDayEUList.add(new Offin(3, 19, 0, "EU", 0));
             BossDayEUList.add(new Karanda(3, 22, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 22, 15, "EU", 0));
+            BossDayEUList.add(new Quint(3, 23, 15, "EU", 0));
             //Thursday
             BossDayEUList.add(new Nouver(4, 0, 15, "EU", 0));
             BossDayEUList.add(new Kutum(4, 2, 0, "EU", 0));
             BossDayEUList.add(new Nouver(4, 5, 0, "EU", 0));
             BossDayEUList.add(new Kutum(4, 9, 0, "EU", 0));
             BossDayEUList.add(new Nouver(4, 12, 0, "EU", 0));
-            BossDayEUList.add(new Kutum(4, 16, 0, "EU", 0));
-            BossDayEUList.add(new Offin(4, 19, 0, "EU", 0));
+            BossDayEUList.add(new Kzarka(4, 16, 0, "EU", 0));
+            BossDayEUList.add(new Kutum(4, 19, 0, "EU", 0));
             BossDayEUList.add(new Garmoth(4, 22, 15, "EU", 0));
             //Friday
             BossDayEUList.add(new Kzarka(5, 0, 15, "EU", 0));
@@ -357,8 +358,8 @@ public class MainActivity extends AppCompatActivity {
             BossDayEUList.add(new Nouver(7, 9, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(7, 12, 0, "EU", 0));
             BossDayEUList.add(new Vell(7, 16, 0, "EU", 0));
-            BossDayEUList.add(new Karanda(7, 19, 0, "EU", 0));
-            BossDayEUList.add(new Garmoth(7, 22, 15, "EU", 0));
+            BossDayEUList.add(new Garmoth(7, 19, 0, "EU", 0));
+            BossDayEUList.add(new Kzarka(7, 22, 15, "EU", 0));
             BossDayEUList.add(new Nouver(7, 22, 15, "EU", 0));
 
             //----------------------------------NA BOSSES-----------------------------------------
@@ -366,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayNAList.add(new Karanda(1, 0, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(1, 3, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(1, 7, 0, "NA", 0));
-            BossDayNAList.add(new Nouver(1, 10, 0, "NA", 0));
+            BossDayNAList.add(new Offin(1, 10, 0, "NA", 0));
             BossDayNAList.add(new Kutum(1, 14, 0, "NA", 0));
             BossDayNAList.add(new Nouver(1, 17, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(1, 20, 15, "NA", 0));
@@ -374,33 +375,33 @@ public class MainActivity extends AppCompatActivity {
             //Tuesday
             BossDayNAList.add(new Kutum(2, 0, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(2, 3, 0, "NA", 0));
-            BossDayNAList.add(new Kutum(2, 7, 0, "NA", 0));
-            BossDayNAList.add(new Offin(2, 10, 0, "NA", 0));
+            BossDayNAList.add(new Nouver(2, 7, 0, "NA", 0));
+            BossDayNAList.add(new Kutum(2, 10, 0, "NA", 0));
             BossDayNAList.add(new Nouver(2, 14, 0, "NA", 0));
             BossDayNAList.add(new Karanda(2, 17, 0, "NA", 0));
-            BossDayNAList.add(new Kzarka(2, 20, 15, "NA", 0));
-            BossDayNAList.add(new Nouver(2, 20, 15, "NA", 0));
+            BossDayNAList.add(new Garmoth(2, 20, 15, "NA", 0));
             BossDayNAList.add(new Kutum(2, 22, 15, "NA", 0));
-            BossDayNAList.add(new Garmoth(2, 22, 15, "NA", 0));
+            BossDayNAList.add(new Kzarka(2, 22, 15, "NA", 0));
             //Wednesday
             BossDayNAList.add(new Karanda(3, 0, 0, "NA", 0));
             BossDayNAList.add(new Karanda(3, 7, 0, "NA", 0));
             BossDayNAList.add(new Nouver(3, 10, 0, "NA", 0));
-            BossDayNAList.add(new Kzarka(3, 14, 0, "NA", 0));
-            BossDayNAList.add(new Kutum(3, 17, 0, "NA", 0));
+            BossDayNAList.add(new Kutum(3, 14, 0, "NA", 0));
+            BossDayNAList.add(new Offin(3, 17, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(3, 20, 15, "NA", 0));
             BossDayNAList.add(new Karanda(3, 20, 15, "NA", 0));
+            BossDayNAList.add(new Quint(3, 21, 15, "NA", 0));
             BossDayNAList.add(new Nouver(3, 22, 15, "NA", 0));
             //Thursday
             BossDayNAList.add(new Kutum(4, 0, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(4, 3, 0, "NA", 0));
             BossDayNAList.add(new Kutum(4, 7, 0, "NA", 0));
             BossDayNAList.add(new Nouver(4, 10, 0, "NA", 0));
-            BossDayNAList.add(new Kutum(4, 14, 0, "NA", 0));
-            BossDayNAList.add(new Offin(4, 17, 0, "NA", 0));
-            BossDayNAList.add(new Karanda(4, 20, 15, "NA", 0));
+            BossDayNAList.add(new Kzarka(4, 14, 0, "NA", 0));
+            BossDayNAList.add(new Kutum(4, 17, 0, "NA", 0));
+            BossDayNAList.add(new Garmoth(4, 20, 15, "NA", 0));
             BossDayNAList.add(new Kzarka(4, 22, 15, "NA", 0));
-            BossDayNAList.add(new Garmoth(4, 22, 15, "NA", 0));
+            BossDayNAList.add(new Karanda(4, 22, 15, "NA", 0));
             //Friday
             BossDayNAList.add(new Nouver(5, 0, 0, "NA", 0));
             BossDayNAList.add(new Karanda(5, 3, 0, "NA", 0));
@@ -511,11 +512,11 @@ public class MainActivity extends AppCompatActivity {
             //----------------------------------EU BOSSES-----------------------------------------
             //Monday
             BossDayEUList.add(new Kutum(1, 0, 15, "EU", 0));
-            BossDayEUList.add(new Kzarka(1, 0, 15, "EU", 0));
+            BossDayEUList.add(new Karanda(1, 0, 15, "EU", 0));
             BossDayEUList.add(new Karanda(1, 2, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 5, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 9, 0, "EU", 0));
-            BossDayEUList.add(new Nouver(1, 12, 0, "EU", 0));
+            BossDayEUList.add(new Offin(1, 12, 0, "EU", 0));
             BossDayEUList.add(new Kutum(1, 16, 0, "EU", 0));
             BossDayEUList.add(new Nouver(1, 19, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(1, 22, 15, "EU", 0));
@@ -523,30 +524,31 @@ public class MainActivity extends AppCompatActivity {
             BossDayEUList.add(new Karanda(2, 0, 15, "EU", 0));
             BossDayEUList.add(new Kutum(2, 2, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(2, 5, 0, "EU", 0));
-            BossDayEUList.add(new Kutum(2, 9, 0, "EU", 0));
-            BossDayEUList.add(new Offin(2, 12, 0, "EU", 0));
+            BossDayEUList.add(new Nouver(2, 9, 0, "EU", 0));
+            BossDayEUList.add(new Kutum(2, 12, 0, "EU", 0));
             BossDayEUList.add(new Nouver(2, 16, 0, "EU", 0));
             BossDayEUList.add(new Karanda(2, 19, 0, "EU", 0));
             BossDayEUList.add(new Garmoth(2, 22, 15, "EU", 0));
-            BossDayEUList.add(new Nouver(2, 22, 15, "EU", 0));
+
             //Wednesday
             BossDayEUList.add(new Kutum(3, 0, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 0, 15, "EU", 0));
             BossDayEUList.add(new Karanda(3, 2, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 5, 0, "EU", 0));
             BossDayEUList.add(new Karanda(3, 9, 0, "EU", 0));
-            BossDayEUList.add(new Kzarka(3, 16, 0, "EU", 0));
-            BossDayEUList.add(new Kutum(3, 19, 0, "EU", 0));
+            BossDayEUList.add(new Kutum(3, 16, 0, "EU", 0));
+            BossDayEUList.add(new Offin(3, 19, 0, "EU", 0));
             BossDayEUList.add(new Karanda(3, 22, 15, "EU", 0));
             BossDayEUList.add(new Kzarka(3, 22, 15, "EU", 0));
+            BossDayEUList.add(new Quint(3, 23, 15, "EU", 0));
             //Thursday
             BossDayEUList.add(new Nouver(4, 0, 15, "EU", 0));
             BossDayEUList.add(new Kutum(4, 2, 0, "EU", 0));
             BossDayEUList.add(new Nouver(4, 5, 0, "EU", 0));
             BossDayEUList.add(new Kutum(4, 9, 0, "EU", 0));
             BossDayEUList.add(new Nouver(4, 12, 0, "EU", 0));
-            BossDayEUList.add(new Kutum(4, 16, 0, "EU", 0));
-            BossDayEUList.add(new Offin(4, 19, 0, "EU", 0));
+            BossDayEUList.add(new Kzarka(4, 16, 0, "EU", 0));
+            BossDayEUList.add(new Kutum(4, 19, 0, "EU", 0));
             BossDayEUList.add(new Garmoth(4, 22, 15, "EU", 0));
             //Friday
             BossDayEUList.add(new Kzarka(5, 0, 15, "EU", 0));
@@ -576,8 +578,8 @@ public class MainActivity extends AppCompatActivity {
             BossDayEUList.add(new Nouver(7, 9, 0, "EU", 0));
             BossDayEUList.add(new Kzarka(7, 12, 0, "EU", 0));
             BossDayEUList.add(new Vell(7, 16, 0, "EU", 0));
-            BossDayEUList.add(new Karanda(7, 19, 0, "EU", 0));
-            BossDayEUList.add(new Garmoth(7, 22, 15, "EU", 0));
+            BossDayEUList.add(new Garmoth(7, 19, 0, "EU", 0));
+            BossDayEUList.add(new Kzarka(7, 22, 15, "EU", 0));
             BossDayEUList.add(new Nouver(7, 22, 15, "EU", 0));
 
             //----------------------------------NA BOSSES-----------------------------------------
@@ -585,7 +587,7 @@ public class MainActivity extends AppCompatActivity {
             BossDayNAList.add(new Karanda(1, 0, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(1, 3, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(1, 7, 0, "NA", 0));
-            BossDayNAList.add(new Nouver(1, 10, 0, "NA", 0));
+            BossDayNAList.add(new Offin(1, 10, 0, "NA", 0));
             BossDayNAList.add(new Kutum(1, 14, 0, "NA", 0));
             BossDayNAList.add(new Nouver(1, 17, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(1, 20, 15, "NA", 0));
@@ -593,33 +595,33 @@ public class MainActivity extends AppCompatActivity {
             //Tuesday
             BossDayNAList.add(new Kutum(2, 0, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(2, 3, 0, "NA", 0));
-            BossDayNAList.add(new Kutum(2, 7, 0, "NA", 0));
-            BossDayNAList.add(new Offin(2, 10, 0, "NA", 0));
+            BossDayNAList.add(new Nouver(2, 7, 0, "NA", 0));
+            BossDayNAList.add(new Kutum(2, 10, 0, "NA", 0));
             BossDayNAList.add(new Nouver(2, 14, 0, "NA", 0));
             BossDayNAList.add(new Karanda(2, 17, 0, "NA", 0));
-            BossDayNAList.add(new Kzarka(2, 20, 15, "NA", 0));
-            BossDayNAList.add(new Nouver(2, 20, 15, "NA", 0));
+            BossDayNAList.add(new Garmoth(2, 20, 15, "NA", 0));
             BossDayNAList.add(new Kutum(2, 22, 15, "NA", 0));
-            BossDayNAList.add(new Garmoth(2, 22, 15, "NA", 0));
+            BossDayNAList.add(new Kzarka(2, 22, 15, "NA", 0));
             //Wednesday
             BossDayNAList.add(new Karanda(3, 0, 0, "NA", 0));
             BossDayNAList.add(new Karanda(3, 7, 0, "NA", 0));
             BossDayNAList.add(new Nouver(3, 10, 0, "NA", 0));
-            BossDayNAList.add(new Kzarka(3, 14, 0, "NA", 0));
-            BossDayNAList.add(new Kutum(3, 17, 0, "NA", 0));
+            BossDayNAList.add(new Kutum(3, 14, 0, "NA", 0));
+            BossDayNAList.add(new Offin(3, 17, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(3, 20, 15, "NA", 0));
             BossDayNAList.add(new Karanda(3, 20, 15, "NA", 0));
+            BossDayNAList.add(new Quint(3, 21, 15, "NA", 0));
             BossDayNAList.add(new Nouver(3, 22, 15, "NA", 0));
             //Thursday
             BossDayNAList.add(new Kutum(4, 0, 0, "NA", 0));
             BossDayNAList.add(new Kzarka(4, 3, 0, "NA", 0));
             BossDayNAList.add(new Kutum(4, 7, 0, "NA", 0));
             BossDayNAList.add(new Nouver(4, 10, 0, "NA", 0));
-            BossDayNAList.add(new Kutum(4, 14, 0, "NA", 0));
-            BossDayNAList.add(new Offin(4, 17, 0, "NA", 0));
-            BossDayNAList.add(new Karanda(4, 20, 15, "NA", 0));
+            BossDayNAList.add(new Kzarka(4, 14, 0, "NA", 0));
+            BossDayNAList.add(new Kutum(4, 17, 0, "NA", 0));
+            BossDayNAList.add(new Garmoth(4, 20, 15, "NA", 0));
             BossDayNAList.add(new Kzarka(4, 22, 15, "NA", 0));
-            BossDayNAList.add(new Garmoth(4, 22, 15, "NA", 0));
+            BossDayNAList.add(new Karanda(4, 22, 15, "NA", 0));
             //Friday
             BossDayNAList.add(new Nouver(5, 0, 0, "NA", 0));
             BossDayNAList.add(new Karanda(5, 3, 0, "NA", 0));
