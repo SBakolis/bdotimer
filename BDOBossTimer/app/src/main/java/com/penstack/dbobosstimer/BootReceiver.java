@@ -52,7 +52,7 @@ public class BootReceiver extends BroadcastReceiver
             }
             else
             {
-                aOff = -8;
+                aOff = -7;
                 B.addAll(BossNA);
             }
             ArrayList<Boss> ALARM_BOSS = new ArrayList<>();

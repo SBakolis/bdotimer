@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         final String PREFS_NAME = "BDO_TIMER_PREFS";
 
 
-        final String PREF_VERSION_CODE_KEY = "12";
+        final String PREF_VERSION_CODE_KEY = "13";
 
 
         final int DOESNT_EXIST = -1;
@@ -771,7 +771,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (currentServerSelection == 2)
         {
-            ServerSelection(BossDayNAList, "-8");
+            ServerSelection(BossDayNAList, "-7");
         }
         else if (currentServerSelection == 3)
         {
